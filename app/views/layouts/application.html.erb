@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Mykeys - Gestion locative</title>
+    <title>Mykeys - Gérer la location de son bien seul</title>
     <%= csrf_meta_tags %>
 
     <!-- Detecting device width -->
@@ -13,6 +13,23 @@
   </head>
 
   <body>
+  <div class="navbar navbar-fixed">
+
+    <!-- Logo -->
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "logo.png" %>
+    <% end %>
+
+    <!-- Navigation menu -->
+    <div class="navbar-right">
+      <ul class="navbar-menu">
+        <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Propriétaires", root_path %></li>
+        <li class="<%= 'active' if current_page?(locataires_path) %>"><%= link_to "Locataires", locataires_path %></li>
+      </ul>
+      <%= link_to t(".top_call_to_action", default: "Se connecter"), "#", class: "navbar-item navbar-button btn" %>
+    </div>
+  </div>
+
     <%= yield %>
   </body>
 </html>
