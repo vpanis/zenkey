@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20170529164610) do
     t.integer  "income_ratio"
     t.boolean  "has_warrantor"
     t.integer  "warrantor_income_ratio"
-    t.integer  "deposit"
+    t.integer  "desposit"
     t.integer  "user_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
