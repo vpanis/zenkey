@@ -1,0 +1,11 @@
+<div class="tabs">
+  <% link_to flat_path(@flat), class: "tab" do %>
+    <h3>Annonce</h3>
+  <% end %>
+  <% link_to flat_dossiers_path(@flat), class: "tab active" do %>
+    <h3>Dossiers</h3>
+  <% end %>
+  <% link_to flat_visits_path(@flat), class: "tab" do %>
+    <h3>Visites</h3>
+  <% end %>
+</div>
