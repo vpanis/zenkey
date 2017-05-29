@@ -7,5 +7,5 @@ Rails.application.routes.draw do
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
   end
-
+  mount Attachinary::Engine => "/attachinary"
 end
