@@ -15,13 +15,13 @@
   position: fixed;
   left: 0px;
   top: 0px;
-  z-index: 1;
+  z-index: 3;
   width: 100%;
 }
 
 /* Navbar logo */
 .navbar-wagon-brand img {
-  width: 50px;
+  height: 50px;
 }
 
 /* Navbar right section (with form, links, button) */
@@ -44,7 +44,7 @@
   font-size: 14px;
 }
 .navbar-wagon-link:hover {
-  color: #da552f;
+  color: #FF686B;
   text-decoration: none;
 }
 
@@ -72,6 +72,7 @@
   justify-content: flex-end;
   padding: 0 10px;
   position: relative;
+
 }
 .navbar-wagon-search-btn {
   line-height: 40px;
@@ -79,7 +80,7 @@
   border: none;
   background: transparent;
   position: absolute;
-  right: 14px;
+  right: -20px;
   top: -2px;
   z-index: 1;
 }
@@ -92,8 +93,10 @@
   border: 1px solid #E6E6E6;
   border-radius: 5px;
   padding: 0 10px;
+  margin: 0 10px;
   font-size: 14px;
   outline: none;
+  width: 300px;
 }
 .navbar-wagon-search-input:focus  {
   border: 1px solid #CCCCCC;
@@ -128,4 +131,28 @@
   transform: rotate(45deg);
   border-left: 1px solid #E6E6E6;
   border-top: 1px solid #E6E6E6;
+}
+
+
+/* Navbar dropdown menu */
+.btn-login {
+  color: #FF686B;
+  border: solid 1px #FF686B;
+  padding: 0 20px;
+  border-radius: 20em;
+  line-height: 40px;
+  font-size: 14px;
+}
+.btn-login:hover {
+  color: white !important;
+  background-color: #FF686B;
+  transition: all 0.3s;
+}
+
+// Navbar links
+.active {
+  border-bottom: solid 2px #FF686B;
+  a {
+    color: #FF686B;
+  }
 }
