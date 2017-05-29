@@ -14,7 +14,7 @@ alban               = User.create(email: "alban@gmail.com", password: '123456')
 
 puts 'Creating Flats...'
 
-oberkampf           = Flat.create(title: "Studio 20m2 rue oberkampf", description: "Studio 20m2 meublé kitchinette", rental_type: "location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, desposit: 800, landlord_id: charles)
+oberkampf           = Flat.create(title: "Studio 20m2 rue oberkampf", description: "Studio 20m2 meublé kitchinette", rental_type: "location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord_id: charles)
 
 puts 'Creating Availabilities...'
 
@@ -29,6 +29,6 @@ s_4  = Slot.create(availability_id: a_1, tenant_id: nikolai, starts_at: DateTime
 
 puts 'Creating Bookings...'
 
-b_1  = Booking.create(flat_id: oberkampf, starting_day: DateTime.new(2017, 7, 1, 0, 0, 0, 0), tenant_id: alban)
+b_1  = Booking.create(flat_id: oberkampf, starting_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), tenant_id: alban)
 
 puts 'Finished !'
