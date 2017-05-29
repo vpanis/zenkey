@@ -10,10 +10,74 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529131423) do
+ActiveRecord::Schema.define(version: 20170529143453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "availabilities", force: :cascade do |t|
+    t.integer  "flat_id"
+    t.datetime "starts_at"
+    t.integer  "length"
+    t.integer  "slot_length"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["flat_id"], name: "index_availabilities_on_flat_id", using: :btree
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.integer  "flat_id"
+    t.date     "starting_date"
+    t.date     "end_date"
+    t.integer  "user_id"
+    t.string   "status"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["flat_id"], name: "index_bookings_on_flat_id", using: :btree
+    t.index ["user_id"], name: "index_bookings_on_user_id", using: :btree
+  end
+
+  create_table "flats", force: :cascade do |t|
+    t.text     "title"
+    t.text     "description"
+    t.text     "rental_type"
+    t.date     "availability_date"
+    t.integer  "min_duration"
+    t.string   "address"
+    t.boolean  "is_address_public"
+    t.string   "subway"
+    t.boolean  "furnished"
+    t.integer  "size"
+    t.integer  "rent"
+    t.integer  "rental_costs"
+    t.integer  "floor"
+    t.integer  "rooms"
+    t.integer  "bedrooms"
+    t.boolean  "balcony"
+    t.boolean  "elevator"
+    t.boolean  "separate_bathroom"
+    t.boolean  "parking"
+    t.string   "status"
+    t.integer  "income_ratio"
+    t.boolean  "has_warrantor"
+    t.integer  "warrantor_income_ratio"
+    t.integer  "desposit"
+    t.integer  "user_id"
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["user_id"], name: "index_flats_on_user_id", using: :btree
+  end
+
+  create_table "slots", force: :cascade do |t|
+    t.integer  "availability_id"
+    t.integer  "user_id"
+    t.time     "starts_at"
+    t.string   "status"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["availability_id"], name: "index_slots_on_availability_id", using: :btree
+    t.index ["user_id"], name: "index_slots_on_user_id", using: :btree
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -43,4 +107,10 @@ ActiveRecord::Schema.define(version: 20170529131423) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "availabilities", "flats"
+  add_foreign_key "bookings", "flats"
+  add_foreign_key "bookings", "users"
+  add_foreign_key "flats", "users"
+  add_foreign_key "slots", "availabilities"
+  add_foreign_key "slots", "users"
 end
