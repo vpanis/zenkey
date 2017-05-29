@@ -1,7 +1,102 @@
+<!-- Banner -->
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('background.jpg');">
-  <div class="banner-content">
-    <h1>Some Stuff</h1>
-    <p>Very cool stuff, useful and smart</p>
-    <a class="button">GET IT</a>
+  <div class="container">
+    <div class="banner-content">
+      <h1>Louer son appartement n'a jamais été aussi simple</h1>
+      <p>Trouver et louer son appartement ne devrait pas être si difficile. MyKeys simplifie la location immobilière en offrant une expérience digitale simplifiée aux locataires</p>
+      <%= link_to t(".top_call_to_action", default: "S'inscrire"), "#", class: "navbar-item navbar-button btn" %>
+    </div>
   </div>
+</div>
+
+<!-- Features -->
+<div class="container padded">
+  <section class="text-center">
+    <h1>Locataires, nous pouvons vous aider</h1>
+  </section>
+  <section class="text-center">
+    <div class="row padded">
+      <div class="col-sm-6 col-xs-12">
+        <%= image_tag "feature_speed.png", class: "feature-img" %>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <div class="value-prop">
+          <h3>Gagnez du temps</h3>
+          <h5>MyKeys vous fait gagner un temps précieux en vous permettant d'organiser vos visites en ligne, en fonction de vos disponibilités. Si vous avez un coup de coeur pour l'appartement que vous visitez, vous pouvez transmettre votre dossier simplement en ligne.</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-center">
+    <div class="row padded">
+      <div class="col-sm-6 col-xs-12">
+        <div class="value-prop save-time">
+          <h3>Simplifiez-vous la vie</h3>
+          <h5>En cas de pépins dans votre logement, notre plateforme simplifie la communication avec vos propriétaires. Le statut de votre requête est mis à jour automatiquement une fois que l'intervention est réalisée. De plus, vous pouvez retrouver tous les documents liés à votre logement sur notre plateforme (bail, état des lieux, quittances).</h5>
+        </div>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <%= image_tag "feature_simple_life.png", class: "feature-img" %>
+      </div>
+    </div>
+  </section>
+
+  <section class="text-center">
+    <div class="row padded">
+      <div class="col-sm-6 col-xs-12">
+        <%= image_tag "feature_confiance.png", class: "feature-img" %>
+      </div>
+      <div class="col-sm-6 col-xs-12">
+        <div class="value-prop stay-inknow">
+          <h3>Regagnez confiance</h3>
+          <h5>MyKeys souhaite que les locataires soient heureux et épanouis dans leurs logements. Pour cela, nous nous efforçons de promouvoir une relation de confiance entre propriétaires et locataires.</h5>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- The steps to rent its appartment -->
+<div class="container">
+  <section class="text-center">
+    <h1>Concentrez-vous sur l'essentiel</h1>
+  </section>
+  <section class="text-center">
+    <div class="row padded">
+      <div class="col-sm-4 col-xs-12">
+        <%= image_tag "feature_recherche.png", class: "feature-img-small" %>
+        <h3>Recherche de biens</h3>
+        <p>La recherche de biens en location est simplifiée en vous permettant de filtrer vos recherches en fonction de vos dossiers.</p>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <%= image_tag "feature_visites_locataires.png", class: "feature-img-small" %>
+        <h3>Organisation des visites</h3>
+        <p>Le système de réservation de visites de MyKeys vous permet de vous organiser en fonction de vos disponibilités.</p>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <%= image_tag "feature_paperplane.png", class: "feature-img-small" %>
+        <h3>Envoi du dossier</h3>
+        <p>Plus besoin d'imprimer vos dossiers en plusieurs exemplaires. Après votre visite, vous pouvez transmettre votre dossier en ligne de manière sécurisée.</p>
+      </div>
+    </div>
+    <div class="row padded">
+      <div class="col-sm-4 col-xs-12">
+        <%= image_tag "feature_signature.png", class: "feature-img-small" %>
+        <h3>Signature du bail</h3>
+        <p>La signature du bail de location se fait numériquement.</p>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <%= image_tag "feature_centralisation.png", class: "feature-img-small" %>
+        <h3>Centralisation des documents</h3>
+        <p>L'ensemble des documents relatifs à la location restent disponibles sur la plateforme MyKeys.</p>
+      </div>
+      <div class="col-sm-4 col-xs-12">
+        <%= image_tag "feature_paiement.png", class: "feature-img-small" %>
+        <h3>Paiement du loyer</h3>
+        <p>Le paiement du loyer se fait simplement et de façon transparente par le biais de MyKeys.</p>
+      </div>
+    </div>
+    <%= link_to t(".top_call_to_action", default: "Rejoignez nous"), "#", class: "navbar-item navbar-button btn padded" %>
+  </section>
 </div>

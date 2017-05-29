@@ -2,9 +2,9 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('background.jpg');">
   <div class="container">
     <div class="banner-content">
-      <h1>Louer son appartement simplement</h1>
-      <p>Gérer la location de son bien immobilier ne devrait pas être si difficile. Mykeys simplifie la gestion locative et permet aux propriétaires de gérer leurs biens sans recourir à une agence immobilière</p>
-      <a class="button">S'inscrire</a>
+      <h1>Louer son appartement n'a jamais été aussi simple</h1>
+      <p>Gérer la location de son bien immobilier ne devrait pas être si difficile. MyKeys simplifie la gestion locative et permet aux propriétaires de gérer leurs biens sans recourir à une agence immobilière</p>
+      <%= link_to t(".top_call_to_action", default: "S'inscrire"), "#", class: "navbar-item navbar-button btn" %>
     </div>
   </div>
 </div>
@@ -12,12 +12,12 @@
 <!-- Features -->
 <div class="container padded">
   <section class="text-center">
-    <h1>Comment pouvons-nous vous aider ?</h1>
+    <h1>Propriétaires, nous pouvons vous aider</h1>
   </section>
   <section class="text-center">
     <div class="row padded">
       <div class="col-sm-6 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img" %>
+        <%= image_tag "feature_money.png", class: "feature-img" %>
       </div>
       <div class="col-sm-6 col-xs-12">
         <div class="value-prop">
@@ -30,17 +30,14 @@
 
   <section class="text-center">
     <div class="row padded">
-      <div class="col-sm-6 col-xs-12 visible-xs-block">
-        <img src="/images/clock.png" class="clock">
-      </div>
       <div class="col-sm-6 col-xs-12">
         <div class="value-prop save-time">
           <h3>Gagnez du temps</h3>
           <h5>Notre solution vous permet d'automatiser les différentes tâches adminsitratives liées à la location de votre bien (organisation des visites, rédaction du bail de location, envoi des quittances de loyers), vous permettant de gagner un grand nombre d'heures.</h5>
         </div>
       </div>
-      <div class="col-sm-6 col-xs-12 hidden-xs">
-        <%= image_tag "feature.png", class: "feature-img" %>
+      <div class="col-sm-6 col-xs-12">
+        <%= image_tag "feature_time.png", class: "feature-img" %>
       </div>
     </div>
   </section>
@@ -48,12 +45,12 @@
   <section class="text-center">
     <div class="row padded">
       <div class="col-sm-6 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img" %>
+        <%= image_tag "feature_information.png", class: "feature-img" %>
       </div>
       <div class="col-sm-6 col-xs-12">
         <div class="value-prop stay-inknow">
-          <h3>Restez informés</h3>
-          <h5>Récupérez de l'information précieuse sur vos biens immobiliers, dès que vous en avez besoin. Grâce à la plateforme Mykeys, vous pouvez parcourir l'ensemble des dossiers de vos locataires, suivre l'historique des demandes de maintenance, observer la performance financière de vos investissements locatifs.</h5>
+          <h3>Restez informés sans effort</h3>
+          <h5>Récupérez de l'information précieuse sur vos biens immobiliers, dès que vous en avez besoin. Grâce à la plateforme MyKeys, vous pouvez parcourir l'ensemble des dossiers de vos locataires, suivre l'historique des demandes de maintenance, observer la performance financière de vos investissements locatifs.</h5>
         </div>
       </div>
     </div>
@@ -63,42 +60,43 @@
 <!-- The steps to rent its appartment -->
 <div class="container">
   <section class="text-center">
-    <h1>Comment ça marche ?</h1>
+    <h1>Concentrez-vous sur l'essentiel</h1>
   </section>
   <section class="text-center">
     <div class="row padded">
       <div class="col-sm-4 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img-small" %>
-        <h3>Tenant Screening Placement</h3>
-        <p>We help you set a rental rate for your properties, market them with beautiful professional photographs, and screen tenants to ensure only the best make it through.</p>
+        <%= image_tag "feature_annonce.png", class: "feature-img-small" %>
+        <h3>Partage de votre annonce</h3>
+        <p>MyKeys simplifie la diffusion de votre annonce en vous permettant de la publier sur différents canaux.</p>
       </div>
       <div class="col-sm-4 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img-small" %>
-        <h3>Tenant Screening Placement</h3>
-        <p>We help you set a rental rate for your properties, market them with beautiful professional photographs, and screen tenants to ensure only the best make it through.</p>
+        <%= image_tag "feature_visites.png", class: "feature-img-small" %>
+        <h3>Organisation des visites</h3>
+        <p>Plus besoin de passer des heures au téléphone pour organiser vos visites. Toutes les visites sont organisées en ligne en fonction de vos disponibilités.</p>
       </div>
       <div class="col-sm-4 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img-small" %>
-        <h3>Tenant Screening Placement</h3>
-        <p>We help you set a rental rate for your properties, market them with beautiful professional photographs, and screen tenants to ensure only the best make it through.</p>
+        <%= image_tag "feature_choix.png", class: "feature-img-small" %>
+        <h3>Choix du locataire</h3>
+        <p>Les dossiers des locataires sont classés et notés vous permettant de simplifier votre choix.</p>
       </div>
     </div>
     <div class="row padded">
       <div class="col-sm-4 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img-small" %>
-        <h3>Tenant Screening Placement</h3>
-        <p>We help you set a rental rate for your properties, market them with beautiful professional photographs, and screen tenants to ensure only the best make it through.</p>
+        <%= image_tag "feature_etat_des_lieux.png", class: "feature-img-small" %>
+        <h3>Etat des lieux numérique</h3>
+        <p>L'état des lieux du bien loué est établi de manière intégralement digitale, permettant d'ajouter des photographies aux commentaires.</p>
       </div>
       <div class="col-sm-4 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img-small" %>
-        <h3>Tenant Screening Placement</h3>
-        <p>We help you set a rental rate for your properties, market them with beautiful professional photographs, and screen tenants to ensure only the best make it through.</p>
+        <%= image_tag "feature_redaction_bail.png", class: "feature-img-small" %>
+        <h3>Rédaction du bail</h3>
+        <p>Une fois que vous avez choisi votre locataire, le bail de location est généré automatiquement en respectant le dernier cadre législatif en vigueur.</p>
       </div>
       <div class="col-sm-4 col-xs-12">
-        <%= image_tag "feature.png", class: "feature-img-small" %>
-        <h3>Tenant Screening Placement</h3>
-        <p>We help you set a rental rate for your properties, market them with beautiful professional photographs, and screen tenants to ensure only the best make it through.</p>
+        <%= image_tag "feature_loyers.png", class: "feature-img-small" %>
+        <h3>Encaissement des loyers</h3>
+        <p>Une fois que le locataire est en place, MyKeys s'occupe de suivre le paiement des loyers et d'envoyer des relances si nécessaire.</p>
       </div>
     </div>
+    <%= link_to t(".top_call_to_action", default: "Rejoignez nous"), "#", class: "navbar-item navbar-button btn padded" %>
   </section>
 </div>
