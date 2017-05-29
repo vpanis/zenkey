@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'pages#home'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get "dashboard" => "pages#dashboard"
+
+  resources :flats, do
+    get "visits" => "flats#visits"
+    get "dossiers" => "flats#dossiers"
+  end
+
 end
