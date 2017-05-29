@@ -7,11 +7,24 @@
         <div class="form-inputs">
           <%= f.input :title,  label: "Titre de l'annonce", required: true %>
           <%= f.input :rental_type, label: "Type de location", required: true %>
-          <%= f.input :photo, as: :attachinary %>
-          <%= f.input :description, required: true %>
-          <%= f.input :address, required: true %>
-          <%= f.input :price, required: true %>
-          <%= f.input :starting_day, required: true, as: :string, input_html: { class: "datepicker" } %>
+          <%= f.input :furnished, label: "Meublé", as: :radio_buttons, required: true %>
+          <%= f.input :availability_date, required: true, as: :string, input_html: { class: "datepicker" } %>
+          <%= f.input :min_duration, label: "Durée minimum (mois)", required: true %>
+          <%= f.input :address, label: "Adresse", required: true %>
+          <%= f.input :is_address_public, label: "Afficher l'addresse", required: true %>
+          <%= f.input :subway, label: "Métro à proximité", collection: @metro_stations %>
+          <%= f.input :size, label: "Superficie", required: true %>
+          <%= f.input :description, label: "Description", required: true %>
+          <%= f.input :rent, label: "Loyers", required: true %>
+          <%= f.input :rental_costs, label: "Charges locatives", required: true %>
+          <%= f.input :floor, label: "Etage", required: true %>
+          <%= f.input :rooms, label: "Nombre de pièces", required: true %>
+          <%= f.input :bedrooms, label: "Nombre de chambres", required: true %>
+
+          <%= f.input :balcony, label: "Balcon", as: :radio_buttons, required: true %>
+          <%= f.input :elevator, label: "Ascenseur", as: :radio_buttons, required: true %>
+          <%= f.input :separate_bathroom, label: "WC séparés", as: :radio_buttons, required: true %>
+          <%= f.input :parking, label: "Parking", as: :radio_buttons, required: true %>
         </div>
         <div class="form-actions text-center">
           <%= f.button :submit, "Créer votre annonce", class:"btn btn-danger"%>
