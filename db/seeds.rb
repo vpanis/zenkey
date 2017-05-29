@@ -7,14 +7,14 @@ Booking.destroy_all
 
 puts 'Creating Users...'
 
-charles             = User.create(email: "charles@gmail.com", password: '123456', username: "Official")
-nikolai             = User.create(email: "nikolai@gmail.com", password: '123456', username: "Pokora")
-vincent             = User.create(email: "vincent@gmail.com", password: '123456', username: "Achilou")
-alban               = User.create(email: "alban@gmail.com", password: '123456', username: "Alban")
+charles             = User.create(email: "charles@gmail.com", password: '123456')
+nikolai             = User.create(email: "nikolai@gmail.com", password: '123456')
+vincent             = User.create(email: "vincent@gmail.com", password: '123456')
+alban               = User.create(email: "alban@gmail.com", password: '123456')
 
 puts 'Creating Flats...'
 
-oberkampf           = Flat.create(title: "Angers neighborhood", address: "14 Rue Garnier, 49100 Angers", price: 40, starting_day: Date.new(2017, 6, 10), length: 5, description: "It's time to become wild and discover the real life in Angers district. Set in the heart of the region Pays de la Loire, and very Europe-minded, France’s 17th city enjoys a good reputation as a desirable place to live. According to the Express magazine, Angers even offers the highest quality of life to its residents compared to other big french cities.", is_outside: false, is_dirty: true, is_food: true, user_id: mathieu.id)
+oberkampf           = Flat.create(title: "Studio 20m2 rue oberkampf", description: "Studio 20m2 meublé kitchinette", rental_type: "location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord_id: charles)
 
 puts 'Creating Availabilities...'
 
