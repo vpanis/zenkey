@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: 'pages#home'
   get "dashboard" => "pages#dashboard"
 
-  resources :flats, do
+  resources :flats do
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
   end
