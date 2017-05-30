@@ -1,9 +1,8 @@
 class Slot < ApplicationRecord
   belongs_to :availability
-  belongs_to :user
-  validates :availability_id, :user_id, :starts_at, presence: true
-  validates :status, presence: true, inclusion: { in: ["vacant","booked","cancelled"] }
+  belongs_to :tenant, foreign_key: :tenant_id, class_name: "User"
+  validates :starts_at, presence: true
+  validates :status, presence: true, inclusion: { in: ["Vacant","Booked","Cancelled"] }
 
-  alias_attribute :tenant_id, :user_id
 end
 

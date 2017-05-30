@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_attachment :photo
 
   has_many :flats, dependent: :destroy, foreign_key: :landlord_id
-  has_many :bookings, dependent: :destroy
-  has_many :slots, dependent: :destroy
+  has_many :bookings, dependent: :destroy, foreign_key: :tenant_id
+  has_many :slots, dependent: :destroy, foreign_key: :tenant_id
 end
