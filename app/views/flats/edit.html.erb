@@ -1,9 +1,64 @@
-<div class="container">
-  <h2>Votre annonce :</h2>
-  <input type="url" value="<%= "http://localhost:3000/flats/#{@flat.id}" %>" id="flat-url">
-  <button onclick="copyToClipboard('flat-url')" class="glyphicon glyphicon-duplicate"></button>
-  <i class="fa fa-clone" aria-hidden="true">
-  </i>
+<!-- Flat navbar -->
+<div class="navbar-flat">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
+      <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_dossiers_path(@flat)) %>">
+      <%= link_to "Candidats", flat_dossiers_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(root_path) %>">
+      <%= link_to "Réservations", root_path, class: "navbar-wagon-link" %>
+    </div>
+  </div>
 </div>
 
-<%= render 'form' %>
+<div class="container text-center">
+  <h2>Publier votre annonce :</h2>
+  <div >
+    <textarea class="js-copytextarea"><%= "http://localhost:3000/flats/#{@flat.id}" %></textarea>
+    <button class="js-textareacopybtn">
+      <i class="fa fa-clone" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+
+<div class="container padded top">
+  <div class="row">
+    <div class="form col-xs-12 col-md-6 col-md-offset-3">
+      <h2 class="text-center">Editer votre annonce</h2>
+      <%= simple_form_for(@flat) do |f| %>
+        <%= f.error_notification %>
+        <div class="form-inputs">
+          <%= f.input :title,  label: "Titre de l'annonce", required: true %>
+          <%= f.input :rental_type, label: "Type de location", collection: ["Location", "Colocation"], include_blank: true %>
+          <%= f.input :furnished, label: "Meublé" %>
+          <%= f.input :availability_date, required: true, as: :string, input_html: { class: "datepicker", value: @flat.availability_date.strftime("%d/%m/%Y") } %>
+          <%= f.input :min_duration, label: "Durée minimum (mois)", required: true %>
+          <%= f.input :photos, as: :attachinary %>
+          <%= f.input :address, label: "Adresse", required: true %>
+          <%= f.input :is_address_public, label: "Afficher l'addresse" %>
+          <%= f.input :subway, label: "Métro à proximité", collection: @metro_stations %>
+          <%= f.input :size, label: "Superficie", input_html: { min: '9', step: 'any' }, required: true %>
+          <%= f.input :description, label: "Description", required: true %>
+          <%= f.input :rent, label: "Loyers", input_html: { min: '0', step: 'any' }, required: true, default: 0 %>
+          <%= f.input :rental_costs, label: "Charges locatives", input_html: { min: '0', step: 'any' }, required: true, default: 0 %>
+          <%= f.input :floor, label: "Etage", collection: [0, 1, 2, 3, 4, 5, 6, 7], required: true %>
+          <%= f.input :rooms, label: "Nombre de pièces", required: true %>
+          <%= f.input :bedrooms, label: "Nombre de chambres", required: true %>
+          <%= f.input :balcony, label: "Balcon" %>
+          <%= f.input :elevator, label: "Ascenseur" %>
+          <%= f.input :separate_bathroom, label: "WC séparés" %>
+          <%= f.input :parking, label: "Parking" %>
+        </div>
+        <div class="form-actions text-center">
+          <%= f.button :submit, "Editer votre annonce", class:"btn btn-danger"%>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
