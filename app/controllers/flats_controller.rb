@@ -32,14 +32,19 @@ class FlatsController < ApplicationController
   end
 
   def update
+    authorize @flat
     @flat.update(flat_params)
-    redirect_to flat_path(@flat)
+    redirect_to edit_flat_path(@flat)
   end
 
   def dossiers
-    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id])
-    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
-    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
+    @bookings_pending = Booking.where(status: "pending", flat_id: params[:flat_id])
+    @bookings_confirmed = Booking.where(status: "confirmed", flat_id: params[:flat_id])
+    @bookings_cancelled = Booking.where(status: "cancelled", flat_id: params[:flat_id])
+  end
+
+  def show
+    authorize @flat
   end
 
   private
