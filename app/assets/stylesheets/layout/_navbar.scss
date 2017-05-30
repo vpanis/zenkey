@@ -135,13 +135,15 @@
 
 
 /* Navbar dropdown menu */
+.btn {
+  border-radius: 8px;
+  line-height: 30px;
+  font-size: 14px;
+}
 .btn-login {
   color: #FF686B;
   border: solid 1px #FF686B;
   padding: 0 20px;
-  border-radius: 20em;
-  line-height: 40px;
-  font-size: 14px;
 }
 .btn-login:hover {
   color: white !important;

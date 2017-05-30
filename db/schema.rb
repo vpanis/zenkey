@@ -80,6 +80,8 @@ ActiveRecord::Schema.define(version: 20170530114804) do
     t.integer  "landlord_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["landlord_id"], name: "index_flats_on_landlord_id", using: :btree
   end
 
