@@ -38,6 +38,9 @@ class FlatsController < ApplicationController
     @bookings_cancelled = Booking.where(status: "cancelled", flat_id: params[:flat_id])
   end
 
+  def show
+  end
+
   private
 
   def flat_params

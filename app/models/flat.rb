@@ -1,7 +1,11 @@
 class Flat < ApplicationRecord
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
+
   belongs_to :landlord, foreign_key: :landlord_id, class_name: "User"
   has_many :availabilities, dependent: :destroy
   has_many :bookings, dependent: :destroy
+  has_many :slots, through: :availabilities, dependent: :destroy
 
   has_attachments :photos, maximum: 10
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530104933) do
+ActiveRecord::Schema.define(version: 20170530114804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20170530104933) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "flat_id"
-    t.date     "starting_date"
-    t.date     "end_date"
+    t.datetime "starting_date"
+    t.datetime "end_date"
     t.integer  "tenant_id"
     t.string   "status",        default: "Pending"
     t.datetime "created_at",                        null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20170530104933) do
     t.text     "title"
     t.text     "description"
     t.text     "rental_type"
-    t.date     "availability_date"
+    t.datetime "availability_date"
     t.integer  "min_duration"
     t.string   "address"
     t.boolean  "is_address_public"
@@ -80,18 +80,20 @@ ActiveRecord::Schema.define(version: 20170530104933) do
     t.integer  "landlord_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.index ["landlord_id"], name: "index_flats_on_landlord_id", using: :btree
   end
 
   create_table "slots", force: :cascade do |t|
     t.integer  "availability_id"
-    t.integer  "user_id"
-    t.time     "starts_at"
-    t.string   "status"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "tenant_id"
+    t.string   "status",          default: "Vacant"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.datetime "starts_at"
     t.index ["availability_id"], name: "index_slots_on_availability_id", using: :btree
-    t.index ["user_id"], name: "index_slots_on_user_id", using: :btree
+    t.index ["tenant_id"], name: "index_slots_on_tenant_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -128,5 +130,5 @@ ActiveRecord::Schema.define(version: 20170530104933) do
   add_foreign_key "bookings", "users", column: "tenant_id"
   add_foreign_key "flats", "users", column: "landlord_id"
   add_foreign_key "slots", "availabilities"
-  add_foreign_key "slots", "users"
+  add_foreign_key "slots", "users", column: "tenant_id"
 end
