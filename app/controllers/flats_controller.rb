@@ -48,8 +48,7 @@ class FlatsController < ApplicationController
   end
 
   def visits
-    @availabilities = Availability.where(flat_id: params[:flat_id])
-    @slots = Slot.where(flat_id: params[:flat_id])
+    @availability = Availability.new
   end
 
 

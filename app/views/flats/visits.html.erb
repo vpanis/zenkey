@@ -1,0 +1,43 @@
+<!-- Flat navbar -->
+<div class="navbar-flat">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
+      <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_dossiers_path(@flat)) %>">
+      <%= link_to "Candidats", flat_dossiers_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(root_path) %>">
+      <%= link_to "Réservations", root_path, class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+
+<div class="container text-center">
+  <h2>Définir un créneau</h2>
+  <div class="row">
+    <%= simple_form_for(@availability) do |f| %>
+    <%= f.error_notification %>
+    <div class="col-xs-12 col-sm-6">
+      <div class="form-inputs">
+        <%= f.input :starts_at, required: true, as: :string, input_html: { class: "datepicker", } %>
+      </div>
+      Datepicker
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="form-actions text-center">
+        <%= f.button :submit, "Editer votre annonce", class:"btn btn-danger"%>
+      </div>
+      Heure
+    </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="container text-center">
+  <h2>Mes créneaux</h2>
+</div>
