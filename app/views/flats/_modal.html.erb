@@ -1,0 +1,43 @@
+<!-- Large modal -->
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
+        <%= booking.user.first_name %>
+        <%= booking.user.last_name %>
+        <%= booking.user.status %>
+        <%= booking.status %>
+        <%= booking.user.grade %>
+        <%= booking.user.description %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <% if @bookings_confirmed.first.nil? %>
+          <% if booking.status == "pending" %>
+            <button type="button" class="btn btn-primary">Refuser ce dossier</button>
+            <button type="button" class="btn btn-primary">Accepter ce dossier</button>
+          <% elsif booking.status == "cancelled" %>
+            <button type="button" class="btn btn-primary">Accepter ce dossier</button>
+          <% elsif booking.status.nil? %>
+            <button type="button" class="btn btn-primary">Proposer votre appartement</button>
+          <% end %>
+        <% else %>
+          <% if booking.status == "pending" %>
+            <button type="button" class="btn btn-primary">Refuser ce dossier</button>
+            <button type="button" class="btn btn-primary">Vous avez déjà accepté un dossier !</button>
+          <% elsif booking.status == "cancelled" %>
+            <button type="button" class="btn btn-primary">Vous avez déjà accepté un dossier !</button>
+          <% elsif booking.status.nil? %>
+            <button type="button" class="btn btn-primary">Vous avez déjà accepté un dossier !</button>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

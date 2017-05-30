@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170529172411) do
+ActiveRecord::Schema.define(version: 20170530104933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,12 +44,12 @@ ActiveRecord::Schema.define(version: 20170529172411) do
     t.integer  "flat_id"
     t.date     "starting_date"
     t.date     "end_date"
-    t.integer  "user_id"
-    t.string   "status"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "tenant_id"
+    t.string   "status",        default: "Pending"
+    t.datetime "created_at",                        null: false
+    t.datetime "updated_at",                        null: false
     t.index ["flat_id"], name: "index_bookings_on_flat_id", using: :btree
-    t.index ["user_id"], name: "index_bookings_on_user_id", using: :btree
+    t.index ["tenant_id"], name: "index_bookings_on_tenant_id", using: :btree
   end
 
   create_table "flats", force: :cascade do |t|
@@ -77,10 +77,10 @@ ActiveRecord::Schema.define(version: 20170529172411) do
     t.boolean  "has_warrantor"
     t.integer  "warrantor_income_ratio"
     t.integer  "deposit"
-    t.integer  "user_id"
+    t.integer  "landlord_id"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
-    t.index ["user_id"], name: "index_flats_on_user_id", using: :btree
+    t.index ["landlord_id"], name: "index_flats_on_landlord_id", using: :btree
   end
 
   create_table "slots", force: :cascade do |t|
@@ -125,8 +125,8 @@ ActiveRecord::Schema.define(version: 20170529172411) do
 
   add_foreign_key "availabilities", "flats"
   add_foreign_key "bookings", "flats"
-  add_foreign_key "bookings", "users"
-  add_foreign_key "flats", "users"
+  add_foreign_key "bookings", "users", column: "tenant_id"
+  add_foreign_key "flats", "users", column: "landlord_id"
   add_foreign_key "slots", "availabilities"
   add_foreign_key "slots", "users"
 end
