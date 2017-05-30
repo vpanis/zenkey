@@ -28,8 +28,9 @@ class FlatsController < ApplicationController
   end
 
   def update
+    authorize @flat
     @flat.update(flat_params)
-    redirect_to flat_path(@flat)
+    redirect_to edit_flat_path(@flat)
   end
 
   def dossiers
@@ -39,6 +40,7 @@ class FlatsController < ApplicationController
   end
 
   def show
+    authorize @flat
   end
 
   private
