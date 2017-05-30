@@ -1,0 +1,66 @@
+<%= render 'tabs' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <h1>Dossier Confirmé</h1>
+        <% @bookings_confirmed.each do |booking| %>
+          <div class="card-booking">
+            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
+            <div class="card-booking-content">
+              <%= booking.user.first_name %>
+              <%= booking.user.last_name %>
+              <%= booking.user.status %>
+              <%= booking.status %>
+              <%= booking.user.grade %>
+            </div>
+            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
+            <%= render 'modal' %>
+          </div>
+        <% end %>
+
+      <h1>Dossiers en attente</h1>
+        <% @bookings_pending.each do |booking| %>
+          <div class="card-booking">
+            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
+            <div class="card-booking-content">
+              <%= booking.user.first_name %>
+              <%= booking.user.last_name %>
+              <%= booking.user.status %>
+              <%= booking.status %>
+              <%= booking.user.grade %>
+            </div>
+            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
+            <%= render 'modal' %>
+          </div>
+        <% end %>
+
+      <h1>Dossiers refusés</h1>
+        <% @bookings_cancelled.each do |booking| %>
+          <div class="card-booking">
+            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
+            <div class="card-booking-content">
+              <%= booking.user.first_name %>
+              <%= booking.user.last_name %>
+              <%= booking.user.status %>
+              <%= booking.status %>
+              <%= booking.user.grade %>
+            </div>
+            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
+            <%= render 'modal' %>
+          </div>
+        <% end %>
+    </div>
+
+    <div class="col-xs-12 col-md-4">
+      <h1>Critères de sélection</h1>
+      <div>
+        <%= @flat.income_ratio %>
+        <%= @flat.has warrantor %>
+        <%= @flat.warrantor_income_ratio %>
+        <%= @flat.deposit %>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,8 +1,8 @@
 class Booking < ApplicationRecord
   belongs_to :flat
-  belongs_to :user
+  belongs_to :tenant, foreign_key: :tenant_id, class_name: "User"
 
-  validates :flat_id, :starting_date, :user_id, presence: true
-  validates :status, presence: true, inclusion: { in: ["pending", "confirmed", "cancelled"] }
-  alias_attribute :tenant_id, :user_id
+  validates :starting_date, presence: true
+  validates :status, presence: true, inclusion: { in: ["Pending", "Confirmed", "Cancelled"] }
+
 end
