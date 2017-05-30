@@ -9,6 +9,10 @@ class FlatPolicy < ApplicationPolicy
     record.landlord == user || user.admin
   end
 
+  def visits?
+    record.landlord == user || user.admin
+  end
+
   def create?
     true
   end

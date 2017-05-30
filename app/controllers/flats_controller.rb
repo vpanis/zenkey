@@ -1,6 +1,6 @@
 class FlatsController < ApplicationController
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
-  before_action :set_nested_flat, only: [:dossiers]
+  before_action :set_nested_flat, only: [:dossiers, :visits]
 
   def index
     @flats = policy_scope(Flat.all)
@@ -41,6 +41,12 @@ class FlatsController < ApplicationController
     @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
     @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
   end
+
+  def visits
+    @availabilities = Availability.where(flat_id: params[:flat_id])
+    @slots = Slot.where(flat_id: params[:flat_id])
+  end
+
 
   private
 
