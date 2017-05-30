@@ -2,10 +2,10 @@
       $('input.datepicker').data({behaviour: "datepicker"}).datepicker();
   });
 
-  $('input#horntrip_starting_day').datepicker({
+  $('input#flat_availability_date').datepicker({
+    format: "dd/mm/yyyy",
     weekStart: 1,
-    multidate: false,
+    startDate: "today",
     todayHighlight: true,
-    altField: '#horntrip_starting_day',
-    altFormat: 'yy-mm-dd',
+    multidate: false,
   });
