@@ -13,13 +13,23 @@ class FlatsController < ApplicationController
 
   def create
     @flat = Flat.new(flat_params)
-    @flat.user = current_user
+    @flat.landlord = current_user
+    @flat.status = "Available"
     authorize @flat
     if @flat.save
-      redirect_to edit_flat_path
+      redirect_to edit_flat_path(@flat)
     else
       render :new
     end
+  end
+
+  def edit
+    authorize @flat
+  end
+
+  def update
+    @flat.update(flat_params)
+    redirect_to flat_path(@flat)
   end
 
   def dossiers
@@ -31,7 +41,7 @@ class FlatsController < ApplicationController
   private
 
   def flat_params
-    params.require(:flat).permit(:title, :rental_type, :furnished, :availability_date, :min_duration, :address, :is_address_public, :subway, :size, :description, :rent, :rental_costs, :floor, :rooms, :bedrooms, :balcony, :elevator, :separate_bathroom, :parking)
+    params.require(:flat).permit(:title, :rental_type, :furnished, :availability_date, :min_duration, :photos, :address, :is_address_public, :subway, :size, :description, :rent, :rental_costs, :floor, :rooms, :bedrooms, :balcony, :elevator, :separate_bathroom, :parking)
   end
 
   def set_flat

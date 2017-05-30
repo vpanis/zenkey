@@ -1,1 +1,9 @@
+<div class="container">
+  <h2>Votre annonce :</h2>
+  <input type="url" value="<%= "http://localhost:3000/flats/#{@flat.id}" %>" id="flat-url">
+  <button onclick="copyToClipboard('flat-url')" class="glyphicon glyphicon-duplicate"></button>
+  <i class="fa fa-clone" aria-hidden="true">
+  </i>
+</div>
+
 <%= render 'form' %>

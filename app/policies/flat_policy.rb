@@ -12,4 +12,12 @@ class FlatPolicy < ApplicationPolicy
   def new?
     create?
   end
+
+  def update?
+    record.landlord == user
+  end
+
+  def edit?
+    update?
+  end
 end
