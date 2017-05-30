@@ -7,16 +7,16 @@ Booking.destroy_all
 
 puts 'Creating Users...'
 
-charles             = User.create!(email: "charles@gmail.com", password: '123456')
+charles             = User.create!(email: "charles@gmail.com", password: '123456', admin: true)
 url_charles         = 'https://unsplash.it/200/300'
 charles.photo_url   = url_charles
-nikolai             = User.create!(email: "nikolai@gmail.com", password: '123456')
+nikolai             = User.create!(email: "nikolai@gmail.com", password: '123456', admin: true)
 url_nikolai         = 'https://unsplash.it/200/300'
 nikolai.photo_url   = url_nikolai
-vincent             = User.create!(email: "vincent@gmail.com", password: '123456')
+vincent             = User.create!(email: "vincent@gmail.com", password: '123456', admin: true)
 url_vincent         = 'https://unsplash.it/200/300'
 vincent.photo_url   = url_vincent
-alban               = User.create!(email: "alban@gmail.com", password: '123456')
+alban               = User.create!(email: "alban@gmail.com", password: '123456', admin: true)
 url_alban           = 'https://unsplash.it/200/300'
 alban.photo_url     = url_alban
 
