@@ -7,16 +7,16 @@ Booking.destroy_all
 
 puts 'Creating Users...'
 
-charles             = User.create!(email: "charles@gmail.com", password: '123456', admin: true)
+charles             = User.create!(email: "charles@gmail.com", password: '123456', admin: true, status: "Cadre supérieur")
 url_charles         = 'https://unsplash.it/200/300'
 charles.photo_url   = url_charles
-nikolai             = User.create!(email: "nikolai@gmail.com", password: '123456', admin: true)
+nikolai             = User.create!(email: "nikolai@gmail.com", password: '123456', admin: true, status: "Ouvrier")
 url_nikolai         = 'https://unsplash.it/200/300'
 nikolai.photo_url   = url_nikolai
-vincent             = User.create!(email: "vincent@gmail.com", password: '123456', admin: true)
+vincent             = User.create!(email: "vincent@gmail.com", password: '123456', admin: true, status: "Agriculteur")
 url_vincent         = 'https://unsplash.it/200/300'
 vincent.photo_url   = url_vincent
-alban               = User.create!(email: "alban@gmail.com", password: '123456', admin: true)
+alban               = User.create!(email: "alban@gmail.com", password: '123456', admin: true, status: "Profession libérale")
 url_alban           = 'https://unsplash.it/200/300'
 alban.photo_url     = url_alban
 
@@ -48,5 +48,9 @@ s_4  = Slot.create!(availability: a_1, tenant: nikolai, starts_at: DateTime.new(
 puts 'Creating Bookings...'
 
 b_1  = Booking.create!(flat: oberkampf, starting_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), tenant: alban)
+
+puts 'Creating Searches...'
+
+s_1  = Search.create!(address: "50 Rue Oberkampf, 75020 PARIS", tenant: alban)
 
 puts 'Finished !'
