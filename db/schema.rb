@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530110042) do
+ActiveRecord::Schema.define(version: 20170530114804) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 20170530110042) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer  "flat_id"
-    t.date     "starting_date"
-    t.date     "end_date"
+    t.datetime "starting_date"
+    t.datetime "end_date"
     t.integer  "tenant_id"
     t.string   "status",        default: "Pending"
     t.datetime "created_at",                        null: false
@@ -56,7 +56,7 @@ ActiveRecord::Schema.define(version: 20170530110042) do
     t.text     "title"
     t.text     "description"
     t.text     "rental_type"
-    t.date     "availability_date"
+    t.datetime "availability_date"
     t.integer  "min_duration"
     t.string   "address"
     t.boolean  "is_address_public"
@@ -86,10 +86,10 @@ ActiveRecord::Schema.define(version: 20170530110042) do
   create_table "slots", force: :cascade do |t|
     t.integer  "availability_id"
     t.integer  "tenant_id"
-    t.time     "starts_at"
     t.string   "status",          default: "Vacant"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.datetime "starts_at"
     t.index ["availability_id"], name: "index_slots_on_availability_id", using: :btree
     t.index ["tenant_id"], name: "index_slots_on_tenant_id", using: :btree
   end
