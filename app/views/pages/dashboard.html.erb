@@ -11,13 +11,14 @@
     <% @user_flats.each do |user_flat| %>
     <div class="col-xs-12 col-sm-4 sm-marged-bottom">
       <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path set_flat_image(user_flat), crop: :scale %>');">
+
         <div class="card-category"><span class="badge"><%= user_flat.bookings.size %></span></div>
+
         <div class="card-description">
           <h2><%= user_flat.title %></h2>
           <p><%= user_flat.description %> <%= user_flat.user_id %></p>
         </div>
-        <span class="badge"><button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>
-        <a class="card-link" href="/flats/:flat_id/visits" ></a>
+
       </div>
     </div>
     <% end %>
