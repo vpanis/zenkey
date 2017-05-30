@@ -21,6 +21,7 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-datepicker-rails'
 gem 'devise'
 gem 'pundit'
+gem "geocoder"
 
 group :development, :test do
   gem 'binding_of_caller'
