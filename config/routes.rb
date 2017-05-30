@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get "dashboard" => "pages#dashboard"
 
   resources :flats do
+    resources :availabilities, only: [:create]
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
   end
