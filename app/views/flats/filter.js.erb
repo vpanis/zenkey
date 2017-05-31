@@ -1,5 +1,6 @@
 <% if @flat.errors.any? %>
   alert("Vos modifications n'ont pas été enregistrées.");
 <% else %>
-  $('#message-modif').text('Vos modifications ont bien été enregistrées.')
+  $('#message-modif').text('Vos modifications ont bien été enregistrées.');
+  $('#candidates').html(" <%= j render 'candidates', bookings_pending: @bookings_pending, bookings_confirmed: @bookings_confirmed, bookings_cancelled: @bookings_cancelled %> ");
 <% end %>

@@ -1,58 +1,9 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 col-md-8">
-
-      <% if !@bookings_confirmed.first.nil? %>
-      <h1><%= pluralize @bookings_confirmed.count, "dossier confirmé" %></h1>
-        <% @bookings_confirmed.each do |booking| %>
-          <div class="card-booking" id="<%= booking.id %>">
-            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar" %>
-            <div class="card-booking-content">
-              <div><%= set_fullname(booking.tenant) %></div>
-              <div><%= booking.tenant.status %></div>
-              <div>Status du dossier : <%= booking.status %></div>
-              <div>Note du dossier : <%= render 'grade', booking: booking %></div>
-            </div>
-            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg"></a>
-            <%= render 'modal', booking: booking  %>
-          </div>
-        <% end %>
-      <% end %>
-
-      <% if !@bookings_pending.first.nil? %>
-      <h1><%= pluralize @bookings_pending.count, "dossier" %> en attente</h1>
-        <% @bookings_pending.each do |booking| %>
-          <div class="card-booking" id="<%= booking.id %>">
-            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar" %>
-            <div class="card-booking-content">
-              <div><%= set_fullname(booking.tenant) %></div>
-              <div><%= booking.tenant.status %></div>
-              <div>Status du dossier : <%= booking.status %></div>
-              <div>Note du dossier : <%= render 'grade', booking: booking %></div>
-            </div>
-            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg"></a>
-            <%= render 'modal', booking: booking %>
-          </div>
-        <% end %>
-      <% end %>
-
-      <% if !@bookings_cancelled.first.nil? %>
-      <h1><%= pluralize @bookings_cancelled.count, "dossier annulé" %></h1>
-        <% @bookings_cancelled.each do |booking| %>
-          <div class="card-booking" id="<%= booking.id %>">
-            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar" %>
-            <div class="card-booking-content">
-              <div><%= set_fullname(booking.tenant) %></div>
-              <div><%= booking.tenant.status %></div>
-              <div>Status du dossier : <%= booking.status %></div>
-              <div>Note du dossier : <%= render 'grade', booking: booking %></div>
-            </div>
-            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg"></a>
-            <%= render 'modal', booking: booking %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
+      <div id="candidates">
+        <%= render 'candidates', bookings_pending: @bookings_pending, bookings_confirmed: @bookings_confirmed, bookings_cancelled: @bookings_cancelled, flat: @flat %>
+      </div>
 
     <div class="col-xs-12 col-md-4" id="criteres">
       <h1 class="text-center">Critères de sélection</h1>
