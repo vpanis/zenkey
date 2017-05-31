@@ -20,3 +20,55 @@
     margin-bottom: 20px;
   }
 }
+
+.form-flat {
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  h2 {
+    font-size: 25px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+
+  a {
+    color: #FF696A;
+    text-decoration: none;
+  }
+  .btn {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
+
+.flat-form-choices {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: 20px 0px;
+  text-align: center;
+  .checkbox {
+    margin: 0px;
+  }
+}
+
+.flat-form-choice {
+  margin-bottom: 20px !important;
+  height: 50px;
+  padding: 15px;
+  flex: 0 0 25%;
+  background: #b7b7b7;
+  border-radius: 5px;
+  opacity: 0.5;
+  transition: 0.3s;
+  &:hover {
+    opacity: 1;
+  }
+  &.active {
+    background: #FF696A;
+    color: white;
+    opacity: 1;
+  }
+}
