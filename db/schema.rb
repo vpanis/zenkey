@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 20170531084656) do
   add_foreign_key "bookings", "flats"
   add_foreign_key "bookings", "users", column: "tenant_id"
   add_foreign_key "flats", "users", column: "landlord_id"
-  add_foreign_key "slots", "flats"
   add_foreign_key "searches", "users", column: "tenant_id"
+  add_foreign_key "slots", "flats"
   add_foreign_key "slots", "users", column: "tenant_id"
 end

@@ -16,7 +16,7 @@ module UsersHelper
   end
 
   def set_grade(user, flat)
-    grade = (user.income + (user.warrantor_income * 0,5)) / (flat.rent + flat.rental.costs)
+    grade = (user.income + (user.warrantor_income * 0.5)) / (flat.rent + flat.rental_costs)
     grade = (grade * 2).round / 2
   end
 end
