@@ -1,6 +1,6 @@
 class FlatsController < ApplicationController
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
-  before_action :set_nested_flat, only: [:filter, :dossiers]
+  before_action :set_nested_flat, only: [:filter, :dossiers, :visits]
 
   def index
     @flats = policy_scope(Flat.all)
@@ -73,6 +73,11 @@ class FlatsController < ApplicationController
       marker.lng flat.longitude
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
+  end
+
+  def visits
+    @slot = Slot.new
+    @slot.starts_at = Date.today
   end
 
   private

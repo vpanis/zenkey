@@ -1,3 +1,11 @@
+.card {
+  background-color: white;
+  margin-top: 30px;
+  padding: 50px;
+  border: solid 1px #ffe0e0;
+}
+
+// Booking card stylesheet
 .card-booking {
   height: 90px;
   margin: 20px;
@@ -41,3 +49,24 @@
   opacity: 0.1;
 }
 
+.slot-card-vacant {
+  height: 200px;
+  background-color: #F7F7F7;
+  border: solid 1px #e8e8e8;
+  margin: 5px;
+  padding: 20px;
+}
+
+.slot-card-booked {
+  height: 200px;
+  background-color: #fff7f7;
+  border: solid 1px #ffb2b2;
+  margin: 5px;
+  padding: 20px;
+  .avatar-large {
+    margin: 20px 0px;
+  }
+  p {
+    margin-bottom: 0px;
+  }
+}
