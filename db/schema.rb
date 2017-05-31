@@ -10,7 +10,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20170531084656) do
 
   # These are extensions that must be enabled in order to support this database
@@ -131,9 +130,9 @@ ActiveRecord::Schema.define(version: 20170531084656) do
     t.integer  "income"
     t.boolean  "has_warrantor"
     t.integer  "warrantor_income"
-    t.string   "grade"
     t.boolean  "is_landlord"
     t.boolean  "admin"
+    t.integer  "grade",                  default: 0
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

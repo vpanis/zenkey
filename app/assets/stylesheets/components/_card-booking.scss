@@ -4,6 +4,9 @@
   background-color: grey;
   color: white;
   position: relative;
+  .fa-star {
+    color: yellow;
+  }
 }
 .card-booking-user {
   position: absolute;
@@ -15,7 +18,6 @@
   top: 10px;
   left: 80px;
   font-size: 10px;
-  text-transform: uppercase;
 }
 .card-booking-link {
   position: absolute;
@@ -30,3 +32,4 @@
 .card-booking-link:hover{
   opacity: 0.2;
 }
+

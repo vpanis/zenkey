@@ -12,4 +12,5 @@ class User < ApplicationRecord
   has_many :searches, dependent: :destroy, foreign_key: :tenant_id
 
   validates :status, inclusion: { in: ["Etudiant", "Entrepreneur", "Sans profession", "Retraité", "Fonctionnaire", "Cadre supérieur", "Ouvrier", "Agriculteur", "Technicien", "Profession libérale"] }
+  validates :grade, inclusion: { in: [0, 1, 2, 3, 4, 5] }
 end
