@@ -3,7 +3,10 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require datepicker-loading
+//= require copy_clipboard
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
+//= require underscore
+//= require gmaps/google
 //= require_tree .

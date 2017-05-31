@@ -1,15 +1,15 @@
-function CopyToClipboard(containerid) {
-  if (document.selection) {
-      var range = document.body.createTextRange();
-      range.moveToElementText(document.getElementById(containerid));
-      range.select().createTextRange();
-      document.execCommand("Copy");
+var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
 
-  } else if (window.getSelection) {
-      var range = document.createRange();
-       range.selectNode(document.getElementById(containerid));
-       window.getSelection().addRange(range);
-       document.execCommand("Copy");
-       alert("text copied")
+copyTextareaBtn.addEventListener('click', function(event) {
+  var copyTextarea = document.querySelector('.js-copytextarea');
+  copyTextarea.select();
+  window.alert("Lien copié dans le presse-papier");
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Copying text command was ' + msg);
+  } catch (err) {
+    console.log('Oops, unable to copy');
   }
-}
+});

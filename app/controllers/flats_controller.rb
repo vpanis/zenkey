@@ -28,12 +28,12 @@ class FlatsController < ApplicationController
   end
 
   def edit
-    authorize @flat
   end
 
   def update
+    authorize @flat
     @flat.update(flat_params)
-    redirect_to flat_path(@flat)
+    redirect_to edit_flat_path(@flat)
   end
 
   def filter
@@ -56,6 +56,17 @@ class FlatsController < ApplicationController
     @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
     @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
     @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
+  end
+
+  def show
+    @flat_coordinates = { lat: @flat.latitude, lng: @flat.longitude }
+    @flats = Flat.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@flats) do |flat, marker|
+      marker.lat flat.latitude
+      marker.lng flat.longitude
+      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+    end
   end
 
   private
