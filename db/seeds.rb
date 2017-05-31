@@ -23,13 +23,13 @@ puts 'Creating Flats...'
 
 oberkampf           = Flat.create!(title: "Studio 20m2 rue oberkampf", description: "Studio 20m2 meublé kitchinette", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: charles)
 
-urls_oberkampf      = [
-  'https://unsplash.it/200/300',
-  'https://unsplash.it/200/300',
-  'https://unsplash.it/200/300',
-  'https://unsplash.it/200/300'
-]
-oberkampf.photo_urls = urls_oberkampf
+# urls_oberkampf      = [
+#   'https://unsplash.it/300/300',
+#   'https://unsplash.it/300/300',
+#   'https://unsplash.it/300/300',
+#   'https://unsplash.it/300/300'
+# ]
+# oberkampf.photo_urls = urls_oberkampf
 
 puts 'Creating Slots...'
 
