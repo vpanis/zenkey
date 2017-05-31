@@ -12,9 +12,12 @@
   <body>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <%= yield %>
+    <div class="footer-down">
+      <%= yield %>
+    </div>
     <%= render 'shared/footer' %>
     <%= javascript_include_tag 'application' %>
+    <%= yield(:after_js) %>
     <%= cloudinary_js_config %>
   </body>
 </html>

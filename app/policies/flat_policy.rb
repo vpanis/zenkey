@@ -5,11 +5,7 @@ class FlatPolicy < ApplicationPolicy
     end
   end
 
-  def dossiers?
-    record.landlord == user || user.admin
-  end
-
-  def create?
+  def show?
     true
   end
 
@@ -17,11 +13,23 @@ class FlatPolicy < ApplicationPolicy
     create?
   end
 
-  def update?
-    record.landlord == user || user.admin
+  def create?
+    true
   end
 
   def edit?
     update?
+  end
+
+  def update?
+    record.landlord == user || user.admin
+  end
+
+  def filter?
+    record.landlord == user || user.admin
+  end
+
+  def dossiers?
+    record.landlord == user || user.admin
   end
 end

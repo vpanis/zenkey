@@ -1,0 +1,5 @@
+<% if @flat.errors.any? %>
+  alert("Vos modifications n'ont pas été enregistrées.");
+<% else %>
+  $('#message-modif').text('Vos modifications ont bien été enregistrées.')
+<% end %>
