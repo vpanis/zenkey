@@ -34,16 +34,16 @@ oberkampf.photo_urls = urls_oberkampf
 
 
 
-puts 'Creating Availabilities...'
+# puts 'Creating Availabilities...'
 
-a_1  = Availability.create!(flat: oberkampf, starts_at: DateTime.new(2017, 6, 12, 8, 0, 0, 0), length: 1, slot_length: 15)
+# a_1  = Availability.create!(flat: oberkampf, starts_at: DateTime.new(2017, 6, 12, 8, 0, 0, 0), length: 1, slot_length: 15)
 
 puts 'Creating Slots...'
 
-s_1  = Slot.create!(availability: a_1, tenant: alban, starts_at: DateTime.new(2017, 6, 12, 8, 0, 0, 0), status: "Booked")
-s_2  = Slot.create!(availability: a_1, tenant: vincent, starts_at: DateTime.new(2017, 6, 12, 8, 15, 0, 0), status: "Booked")
-s_3  = Slot.create!(availability: a_1, starts_at: DateTime.new(2017, 6, 12, 8, 30, 0, 0), status: "Vacant")
-s_4  = Slot.create!(availability: a_1, tenant: nikolai, starts_at: DateTime.new(2017, 6, 12, 8, 45, 0, 0), status: "Cancelled")
+s_1  = Slot.create!(flat: oberkampf, tenant: alban, starts_at: DateTime.new(2017, 6, 12, 8, 0, 0, 0), status: "Booked")
+s_2  = Slot.create!(flat: oberkampf, tenant: vincent, starts_at: DateTime.new(2017, 6, 12, 8, 15, 0, 0), status: "Booked")
+s_3  = Slot.create!(flat: oberkampf, starts_at: DateTime.new(2017, 6, 12, 8, 30, 0, 0), status: "Vacant")
+s_4  = Slot.create!(flat: oberkampf, tenant: nikolai, starts_at: DateTime.new(2017, 6, 12, 8, 45, 0, 0), status: "Cancelled")
 
 puts 'Creating Bookings...'
 

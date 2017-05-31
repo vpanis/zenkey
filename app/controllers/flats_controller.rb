@@ -24,7 +24,6 @@ class FlatsController < ApplicationController
   end
 
   def edit
-    authorize @flat
   end
 
   def update
@@ -39,6 +38,14 @@ class FlatsController < ApplicationController
   end
 
   def show
+    @flat_coordinates = { lat: @flat.latitude, lng: @flat.longitude }
+    @flats = Flat.where.not(latitude: nil, longitude: nil)
+
+    @hash = Gmaps4rails.build_markers(@flats) do |flat, marker|
+      marker.lat flat.latitude
+      marker.lng flat.longitude
+      # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
+      end
   end
 
   private
@@ -49,5 +56,6 @@ class FlatsController < ApplicationController
 
   def set_flat
     @flat = Flat.find(params[:id])
+    authorize @flat
   end
 end
