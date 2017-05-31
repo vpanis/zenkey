@@ -20,10 +20,9 @@
 <div class="container card text-center">
   <h2 class="highlight">Définir un créneau</h2>
   <div class="row">
-    <%= simple_form_for([@flat, @availability]) do |f| %>
+    <%= simple_form_for([@flat, @slot]) do |f| %>
     <%= f.error_notification %>
     <div class="col-xs-12 col-sm-6">
-      <!-- <div id="datepicker" data-date=Date.today></div> -->
       <div style="overflow:hidden;">
         <div class="form-group">
           <div class="col-xs-10 col-xs-offset-1">
@@ -34,12 +33,12 @@
     </div>
     <div class="col-xs-12 col-sm-6">
       <div class="form-inputs">
-        <%= f.input :starts_at, as: :hidden, :input_html => { :id => "datetimepicker_hidden_field" } %>
+        <%= f.input :starts_at, as: :hidden, :input_html => { :id => "datetimepicker_hidden_field", value: DateTime.now.strftime("%d/%m/%Y %H:%M")} %>
         <div class="col-xs-10 col-xs-offset-1">
-          <%= f.input :length, label: "Durée du créneau (h) :" %>
+          <%= f.input :availability_length, label: "Durée du créneau (h) :", input_html: {value: 0} %>
         </div>
         <div class="col-xs-10 col-xs-offset-1">
-          <%= f.input :slot_length, label: "Durée de la visite (min) :" %>
+          <%= f.input :length, label: "Durée de la visite (min) :", input_html: {value: 0} %>
         </div>
       </div>
       <div class="form-actions text-center">
@@ -50,74 +49,81 @@
   </div>
 </div>
 
-<% if @flat.availabilities.size > 0 %>
   <!-- Next slots -->
-  <div class="container card text-center">
-    <h2 class="highlight">Mes prochaines visites</h2>
-    <% @flat.availabilities.each do |availability| %>
-      <% if availability.slots.size >= 1 %>
+  <% if @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now]).length >= 1 %>
+    <div class="container card text-center">
+      <h2 class="highlight">Mes prochaines visites</h2>
+      <% @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
+        <h4><strong><%= date %></strong></h4>
         <div class="row">
-          <h4><strong><%= availability.starts_at.strftime(format="%A %e %Y %H:%M") %></strong></h4>
-          <% availability.slots.each do |slot| %>
-            <div class="col-xs-6 col-sm-3">
-              <% if slot.status == "Vacant" %>
-                <div class="slot-card-vacant" %>
-                  <div class="card-category">
-                    <%= slot.starts_at.strftime(format="%H:%M") %>
-                  </div>
-                  <div class="card-description">
-                    <p><%= slot.status %></p>
-                  </div>
-                </div>
-              <% elsif slot.status == "Booked" %>
+          <% slots.each do |slot| %>
+            <% if slot.status == "Booked" %>
+              <div class="col-xs-6 col-sm-3">
                 <div class="slot-card-booked" %>
                   <div class="card-category">
-                    <%= slot.starts_at %>
+                    <p><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
                   </div>
                   <div class="card-description">
-                    <p><%= slot.status %></p>
+                    <%= cl_image_tag 'https://unsplash.it/400/400', class: "avatar-large" %>
+                    <p><%= slot.tenant.email %>
+                    <%= slot.tenant.status %></p>
                   </div>
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% else %>
+            <div class="col-xs-6 col-sm-3">
+                <div class="slot-card-vacant" %>
+                  <div class="card-category">
+                    <h><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
+                  </div>
+                  <div class="card-description">
+                    <%= slot.status %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 
   <!-- Past slots -->
-  <div class="container card text-center">
-    <h2 class="highlight">Visites passées</h2>
-    <% @flat.availabilities.each do |availability| %>
-      <% if availability.slots.size >= 1 %>
+  <% if @flat.slots.order("starts_at asc").where(['starts_at < ?', DateTime.now]).length >= 1 %>
+    <div class="container card text-center">
+      <h2 class="highlight">Mes visites passées</h2>
+      <% @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
+        <h4><strong><%= date %></strong></h4>
         <div class="row">
-          <h4><%= availability.starts_at.strftime(format="%A %e %Y %H:%M") %></h4>
-          <% availability.slots.each do |slot| %>
-            <div class="col-xs-6 col-sm-3">
-              <% if slot.status == "Vacant" %>
-                <div class="slot-card-vacant" %>
-                  <div class="card-category">
-                    <%= slot.starts_at.strftime(format="%A %e %Y %H:%M") %>
-                  </div>
-                  <div class="card-description">
-                    <p><%= slot.status %></p>
-                  </div>
-                </div>
-              <% elsif slot.status == "Booked" %>
+          <% slots.each do |slot| %>
+            <% if slot.status == "Booked" %>
+              <div class="col-xs-6 col-sm-3">
                 <div class="slot-card-booked" %>
                   <div class="card-category">
-                    <%= slot.starts_at %>
+                    <p><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
+                  </div>
+                  <div class="card-description">
+                    <%= cl_image_tag 'https://unsplash.it/400/400', class: "avatar-large" %>
+                    <p><%= slot.tenant.email %>
+                    <%= slot.tenant.status %></p>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+            <div class="col-xs-6 col-sm-3">
+                <div class="slot-card-vacant" %>
+                  <div class="card-category">
+                    <h><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
                   </div>
                   <div class="card-description">
                     <p><%= slot.status %></p>
                   </div>
+
                 </div>
-              <% end %>
-            </div>
+              </div>
+            <% end %>
           <% end %>
         </div>
       <% end %>
-    <% end %>
-  </div>
-<% end %>
+    </div>
+  <% end %>

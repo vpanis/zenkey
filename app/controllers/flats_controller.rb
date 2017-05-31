@@ -54,8 +54,8 @@ class FlatsController < ApplicationController
   end
 
   def visits
-    @availability = Availability.new
-    @availability.starts_at = Date.today
+    @slot = Slot.new
+    @slot.starts_at = Date.today
   end
 
   private

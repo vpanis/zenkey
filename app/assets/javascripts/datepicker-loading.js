@@ -27,9 +27,9 @@ $(function () {
 
     $('#datetimepicker').datetimepicker();
     $('#datetimepicker').on('dp.change', function(e) {
-      console.log("Hello 2", e.date.format("DD/MM/YYYY hh:mm"));
+      console.log("Coucou 1", e.date.format("DD/MM/YYYY HH:mm"))
       $('#datetimepicker_hidden_field').val(
-          e.date.format("DD/MM/YYYY hh:mm")
+          e.date.format("DD/MM/YYYY HH:mm")
       );
    });
 });

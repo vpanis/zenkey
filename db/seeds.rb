@@ -1,7 +1,6 @@
 puts 'Cleaning DB...'
 User.destroy_all
 Flat.destroy_all
-Availability.destroy_all
 Slot.destroy_all
 Booking.destroy_all
 

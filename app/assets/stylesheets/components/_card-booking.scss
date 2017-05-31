@@ -41,13 +41,23 @@
 
 // Slot card stylesheet
 .slot-card-vacant {
-  height: 170px;
+  height: 200px;
   background-color: #F7F7F7;
+  border: solid 1px #e8e8e8;
   margin: 5px;
+  padding: 20px;
 }
 .slot-card-booked {
-  height: 170px;
-  background-color: #F7F7F7;
+  height: 200px;
+  background-color: #fff7f7;
+  border: solid 1px #ffb2b2;
   margin: 5px;
+  padding: 20px;
+  .avatar-large {
+    margin: 20px 0px;
+  }
+  p {
+    margin-bottom: 0px;
+  }
 }
 
