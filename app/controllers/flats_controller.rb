@@ -1,8 +1,12 @@
 class FlatsController < ApplicationController
-  before_action :set_flat, only: [:show, :edit, :update, :destroy, :dossiers]
+  before_action :set_flat, only: [:show, :edit, :update, :destroy]
+  before_action :set_nested_flat, only: [:dossiers]
 
   def index
     @flats = policy_scope(Flat.all)
+  end
+
+  def show
   end
 
   def new
@@ -27,8 +31,9 @@ class FlatsController < ApplicationController
   end
 
   def update
+    authorize @flat
     @flat.update(flat_params)
-    redirect_to flat_path(@flat)
+    redirect_to edit_flat_path(@flat)
   end
 
   def dossiers
@@ -57,5 +62,10 @@ class FlatsController < ApplicationController
   def set_flat
     @flat = Flat.find(params[:id])
     authorize @flat
+  end
+
+  def set_nested_flat
+    @flat = Flat.find(params[:flat_id])
+    authorize(@flat)
   end
 end

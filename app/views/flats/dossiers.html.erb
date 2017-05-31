@@ -8,14 +8,14 @@
           <div class="card-booking">
             <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
             <div class="card-booking-content">
-              <%= booking.user.first_name %>
-              <%= booking.user.last_name %>
-              <%= booking.user.status %>
+              <%= booking.tenant.first_name %>
+              <%= booking.tenant.last_name %>
+              <%= booking.tenant.status %>
               <%= booking.status %>
-              <%= booking.user.grade %>
+              <%= booking.tenant.grade %>
             </div>
             <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
-            <%= render 'modal' %>
+            <%= render 'modal', booking: booking  %>
           </div>
         <% end %>
 
@@ -24,14 +24,14 @@
           <div class="card-booking">
             <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
             <div class="card-booking-content">
-              <%= booking.user.first_name %>
-              <%= booking.user.last_name %>
-              <%= booking.user.status %>
+              <%= booking.tenant.first_name %>
+              <%= booking.tenant.last_name %>
+              <%= booking.tenant.status %>
               <%= booking.status %>
-              <%= booking.user.grade %>
+              <%= booking.tenant.grade %>
             </div>
             <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
-            <%= render 'modal' %>
+            <%= render 'modal', booking: booking %>
           </div>
         <% end %>
 
@@ -40,14 +40,14 @@
           <div class="card-booking">
             <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
             <div class="card-booking-content">
-              <%= booking.user.first_name %>
-              <%= booking.user.last_name %>
-              <%= booking.user.status %>
+              <%= booking.tenant.first_name %>
+              <%= booking.tenant.last_name %>
+              <%= booking.tenant.status %>
               <%= booking.status %>
-              <%= booking.user.grade %>
+              <%= booking.tenant.grade %>
             </div>
             <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
-            <%= render 'modal' %>
+            <%= render 'modal', booking: booking %>
           </div>
         <% end %>
     </div>
@@ -56,7 +56,7 @@
       <h1>Critères de sélection</h1>
       <div>
         <%= @flat.income_ratio %>
-        <%= @flat.has warrantor %>
+        <%= @flat.has_warrantor %>
         <%= @flat.warrantor_income_ratio %>
         <%= @flat.deposit %>
       </div>

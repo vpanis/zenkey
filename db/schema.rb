@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20170531084656) do
 
   # These are extensions that must be enabled in order to support this database
@@ -72,17 +73,29 @@ ActiveRecord::Schema.define(version: 20170531084656) do
     t.boolean  "elevator"
     t.boolean  "separate_bathroom"
     t.boolean  "parking"
-    t.string   "status"
+    t.string   "status",                 default: "Available"
     t.integer  "income_ratio"
     t.boolean  "has_warrantor"
     t.integer  "warrantor_income_ratio"
     t.integer  "deposit"
     t.integer  "landlord_id"
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.float    "latitude"
     t.float    "longitude"
     t.index ["landlord_id"], name: "index_flats_on_landlord_id", using: :btree
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.string   "address"
+    t.integer  "size_min"
+    t.integer  "size_max"
+    t.integer  "rent_min"
+    t.integer  "rent_max"
+    t.integer  "tenant_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tenant_id"], name: "index_searches_on_tenant_id", using: :btree
   end
 
   create_table "slots", force: :cascade do |t|
@@ -130,5 +143,6 @@ ActiveRecord::Schema.define(version: 20170531084656) do
   add_foreign_key "bookings", "users", column: "tenant_id"
   add_foreign_key "flats", "users", column: "landlord_id"
   add_foreign_key "slots", "flats"
+  add_foreign_key "searches", "users", column: "tenant_id"
   add_foreign_key "slots", "users", column: "tenant_id"
 end

@@ -9,6 +9,6 @@ class Flat < ApplicationRecord
   has_attachments :photos, maximum: 10
 
   validates :title, :description,  :availability_date, :min_duration, :address, :subway, :furnished, :size, :rent, :rental_costs, :floor, :rooms, :bedrooms, presence: true
-  validates :status, presence: true, inclusion: { in: ["Available","Booked"] }
+  validates :status, presence: true, inclusion: { in: ["Available","Busy"] }
   validates :rental_type, presence: true, inclusion: { in: ["Colocation","Location"] }
 end

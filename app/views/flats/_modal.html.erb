@@ -9,12 +9,12 @@
       </div>
       <div class="modal-body">
         <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
-        <%= booking.user.first_name %>
-        <%= booking.user.last_name %>
-        <%= booking.user.status %>
+        <%= booking.tenant.first_name %>
+        <%= booking.tenant.last_name %>
+        <%= booking.tenant.status %>
         <%= booking.status %>
-        <%= booking.user.grade %>
-        <%= booking.user.description %>
+        <%= booking.tenant.grade %>
+        <%= booking.tenant.description %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
