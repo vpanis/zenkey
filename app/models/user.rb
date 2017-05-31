@@ -12,5 +12,9 @@ class User < ApplicationRecord
   has_many :searches, dependent: :destroy, foreign_key: :tenant_id
 
   validates :status, inclusion: { in: ["Etudiant", "Entrepreneur", "Sans profession", "Retraité", "Fonctionnaire", "Cadre supérieur", "Ouvrier", "Agriculteur", "Technicien", "Profession libérale"] }
-  validates :grade, inclusion: { in: [0, 1, 2, 3, 4, 5] }
+
+  # validates :warrantor_income, inclusion: { in: (0..10000000), conditions: -> { where(has_warrantor: true) } }
+  # validates_inclusion_of :warrantor_income, :in => [0], conditions: -> { where(has_warrantor: false) }
+  # validates :warrantor_income, inclusion: { in: (0..10) }
+
 end
