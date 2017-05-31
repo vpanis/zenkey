@@ -1,5 +1,3 @@
-
-
 $('#flat_income_ratio').change(function(event) {
   var a = $('#flat_income_ratio').val();
   var b = parseInt($('#rent').html());

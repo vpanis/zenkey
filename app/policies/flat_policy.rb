@@ -13,6 +13,10 @@ class FlatPolicy < ApplicationPolicy
     create?
   end
 
+  def visits?
+    record.landlord == user || user.admin
+  end
+
   def create?
     true
   end
@@ -31,9 +35,5 @@ class FlatPolicy < ApplicationPolicy
 
   def dossiers?
     record.landlord == user || user.admin
-  end
-
-  def show?
-    true
   end
 end

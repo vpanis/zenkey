@@ -4,6 +4,13 @@
  * Feel free to change them and create your own
  * ------------------------------------- */
 
+// Body
+
+.highlight {
+  color: #FF696A;
+  margin: 0px 0px 30px 0px;
+}
+
 // Paddings
 .padded {
   padding-top: 5em;
@@ -31,3 +38,9 @@ textarea {
   width: 20em;
   height: 30px;
 }
+
+// Links
+a {
+  color: $red;
+}
+
