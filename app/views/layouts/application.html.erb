@@ -13,7 +13,7 @@
 
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <div class="<%= current_page?(flat_dossiers_path(@flat)) ? 'footer-down-with-flat-navbar' : 'footer-down' %>">
+    <div class="<%= current_page?(edit_flat_path(@flat)) || current_page?(flat_dossiers_path(@flat)) || current_page?(flat_visits_path(@flat)) || current_page?(flat_reservations_path(@flat)) ? 'footer-down-with-flat-navbar' : 'footer-down' %>">
       <%= yield %>
     </div>
     <%= render 'shared/footer' %>

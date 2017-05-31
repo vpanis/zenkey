@@ -1,5 +1,5 @@
 <!-- Flat navbar -->
-<div class="navbar-flat">
+<div class="navbar-flat navbar-flat-wagon-fixed">
   <div class="navbar-flat-content">
     <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
       <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
@@ -10,8 +10,8 @@
     <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
       <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
     </div>
-    <div class="<%= 'active' if current_page?(root_path) %>">
-      <%= link_to "Réservations", root_path, class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
+      <%= link_to "Réservations", flat_reservations_path(@flat), class: "navbar-wagon-link" %>
     </div>
   </div>
 </div>

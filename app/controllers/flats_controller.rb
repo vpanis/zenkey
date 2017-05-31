@@ -1,6 +1,6 @@
 class FlatsController < ApplicationController
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
-  before_action :set_nested_flat, only: [:filter, :dossiers, :visits]
+  before_action :set_nested_flat, only: [:filter, :dossiers, :reservations, :visits]
 
   def index
     @flats = policy_scope(Flat.all)
@@ -73,6 +73,14 @@ class FlatsController < ApplicationController
       marker.lng flat.longitude
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
+  end
+
+  def reservations
+    @bookings = Booking.where(flat_id: params[:flat_id])
+    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id])
+#    .select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
+    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
   end
 
   def visits

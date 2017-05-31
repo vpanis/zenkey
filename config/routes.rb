@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
     patch "filter" => "flats#filter"
+    get "reservations" => "flats#reservations"
   end
   mount Attachinary::Engine => "/attachinary"
 end
