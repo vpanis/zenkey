@@ -17,8 +17,8 @@
 </div>
 
 
-<div class="container text-center">
-  <h2>Définir un créneau</h2>
+<div class="container card text-center">
+  <h2 class="highlight">Définir un créneau</h2>
   <div class="row">
     <%= simple_form_for([@flat, @availability]) do |f| %>
     <%= f.error_notification %>
@@ -44,26 +44,74 @@
   </div>
 </div>
 
-<div class="container text-center">
-  <h2>Mes créneaux</h2>
+<% if @flat.availabilities.size > 0 %>
+  <!-- Next slots -->
+  <div class="container card text-center">
+    <h2 class="highlight">Mes prochaines visites</h2>
     <% @flat.availabilities.each do |availability| %>
       <% if availability.slots.size >= 1 %>
         <div class="row">
-          <h2><%= availability.starts_at %></h2>
+          <h4><%= availability.starts_at.strftime(format="%A %e %Y %H:%M") %></h4>
           <% availability.slots.each do |slot| %>
-            <div class="col-xs-12 col-sm-6">
-              <div class="card" %>
-                <div class="card-category">
-                  <%= slot.starts_at %>
+            <div class="col-xs-6 col-sm-3">
+              <% if slot.status == "Vacant" %>
+                <div class="slot-card-vacant" %>
+                  <div class="card-category">
+                    <%= slot.starts_at.strftime(format="%A %e %Y %H:%M") %>
+                  </div>
+                  <div class="card-description">
+                    <p><%= slot.status %></p>
+                  </div>
                 </div>
-                <div class="card-description">
-                  <p><%= slot.status %></p>
+              <% elsif slot.status == "Booked" %>
+                <div class="slot-card-booked" %>
+                  <div class="card-category">
+                    <%= slot.starts_at %>
+                  </div>
+                  <div class="card-description">
+                    <p><%= slot.status %></p>
+                  </div>
                 </div>
-              </div>
+              <% end %>
             </div>
           <% end %>
         </div>
       <% end %>
     <% end %>
-  </ul>
-</div>
+  </div>
+
+  <!-- Past slots -->
+  <div class="container card text-center">
+    <h2 class="highlight">Visites passées</h2>
+    <% @flat.availabilities.each do |availability| %>
+      <% if availability.slots.size >= 1 %>
+        <div class="row">
+          <h4><%= availability.starts_at.strftime(format="%A %e %Y %H:%M") %></h4>
+          <% availability.slots.each do |slot| %>
+            <div class="col-xs-6 col-sm-3">
+              <% if slot.status == "Vacant" %>
+                <div class="slot-card-vacant" %>
+                  <div class="card-category">
+                    <%= slot.starts_at.strftime(format="%A %e %Y %H:%M") %>
+                  </div>
+                  <div class="card-description">
+                    <p><%= slot.status %></p>
+                  </div>
+                </div>
+              <% elsif slot.status == "Booked" %>
+                <div class="slot-card-booked" %>
+                  <div class="card-category">
+                    <%= slot.starts_at %>
+                  </div>
+                  <div class="card-description">
+                    <p><%= slot.status %></p>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>
