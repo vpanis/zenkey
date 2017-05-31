@@ -22,13 +22,14 @@ $(function () {
         inline: true,
         sideBySide: true,
         stepping: 15,
-    format: "dd/mm/yyyy HH:mm",
+        format: "dd/mm/yyyy HH:mm",
     });
 
     $('#datetimepicker').datetimepicker();
-    $('#datetimepicker').on('changeDate', function() {
+    $('#datetimepicker').on('dp.change', function(e) {
+      console.log("Hello 2", e.date.format("DD/MM/YYYY hh:mm"));
       $('#datetimepicker_hidden_field').val(
-          $('#datetimepicker').data('DateTimePicker')
+          e.date.format("DD/MM/YYYY hh:mm")
       );
    });
 });
