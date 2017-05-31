@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   resources :flats do
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
+    patch "filter" => "flats#filter"
+    resources :slots, only: [:update]
   end
   mount Attachinary::Engine => "/attachinary"
 end
