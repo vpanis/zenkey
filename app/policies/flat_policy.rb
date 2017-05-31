@@ -32,8 +32,4 @@ class FlatPolicy < ApplicationPolicy
   def edit?
     update?
   end
-
-  def show?
-    true
-  end
 end

@@ -50,10 +50,10 @@
 </div>
 
   <!-- Next slots -->
-  <% if @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now]).length >= 1 %>
+  <% if @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now.midnight]).length >= 1 %>
     <div class="container card text-center">
       <h2 class="highlight">Mes prochaines visites</h2>
-      <% @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
+      <% @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now.midnight]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
         <h4><strong><%= date %></strong></h4>
         <div class="row">
           <% slots.each do |slot| %>
@@ -67,6 +67,9 @@
                     <%= cl_image_tag 'https://unsplash.it/400/400', class: "avatar-large" %>
                     <p><%= slot.tenant.email %>
                     <%= slot.tenant.status %></p>
+                    <%= link_to [@flat, slot], data: {:confirm => 'Êtes-vous sûr ?'}, :method => :delete do %>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -77,7 +80,10 @@
                     <h><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
                   </div>
                   <div class="card-description">
-                    <%= slot.status %>
+                    <p><%= slot.status %></p>
+                    <%= link_to [@flat, slot], data: {:confirm => 'Êtes-vous sûr ?'}, :method => :delete do %>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    <% end %>
                   </div>
                 </div>
               </div>
@@ -89,10 +95,10 @@
   <% end %>
 
   <!-- Past slots -->
-  <% if @flat.slots.order("starts_at asc").where(['starts_at < ?', DateTime.now]).length >= 1 %>
+  <% if @flat.slots.order("starts_at asc").where(['starts_at < ?', DateTime.now.midnight]).length >= 1 %>
     <div class="container card text-center">
       <h2 class="highlight">Mes visites passées</h2>
-      <% @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
+      <% @flat.slots.order("starts_at asc").where(['starts_at < ?', DateTime.now.midnight]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
         <h4><strong><%= date %></strong></h4>
         <div class="row">
           <% slots.each do |slot| %>

@@ -5,7 +5,15 @@ class SlotPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def create?
     true
+  end
+
+  def destroy?
+    record.flat.landlord == user
   end
 end

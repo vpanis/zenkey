@@ -18,6 +18,15 @@ class SlotsController < ApplicationController
     redirect_to :back
   end
 
+  def destroy
+    @slot = Slot.find(params[:id])
+    @slot.destroy
+
+    authorize @slot
+
+    redirect_to :back
+  end
+
   private
 
   def slot_params
