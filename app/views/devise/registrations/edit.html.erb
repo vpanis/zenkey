@@ -8,15 +8,15 @@
           <%= f.error_notification %>
 
           <div class="form-inputs">
-            <%= f.input :email, required: true, autofocus: true %>
+            <%= f.input :email, placeholder:"dupont@gmail.com", required: true, autofocus: true %>
 
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
             <% end %>
 
-            <%= f.input :password, autocomplete: "off", hint: "Laissez blanc si vous ne voulez pas le modifier", required: false %>
-            <%= f.input :password_confirmation, required: false %>
-            <%= f.input :current_password, hint: "Nous avons besoin de votre mot de passe pour confirmer les modifications", required: true %>
+            <%= f.input :password, autocomplete: "off", placeholder:"********", hint: "Laissez blanc si vous ne voulez pas le modifier", required: false %>
+            <%= f.input :password_confirmation, placeholder:"********", required: false %>
+            <%= f.input :current_password, hint: "Nous avons besoin de votre mot de passe pour confirmer les modifications",  placeholder:"********", required: true %>
           </div>
 
           <div class="form-actions">
