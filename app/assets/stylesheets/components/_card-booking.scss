@@ -12,6 +12,9 @@
   background-color: grey;
   color: white;
   position: relative;
+  .fa-star {
+    color: yellow;
+  }
 }
 .card-booking-user {
   position: absolute;
@@ -23,7 +26,6 @@
   top: 10px;
   left: 80px;
   font-size: 10px;
-  text-transform: uppercase;
 }
 .card-booking-link {
   position: absolute;
@@ -39,7 +41,6 @@
   opacity: 0.2;
 }
 
-// Slot card stylesheet
 .slot-card-vacant {
   height: 200px;
   background-color: #F7F7F7;
@@ -47,6 +48,7 @@
   margin: 5px;
   padding: 20px;
 }
+
 .slot-card-booked {
   height: 200px;
   background-color: #fff7f7;
@@ -60,4 +62,3 @@
     margin-bottom: 0px;
   }
 }
-
