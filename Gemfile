@@ -24,6 +24,11 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'devise'
 gem 'pundit'
 gem "geocoder"
+gem "gmaps4rails"
+
+source 'https://rails-assets.org' do
+  gem "rails-assets-underscore"
+end
 
 group :development, :test do
   gem 'binding_of_caller'
