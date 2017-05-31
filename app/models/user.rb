@@ -13,8 +13,17 @@ class User < ApplicationRecord
 
   validates :status, inclusion: { in: ["Etudiant", "Entrepreneur", "Sans profession", "Retraité", "Fonctionnaire", "Cadre supérieur", "Ouvrier", "Agriculteur", "Technicien", "Profession libérale"] }
 
-  # validates :warrantor_income, inclusion: { in: (0..10000000), conditions: -> { where(has_warrantor: true) } }
-  # validates_inclusion_of :warrantor_income, :in => [0], conditions: -> { where(has_warrantor: false) }
-  # validates :warrantor_income, inclusion: { in: (0..10) }
+  validate :has_warrantor_or_not
 
+  def has_warrantor_or_not
+    if warrantor_income.nil?
+      warrantor_income = 0
+      has_warrantor = false
+    elsif !(warrantor_income > 0 )
+      has_warrantor = true
+    else
+      warrantor_income = 0
+      has_warrantor = false
+    end
+  end
 end
