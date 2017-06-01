@@ -67,33 +67,25 @@
             <div class="flat-form-choices">
               <div class="checkbox">
                 <input value="0" type="hidden" name="flat[balcony]">
-                <label class="flat-form-choice" for="flat_balcony">
-                  <input class="hidden " type="checkbox" value="1" name="flat[balcony]" id="flat_balcony">Balcon
-                </label>
+                <input class="hidden " type="checkbox" value="1" name="flat[balcony]" id="flat_balcony">
+                <label class="boolean optional flat-form-choice" for="flat_balcony">Balcon</label>
               </div>
               <div class="checkbox">
                 <input value="0" type="hidden" name="flat[elevator]">
-                <label class="boolean optional flat-form-choice" for="flat_elevator">
-                  <input class="boolean optional hidden" type="checkbox" value="1" name="flat[elevator]" id="flat_elevator">Ascenseur
-                </label>
+                <input class="hidden" type="checkbox" value="1" name="flat[elevator]" id="flat_elevator">
+                <label class="boolean optional flat-form-choice" for="flat_elevator">Ascenseur</label>
               </div>
               <div class="checkbox">
                 <input value="0" type="hidden" name="flat[separate_bathroom]">
-                <label class="boolean optional flat-form-choice" for="flat_separate_bathroom">
-                  <input class="boolean optional hidden" type="checkbox" value="1" name="flat[separate_bathroom]" id="flat_separate_bathroom">WC séparés
-                </label>
+                <input class="hidden" type="checkbox" value="1" name="flat[separate_bathroom]" id="flat_separate_bathroom">
+                <label class="boolean optional flat-form-choice" for="flat_separate_bathroom">WC séparés</label>
               </div>
               <div class="checkbox">
                 <input value="0" type="hidden" name="flat[parking]">
-                <label class="boolean optional flat-form-choice" for="flat_parking">
-                  <input class="boolean optional hidden" type="checkbox" value="1" name="flat[parking]" id="flat_parking">Parking
-                </label>
+                <input class="hidden" type="checkbox" value="1" name="flat[parking]" id="flat_parking">
+                <label class="boolean optional flat-form-choice" for="flat_parking">Parking</label>
               </div>
             </div>
-<!-- f.input :balcony, label: "Balcon", input_html: { class: "hidden flat-form-choice" }
-f.input :elevator, label: "Ascenseur", input_html: { class: "hidden flat-form-choice" }
-f.input :separate_bathroom, label: "WC séparés", input_html: { class: "hidden flat-form-choice" }
-f.input :parking, label: "Parking", input_html: { class: "hidden flat-form-choice" } -->
 
           <!-- Form actions -->
           <div class="form-actions text-center">
