@@ -1,0 +1,57 @@
+
+<div class="container marged-top">
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-4 sm-marged-bottom">
+      <div class="card text-center">
+          <h2>
+            <%= link_to 'Créer une annonce', new_flat_path, class:"card-new-link" %>
+          </h2>
+
+      </div>
+    </div>
+
+    <% @user_flats.where(status: "Busy").each do |user_flat|%>
+      <div class="col-xs-12 col-sm-4 sm-marged-bottom">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%=user_flat.photos.first.nil? ? "" : cl_image_path(user_flat.photos.first , crop: :scale) %>');">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="flat_status"> <%= user_flat.status %> </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="flat-user-photo">
+               <%= image_tag(set_user_photo(user_flat.booking.tenant)) %>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-description">
+            <h2><%= user_flat.title %></h2>
+            <p>
+            Loué depuis le <%= user_flat.booking.starting_date %>
+            Fin du bail: <%= user_flat.booking.end_date %>
+            Loyer: <%= user_flat.rent %>
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <% @user_flats.where(status: "Available").each do |user_flat|%>
+      <div class="col-xs-12 col-sm-4 sm-marged-bottom">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%=user_flat.photos.first.nil? ? "" : cl_image_path(user_flat.photos.first , crop: :scale) %>');">
+          <div class="flat_status"> <%= user_flat.status %> </div>
+
+          <div class="card-description">
+            <h2><%= user_flat.title %></h2>
+            <p>Prochaine visite: <%=user_flat.slots.empty? ? "N/A" :user_flat.slots.last.starts_at %>
+            Visites a venir: <%= user_flat.slots.length %>
+            <%= user_flat.bookings.length %> dossiers déposés
+            </p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</div>
