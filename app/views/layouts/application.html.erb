@@ -13,10 +13,10 @@
 
     <%= render 'shared/navbar' %>
     <%= render 'shared/flashes' %>
-    <div class="<%= if current_page?(root_path)
+    <div class="<%= if current_page?(root_path) || current_page?(dashboard_path) || current_page?(profile_path)
                       'footer-down'
                     else
-                      current_page?(edit_flat_path(@flat)) || current_page?(flat_dossiers_path(@flat)) || current_page?(flat_visits_path(@flat)) || current_page?(flat_reservations_path(@flat)) ? 'footer-down-with-flat-navbar' : 'footer-down'
+                      'footer-down-with-flat-navbar'
                     end %>">
       <%= yield %>
     </div>

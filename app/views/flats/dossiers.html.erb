@@ -37,7 +37,7 @@
     <div class="col-xs-12 col-md-4" id="criteres">
       <div class="text-center affix" id="sidebar">
 
-        <h1 class="text-center">Critères de sélection</h1>
+        <h1 class="text-center">Vos exigences</h1>
 
         <%= simple_form_for @flat, method: 'patch', url: flat_filter_path(@flat), remote: true do |f| %>
 
@@ -65,9 +65,9 @@
 
           <%= f.input :deposit, label: "Vous exigez une caution de :", input_html: {value: @flat.deposit, min: '0' , max: ((@flat.rent + @flat.rental_costs) * 2).to_s , step: '10' } %>
 
-          <div id="message-modif"></div>
+          <%= f.button :submit, "Enregistrer les modifications de vos exigences", class:"btn btn-danger"%>
 
-          <%= f.button :submit, "Enregistrer les modifications de vos critères", class:"btn btn-danger"%>
+          <div id="message-modif"></div>
         <% end %>
 
       </div>
