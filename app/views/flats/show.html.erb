@@ -4,7 +4,7 @@
     <!-- Colonne de gauche -->
   <div class="row">
     <div class="col-xs-12 col-md-7">
-      <%= cl_image_tag(@flat.photos.first.path, :alt => "banner_image", height:300, width: 720, crop: :fill) %>
+    <%= set_flat_image(@flat) %>
       <div class="page-header">
         <h1><%= @flat.title%> <small>Loyer: <%= @flat.rent%>€</small></h1>
       </div>
