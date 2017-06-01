@@ -18,6 +18,15 @@ class SlotsController < ApplicationController
     redirect_to :back
   end
 
+  def update
+    @slot = Slot.find(params[:id])
+    authorize @slot
+    @slot.status = "Booked"
+    @slot.tenant = current_user
+    @slot.save
+    redirect_to root_path
+  end
+
   def destroy
     @slot = Slot.find(params[:id])
     @slot.destroy
@@ -32,4 +41,5 @@ class SlotsController < ApplicationController
   def slot_params
     params.require(:slot).permit(:starts_at)
   end
+
 end

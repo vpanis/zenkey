@@ -1,12 +1,10 @@
 class FlatsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :show
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
-  before_action :set_nested_flat, only: [:filter, :dossiers, :visits]
+  before_action :set_nested_flat, only: [:filter, :dossiers, :reservations, :visits]
 
   def index
     @flats = policy_scope(Flat.all)
-  end
-
-  def show
   end
 
   def new
@@ -39,10 +37,12 @@ class FlatsController < ApplicationController
   def filter
     params[:flat][:has_warrantor] == "1" ? @flat.has_warrantor = true : @flat.has_warrantor = false
     @bookings = Booking.where(flat_id: params[:flat_id])
-    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id])
-#    .select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
-    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
+    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots = Slot.where(flat_id: params[:flat_id])
+    @slots_booked = Slot.where(status: "Booked", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots_cancelled = Slot.where(status: "Cancelled", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
     if @flat.update(flat_filter_params)
       respond_to do |format|
         format.html { redirect_to flat_dossiers_path(@flat) }
@@ -58,13 +58,28 @@ class FlatsController < ApplicationController
 
   def dossiers
     @bookings = Booking.where(flat_id: params[:flat_id])
-    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id])
-#    .select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
-    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
+    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots = Slot.where(flat_id: params[:flat_id])
+    @slots_booked = Slot.where(status: "Booked", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots_cancelled = Slot.where(status: "Cancelled", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
   end
 
   def show
+    if @flat.slots.size > 0
+      @slot = Slot.new
+      @start_date = @flat.slots.order(starts_at: :asc).first.starts_at.strftime("%d/%m/%Y") # next slot date
+      @slots_date = []
+      @flat.slots.each do |slot|
+      @slots_date << slot.starts_at.yesterday.strftime("%d/%m/%Y")
+      end
+      @slots_date.uniq!
+
+      @flat.slots.each do |slot|
+        slot.starts_at.strftime("%d/%m/%Y")
+      end
+    end
     @flat_coordinates = { lat: @flat.latitude, lng: @flat.longitude }
     @flats = Flat.where.not(latitude: nil, longitude: nil)
 
@@ -73,6 +88,14 @@ class FlatsController < ApplicationController
       marker.lng flat.longitude
       # marker.infowindow render_to_string(partial: "/flats/map_box", locals: { flat: flat })
     end
+  end
+
+  def reservations
+    @bookings = Booking.where(flat_id: params[:flat_id])
+    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id])
+#    .select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
+    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
   end
 
   def visits

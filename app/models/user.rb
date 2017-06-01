@@ -26,4 +26,5 @@ class User < ApplicationRecord
       errors.add(:warrantor_income, "has to be greater than 0")
     end
   end
+
 end
