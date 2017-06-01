@@ -106,7 +106,7 @@ class FlatsController < ApplicationController
   private
 
   def flat_params
-    params.require(:flat).permit(:title, :rental_type, :furnished, :availability_date, :min_duration, :photos, :address, :is_address_public, :subway, :size, :description, :rent, :rental_costs, :floor, :rooms, :bedrooms, :balcony, :elevator, :separate_bathroom, :parking)
+    params.require(:flat).permit(:title, :rental_type, :furnished, :availability_date, :min_duration, :address, :is_address_public, :subway, :size, :description, :rent, :rental_costs, :floor, :rooms, :bedrooms, :balcony, :elevator, :separate_bathroom, :parking, photos: [])
   end
 
   def flat_filter_params
