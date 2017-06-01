@@ -30,7 +30,6 @@ class FlatsController < ApplicationController
 
   def update
     authorize @flat
-    raise
     @flat.update(flat_params)
     redirect_to edit_flat_path(@flat)
   end
