@@ -58,10 +58,12 @@ class FlatsController < ApplicationController
 
   def dossiers
     @bookings = Booking.where(flat_id: params[:flat_id])
-    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id])
-#    .select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id])
-    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id])
+    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots = Slot.where(flat_id: params[:flat_id])
+    @slots_booked = Slot.where(status: "Booked", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots_cancelled = Slot.where(status: "Cancelled", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
   end
 
   def show

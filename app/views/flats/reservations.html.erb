@@ -18,10 +18,18 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-xs-12 col-md-8">
-      <div id="candidates">
-        <%= render 'candidates', bookings_pending: @bookings_pending, bookings_confirmed: @bookings_confirmed, bookings_cancelled: @bookings_cancelled, flat: @flat %>
+    <div class="col-xs-12">
+
+      <div id="candidates" class="marged-top">
+
+        <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %>
+
       </div>
+
     </div>
   </div>
 </div>
