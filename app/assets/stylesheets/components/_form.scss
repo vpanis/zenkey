@@ -23,7 +23,7 @@
 
 .form-flat {
   background-color: white;
-  padding: 10px 20px;
+  padding: 20px;
   border-radius: 3px;
   box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
   h2 {
@@ -60,13 +60,14 @@
 .flat-form-choice {
   margin-bottom: 20px !important;
   height: 50px;
-  width: 130px;
+  width: 120px;
   padding: 15px;
   flex: 0 0 25%;
   background: #b7b7b7;
   border-radius: 5px;
   opacity: 0.5;
   transition: 0.3s;
+  text-align: center;
   &:hover {
     opacity: 1;
   }
@@ -121,5 +122,15 @@
     img {
       margin-right: 20px;
     }
+  }
+}
+
+#flat_rental_type, #flat_address {
+  height: 50px;
+}
+.checkbox {
+  margin: 0px !important;
+  label {
+    padding-left: 15px !important;
   }
 }

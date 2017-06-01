@@ -20,7 +20,6 @@ class FlatsController < ApplicationController
     @flat.landlord = current_user
     @flat.status = "Available"
     authorize @flat
-    raise
     if @flat.save
       redirect_to edit_flat_path(@flat)
     else

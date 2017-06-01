@@ -8,10 +8,15 @@
           <div class="form-inputs">
             <%= f.input :title,  label: "Titre de l'annonce", required: true %>
 
+            <label class="control-label select required" for="flat_rental_type"> Type de location</label>
             <div class="row">
               <div class="col-xs-9">
-                <%= f.input :rental_type, label: "Type de location", collection: ["Location", "Colocation"], include_blank: true %>
-              </div>
+                  <select class="form-control select required" name="flat[rental_type]" id="flat_rental_type">
+                    <option value="Location">Location</option>
+                    <option value="Colocation">Colocation</option>
+                  </select>
+                </div>
+                <!-- f.input :rental_type, label: "Type de location", collection: ["Location", "Colocation"], include_blank: true %> -->
               <div class="col-xs-3">
                 <div class="checkbox">
                   <input value="0" type="hidden" name="flat[furnished]">
@@ -21,8 +26,6 @@
               </div>
             </div>
 
-<!-- f.input :furnished, label: "Meublé", input_html: { class: "hidden" } -->
-
             <!-- Availability date and minimum duration -->
             <div class="row">
               <div class="col-xs-12 col-md-6">
@@ -31,14 +34,17 @@
               <div class="col-xs-12 col-md-6">
                 <%= f.input :min_duration, label: "Durée minimum (mois)", input_html: { value: 1, min: 1, step: 'any' }, required: true %>
               </div>
+            </div>
 
             <%= f.input :photos, as: :attachinary %>
 
+            <!-- Address -->
             <div class="row">
               <div class="col-xs-9">
-                <%= f.input :address, label: "Adresse", required: true %>
+                <%= f.input :address, label: "Adresse" %>
               </div>
               <div class="col-xs-3">
+                <label></label>
                 <div class="checkbox">
                   <input value="0" type="hidden" name="flat[is_address_public]">
                   <input class="hidden " type="checkbox" value="1" name="flat[is_address_public]" id="flat_is_address_public">
