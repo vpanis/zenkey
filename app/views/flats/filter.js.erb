@@ -1,6 +1,10 @@
 <% if @flat.errors.any? %>
   alert("Vos modifications n'ont pas été enregistrées.");
 <% else %>
-  $('#message-modif').text('Vos modifications ont bien été enregistrées.');
-  $('#candidates').html(" <%= j render 'candidates', bookings_pending: @bookings_pending, bookings_confirmed: @bookings_confirmed, bookings_cancelled: @bookings_cancelled %> ");
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %> ");
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %> ");
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %> ");
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %> ");
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_slots_cancelled', slots_cancelled: @slots_cancelled, flat: @flat %> ");
+  $("#message-modif").show().text('Vos modifications ont bien été enregistrées.').delay(2500).fadeOut();
 <% end %>

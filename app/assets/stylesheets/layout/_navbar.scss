@@ -53,6 +53,15 @@
   width: 100%;
 }
 
+/* Optional class to fix the navbar on top */
+.navbar-flat-wagon-fixed {
+  position: fixed;
+  left: 0px;
+  top: 70px;
+  z-index: 3;
+  width: 100%;
+}
+
 /* Navbar logo */
 .navbar-wagon-brand img {
   height: 50px;

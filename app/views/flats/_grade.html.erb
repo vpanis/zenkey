@@ -24,9 +24,6 @@
   <% set_grade(booking.tenant, flat).floor.times do %>
     <i class="fa fa-star" aria-hidden="true"></i>
   <% end %>
-  <% 1.times do %>
-    <i class="fa fa-star-half-o" aria-hidden="true"></i>
-  <% end %>
   <i class="fa fa-star-half-o" aria-hidden="true"></i>
   <% (4 - set_grade(booking.tenant, flat).floor).times do %>
     <i class="fa fa-star-o" aria-hidden="true"></i>

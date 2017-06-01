@@ -1,0 +1,35 @@
+<!-- Flat navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
+      <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_dossiers_path(@flat)) %>">
+      <%= link_to "Candidats", flat_dossiers_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
+      <%= link_to "Réservations", flat_reservations_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12">
+
+      <div id="candidates" class="marged-top">
+
+        <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %>
+
+      </div>
+
+    </div>
+  </div>
+</div>
