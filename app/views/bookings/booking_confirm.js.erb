@@ -1,0 +1,7 @@
+<% if @booking.errors.any? %>
+  alert("Vos modifications n'ont pas été enregistrées.");
+<% else %>
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %> ");
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %> ");
+  $('#candidates').append(" <%= j render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %> ");
+<% end %>

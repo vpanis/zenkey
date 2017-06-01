@@ -15,7 +15,7 @@ nikolay.photo_url   = url_nikolay
 vincent             = User.create!(first_name: "Vincent", last_name: "Panis", email: "vincent@gmail.com", password: '123456', admin: true, status: "Agriculteur", income: 1500, has_warrantor: false, warrantor_income: 0)
 url_vincent         = 'https://avatars0.githubusercontent.com/u/25386031?v=3'
 vincent.photo_url   = url_vincent
-alban               = User.create!(first_name: "Alban", last_name: "Porcheron", email: "alban@gmail.com", password: '123456', admin: true, status: "Profession libérale", income: 2500, has_warrantor: true, warrantor_income: 5000)
+alban               = User.create!(first_name: "Alban", last_name: "Porcheron", email: "alban@gmail.com", password: '123456', admin: true, status: "Profession libérale", income: 3500, has_warrantor: true, warrantor_income: 6000)
 url_alban           = 'https://avatars1.githubusercontent.com/u/25384564?v=3'
 alban.photo_url     = url_alban
 mathieu             = User.create!(first_name: "Mathieu", last_name: "Cochet", email: "mathieu@gmail.com", password: '123456', admin: true, status: "Cadre supérieur", income: 2000, has_warrantor: true, warrantor_income: 5000)
@@ -138,17 +138,17 @@ montorgueil.photo_urls = urls_montorgueil
 puts 'Creating Slots...'
 
 s_1  = Slot.create!(flat: oberkampf, tenant: xavier, starts_at: DateTime.new(2017, 6, 7, 8, 0, 0, 0), status: "Booked")
-s_2  = Slot.create!(flat: reuilly, tenant: gautier, starts_at: DateTime.new(2017, 6, 13, 8, 15, 0, 0), status: "Booked")
+s_2  = Slot.create!(flat: oberkampf, tenant: gautier, starts_at: DateTime.new(2017, 6, 13, 8, 15, 0, 0), status: "Booked")
 s_3  = Slot.create!(flat: reuilly, starts_at: DateTime.new(2017, 6, 12, 8, 30, 0, 0), status: "Vacant")
-s_4  = Slot.create!(flat: reuilly, tenant: nico, starts_at: DateTime.new(2017, 6, 5, 8, 45, 0, 0), status: "Cancelled")
-s_5  = Slot.create!(flat: nation, tenant: fiona, starts_at: DateTime.new(2017, 6, 14, 8, 0, 0, 0), status: "Booked")
-s_6  = Slot.create!(flat: nation, tenant: mathieu, starts_at: DateTime.new(2017, 6, 4, 8, 15, 0, 0), status: "Booked")
-s_7  = Slot.create!(flat: nation, starts_at: DateTime.new(2017, 6, 2, 8, 30, 0, 0), status: "Vacant")
-s_8  = Slot.create!(flat: censier, tenant: alexis, starts_at: DateTime.new(2017, 6, 18, 8, 45, 0, 0), status: "Cancelled")
-s_9  = Slot.create!(flat: censier, tenant: patrick, starts_at: DateTime.new(2017, 6, 17, 8, 0, 0, 0), status: "Booked")
-s_10  = Slot.create!(flat: censier, tenant: achille, starts_at: DateTime.new(2017, 6, 15, 8, 15, 0, 0), status: "Booked")
+s_4  = Slot.create!(flat: oberkampf, tenant: nico, starts_at: DateTime.new(2017, 6, 5, 8, 45, 0, 0), status: "Cancelled")
+s_5  = Slot.create!(flat: oberkampf, tenant: fiona, starts_at: DateTime.new(2017, 6, 14, 8, 0, 0, 0), status: "Booked")
+s_6  = Slot.create!(flat: oberkampf, tenant: mathieu, starts_at: DateTime.new(2017, 6, 4, 8, 15, 0, 0), status: "Booked")
+s_7  = Slot.create!(flat: oberkampf, starts_at: DateTime.new(2017, 6, 2, 8, 30, 0, 0), status: "Vacant")
+s_8  = Slot.create!(flat: oberkampf, tenant: alexis, starts_at: DateTime.new(2017, 6, 18, 8, 45, 0, 0), status: "Cancelled")
+s_9  = Slot.create!(flat: oberkampf, tenant: patrick, starts_at: DateTime.new(2017, 6, 17, 8, 0, 0, 0), status: "Booked")
+s_10  = Slot.create!(flat: oberkampf, tenant: achille, starts_at: DateTime.new(2017, 6, 15, 8, 15, 0, 0), status: "Booked")
 s_11  = Slot.create!(flat: gobelins, starts_at: DateTime.new(2017, 6, 20, 8, 30, 0, 0), status: "Vacant")
-s_12  = Slot.create!(flat: gobelins, tenant: vincent, starts_at: DateTime.new(2017, 6, 9, 8, 45, 0, 0), status: "Cancelled")
+s_12  = Slot.create!(flat: oberkampf, tenant: vincent, starts_at: DateTime.new(2017, 6, 9, 8, 45, 0, 0), status: "Cancelled")
 
 puts 'Creating Bookings...'
 

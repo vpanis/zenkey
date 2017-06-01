@@ -19,6 +19,9 @@
   .fa-star-half-o {
     color: $yellow;
   }
+  .fa-star-o {
+    color: $yellow;
+  }
 }
 .card-candidates-user {
   position: absolute;
@@ -119,5 +122,8 @@
 
 #candidates {
   overflow-y: scroll;
-  height: 400px;
+  height: 600px;
+  h2 {
+    font-size: 16px;
+  }
 }

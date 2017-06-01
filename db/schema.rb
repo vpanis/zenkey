@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170531182537) do
+ActiveRecord::Schema.define(version: 20170601091147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,9 +53,9 @@ ActiveRecord::Schema.define(version: 20170531182537) do
   end
 
   create_table "flats", force: :cascade do |t|
-    t.text     "title"
+    t.string   "title"
     t.text     "description"
-    t.text     "rental_type"
+    t.string   "rental_type"
     t.datetime "availability_date"
     t.integer  "min_duration"
     t.string   "address"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170531182537) do
     t.datetime "updated_at",                    null: false
     t.datetime "starts_at"
     t.integer  "flat_id"
+    t.integer  "length",     default: 0
     t.index ["flat_id"], name: "index_slots_on_flat_id", using: :btree
     t.index ["tenant_id"], name: "index_slots_on_tenant_id", using: :btree
   end

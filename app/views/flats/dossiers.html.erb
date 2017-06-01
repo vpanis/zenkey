@@ -16,26 +16,36 @@
   </div>
 </div>
 
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-8">
       <div id="candidates" class="marged-top">
 
-        <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+        <div id="candidates-bookings-confirmed">
+          <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+        </div>
 
-        <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+        <div id="candidates-bookings-pending">
+          <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+        </div>
 
-        <%= render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %>
+        <div id="candidates-slots-booked">
+          <%= render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %>
+        </div>
 
-        <%= render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %>
+        <div id="candidates-bookings-cancelled">
+          <%= render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %>
+        </div>
 
-        <%= render 'flats/candidates/candidates_slots_cancelled', slots_cancelled: @slots_cancelled, flat: @flat %>
+        <div id="candidates-slots-cancelled">
+          <%= render 'flats/candidates/candidates_slots_cancelled', slots_cancelled: @slots_cancelled, flat: @flat %>
+        </div>
 
       </div>
     </div>
 
     <div class="col-xs-12 col-md-4" id="criteres">
-      <div class="text-center affix" id="sidebar">
+      <div class="text-center affix" id="sidebar-dossiers">
 
         <h1 class="text-center">Vos exigences</h1>
 

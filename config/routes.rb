@@ -10,6 +10,10 @@ Rails.application.routes.draw do
     get "dossiers" => "flats#dossiers"
     patch "filter" => "flats#filter"
     get "reservations" => "flats#reservations"
+    resources :bookings, only: [] do
+      patch "booking_confirm" => "bookings#booking_confirm"
+      patch "booking_cancel" => "bookings#booking_cancel"
+    end
   end
   mount Attachinary::Engine => "/attachinary"
 end
