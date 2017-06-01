@@ -16,7 +16,7 @@
         <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%=user_flat.photos.first.nil? ? "" : cl_image_path(user_flat.photos.first , crop: :scale) %>');">
           <div class="row">
             <div class="col-xs-6">
-              <div class="btn btn-primary"> <%= user_flat.status %> </div>
+              <div class="flat_status"> <%= user_flat.status %> </div>
             </div>
             <div class="col-xs-6">
               <div class="flat-user-photo">
@@ -40,11 +40,14 @@
     <% @user_flats.where(status: "Available").each do |user_flat|%>
       <div class="col-xs-12 col-sm-4 sm-marged-bottom">
         <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%=user_flat.photos.first.nil? ? "" : cl_image_path(user_flat.photos.first , crop: :scale) %>');">
-          <div class="btn btn-primary"> <%= user_flat.status %> </div>
+          <div class="flat_status"> <%= user_flat.status %> </div>
 
           <div class="card-description">
             <h2><%= user_flat.title %></h2>
-            <p><%= user_flat.description %> <%= user_flat.landlord.first_name %></p>
+            <p>Prochaine visite: <%=user_flat.slots.empty? ? "N/A" :user_flat.slots.last.starts_at %>
+            Visites a venir: <%= user_flat.slots.length %>
+            <%= user_flat.bookings.length %> dossiers déposés
+            </p>
           </div>
         </div>
       </div>
