@@ -1,6 +1,6 @@
 <div>
   <% if !@slots_booked.first.nil? %>
-    <h2  class="highlight text-center"><%= pluralize @slots_booked.count, "dossier annulé" %></h2>
+    <h2  class="highlight text-center"><%= pluralize @slots_booked.count, "visites" %> à venir</h2>
     <% @slots_booked.each do |slot| %>
       <div class="card-candidates" id="<%= slot.id %>">
         <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>

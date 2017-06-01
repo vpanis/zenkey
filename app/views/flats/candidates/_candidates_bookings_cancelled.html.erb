@@ -9,9 +9,15 @@
           <div><%= booking.tenant.status %></div>
           <div>Status du dossier : <%= booking.status %></div>
           <div>Note du dossier : <%= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></div>
+
+          <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Choisir ce locataire</button>
+
         </div>
+
         <a class="card-candidates-link" data-toggle="modal" data-target="#modal-booking-<%= booking.id %>"></a>
+
         <%= render 'flats/modals/modal_candidates_bookings', booking: booking, flat: @flat %>
+        <%= render 'flats/modals/modal_confirm_bookings', booking: booking, flat: @flat  %>
       </div>
     <% end %>
   <% end %>

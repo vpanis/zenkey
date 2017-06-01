@@ -38,13 +38,13 @@ class FlatsController < ApplicationController
 
   def filter
     params[:flat][:has_warrantor] == "1" ? @flat.has_warrantor = true : @flat.has_warrantor = false
-    @bookings = Booking.where(flat_id: params[:flat_id])
-    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @slots = Slot.where(flat_id: params[:flat_id])
-    @slots_booked = Slot.where(status: "Booked", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @slots_cancelled = Slot.where(status: "Cancelled", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings = Booking.where(flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_pending = @bookings.select { |booking| booking.status == "Pending" }
+    @bookings_confirmed = @bookings.select { |booking| booking.status == "Confirmed" }
+    @bookings_cancelled = @bookings.select { |booking| booking.status == "Cancelled" }
+    @slots = Slot.where(flat_id: params[:flat_id]).where.not(tenant_id: nil).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots_booked = @slots.select { |slot| slot.status == "Booked" }
+    @slots_cancelled = @slots.select { |slot| slot.status == "Cancelled" }
     if @flat.update(flat_filter_params)
       respond_to do |format|
         format.html { redirect_to flat_dossiers_path(@flat) }
@@ -59,13 +59,13 @@ class FlatsController < ApplicationController
   end
 
   def dossiers
-    @bookings = Booking.where(flat_id: params[:flat_id])
-    @bookings_pending = Booking.where(status: "Pending", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @bookings_confirmed = Booking.where(status: "Confirmed", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @bookings_cancelled = Booking.where(status: "Cancelled", flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @slots = Slot.where(flat_id: params[:flat_id])
-    @slots_booked = Slot.where(status: "Booked", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
-    @slots_cancelled = Slot.where(status: "Cancelled", flat_id: params[:flat_id]).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings = Booking.where(flat_id: params[:flat_id]).select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @bookings_pending = @bookings.select { |booking| booking.status == "Pending" }
+    @bookings_confirmed = @bookings.select { |booking| booking.status == "Confirmed" }
+    @bookings_cancelled = @bookings.select { |booking| booking.status == "Cancelled" }
+    @slots = Slot.where(flat_id: params[:flat_id]).where.not(tenant_id: nil).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots_booked = @slots.select { |slot| slot.status == "Booked" }
+    @slots_cancelled = @slots.select { |slot| slot.status == "Cancelled" }
   end
 
   def show
