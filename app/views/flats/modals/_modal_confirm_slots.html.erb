@@ -13,7 +13,10 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">J'annule cette visite !</button>
+
+            <%= simple_form_for [@flat, slot], url: flat_slot_slot_cancel_path(@flat, slot), method: :patch do |f| %>
+              <%= f.submit "Annuler cette visite !", class: "btn btn-danger" %>
+            <% end %>
           </div>
 
        <!--  <#% else %>

@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get "dashboard" => "pages#dashboard"
 
   resources :flats do
-    resources :slots, only: [:create, :update, :destroy]
+    resources :slots, only: [:create, :update, :destroy] do
+      patch "slot_confirm" => "slots#slot_confirm"
+      patch "slot_cancel" => "slots#slot_cancel"
+    end
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
     patch "filter" => "flats#filter"

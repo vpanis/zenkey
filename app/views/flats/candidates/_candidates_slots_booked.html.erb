@@ -2,22 +2,51 @@
   <% if !@slots_booked.first.nil? %>
 
     <% @slots_booked.each do |slot| %>
-      <div class="card-candidates" id="<%= slot.id %>">
-        <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>
-        <div class="card-candidates-content">
-          <div><%= set_fullname(slot.tenant) %></div>
-          <div><%= slot.tenant.status %></div>
-          <div>Date de la visite : <%= slot.starts_at.strftime('%d/%m/%Y') %></div>
-          <div>Heure de la visite : <%= slot.starts_at.strftime('%H:%M') %></div>
-          <div>Note du dossier : <%= render 'flats/grade', slot: slot, user: slot.tenant, flat: @flat %></div>
+
+      <% if slot.starts_at - Time.now > 0 %>
+
+        <div class="card-candidates slot-to-come" id="<%= slot.id %>">
+          <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>
+          <div class="card-candidates-content">
+            <div><%= set_fullname(slot.tenant) %></div>
+            <div><%= slot.tenant.status %></div>
+            <div>Date de la visite : <%= slot.starts_at.strftime('%d/%m/%Y') %></div>
+            <div>Heure de la visite : <%= slot.starts_at.strftime('%H:%M') %></div>
+            <div>Note du dossier : <%= render 'flats/grade', slot: slot, user: slot.tenant, flat: @flat %></div>
+            <div>Visite à venir !</div>
+          </div>
+
+          <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-slots<%= slot.id %>" data-dismiss="modal">Annuler cette visite</button>
+
+          <a class="card-candidates-link" data-toggle="modal" data-target="#modal-slot-<%= slot.id %>"></a>
+
+          <%= render 'flats/modals/modal_candidates_slots', slot: slot, flat: @flat %>
+          <%= render 'flats/modals/modal_confirm_slots', slot: slot, flat: @flat %>
         </div>
 
-        <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-slots<%= slot.id %>" data-dismiss="modal">Annuler cette visite</button>
+      <% else %>
 
-        <a class="card-candidates-link" data-toggle="modal" data-target="#modal-slot-<%= slot.id %>"></a>
+        <div class="card-candidates slot-passed" id="<%= slot.id %>">
+            <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>
+            <div class="card-candidates-content">
+              <div><%= set_fullname(slot.tenant) %></div>
+              <div><%= slot.tenant.status %></div>
+              <div>Date de la visite : <%= slot.starts_at.strftime('%d/%m/%Y') %></div>
+              <div>Heure de la visite : <%= slot.starts_at.strftime('%H:%M') %></div>
+              <div>Note du dossier : <%= render 'flats/grade', slot: slot, user: slot.tenant, flat: @flat %></div>
+              <div>Visite effectuée !</div>
+            </div>
 
-        <%= render 'flats/modals/modal_candidates_slots', slot: slot, flat: @flat %>
-      </div>
+           <!--  <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-slots<%= slot.id %>" data-dismiss="modal">Annuler cette visite</button> -->
+
+            <a class="card-candidates-link" data-toggle="modal" data-target="#modal-slot-<%= slot.id %>"></a>
+
+            <%= render 'flats/modals/modal_candidates_slots', slot: slot, flat: @flat %>
+            <%= render 'flats/modals/modal_confirm_slots', slot: slot, flat: @flat %>
+          </div>
+
+        <% end %>
+
     <% end %>
   <% end %>
 </div>
