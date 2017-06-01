@@ -17,7 +17,7 @@
 </div>
 
 
-<div class="container card text-center">
+<div class="container card text-center marged-top">
   <h2 class="highlight">Définir un créneau</h2>
   <div class="row">
     <%= simple_form_for([@flat, @slot]) do |f| %>
@@ -35,10 +35,12 @@
       <div class="form-inputs">
         <%= f.input :starts_at, as: :hidden, :input_html => { :id => "datetimepicker_hidden_field", value: DateTime.now.strftime("%d/%m/%Y %H:%M")} %>
         <div class="col-xs-10 col-xs-offset-1">
-          <%= f.input :availability_length, label: "Durée du créneau (h) :", input_html: {value: 0} %>
+          <%= f.input :availability_length, label: "Créneau de ", input_html: { value: 0, min: 0, step: 'any' } %>
+            <p>heures</p>
+          </%>
         </div>
         <div class="col-xs-10 col-xs-offset-1">
-          <%= f.input :length, label: "Durée de la visite (min) :", input_html: {value: 0} %>
+          <%= f.input :length, label: "Durée de la visite (min) :", input_html: { value: 0, min: 0, step: 'any' } %>
         </div>
       </div>
       <div class="form-actions text-center">
@@ -65,8 +67,8 @@
                   </div>
                   <div class="card-description">
                     <%= cl_image_tag 'https://unsplash.it/400/400', class: "avatar-large" %>
-                    <p><%= slot.tenant.email %>
-                    <%= slot.tenant.status %></p>
+                    <p><%= slot.tenant.email %></p>
+                    <p><%= slot.tenant.status %></p>
                     <%= link_to [@flat, slot], data: {:confirm => 'Êtes-vous sûr ?'}, :method => :delete do %>
                       <i class="fa fa-trash" aria-hidden="true"></i>
                     <% end %>
@@ -80,7 +82,7 @@
                     <h><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
                   </div>
                   <div class="card-description">
-                    <p><%= slot.status %></p>
+                    <%= slot.status %>
                     <%= link_to [@flat, slot], data: {:confirm => 'Êtes-vous sûr ?'}, :method => :delete do %>
                       <i class="fa fa-trash" aria-hidden="true"></i>
                     <% end %>
@@ -110,8 +112,8 @@
                   </div>
                   <div class="card-description">
                     <%= cl_image_tag 'https://unsplash.it/400/400', class: "avatar-large" %>
-                    <p><%= slot.tenant.email %>
-                    <%= slot.tenant.status %></p>
+                    <p><%= slot.tenant.email %></p>
+                    <p><%= slot.tenant.status %></p>
                   </div>
                 </div>
               </div>
