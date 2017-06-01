@@ -1,66 +1,87 @@
-<%= render 'tabs' %>
-
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-md-8">
-      <h1>Dossier Confirmé</h1>
-        <% @bookings_confirmed.each do |booking| %>
-          <div class="card-booking">
-            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
-            <div class="card-booking-content">
-              <%= booking.tenant.first_name %>
-              <%= booking.tenant.last_name %>
-              <%= booking.tenant.status %>
-              <%= booking.status %>
-              <%= booking.tenant.grade %>
-            </div>
-            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
-            <%= render 'modal', booking: booking  %>
-          </div>
-        <% end %>
-
-      <h1>Dossiers en attente</h1>
-        <% @bookings_pending.each do |booking| %>
-          <div class="card-booking">
-            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
-            <div class="card-booking-content">
-              <%= booking.tenant.first_name %>
-              <%= booking.tenant.last_name %>
-              <%= booking.tenant.status %>
-              <%= booking.status %>
-              <%= booking.tenant.grade %>
-            </div>
-            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
-            <%= render 'modal', booking: booking %>
-          </div>
-        <% end %>
-
-      <h1>Dossiers refusés</h1>
-        <% @bookings_cancelled.each do |booking| %>
-          <div class="card-booking">
-            <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
-            <div class="card-booking-content">
-              <%= booking.tenant.first_name %>
-              <%= booking.tenant.last_name %>
-              <%= booking.tenant.status %>
-              <%= booking.status %>
-              <%= booking.tenant.grade %>
-            </div>
-            <a class="card-booking-link" data-toggle="modal" data-target=".bs-example-modal-lg" href="#" ></a>
-            <%= render 'modal', booking: booking %>
-          </div>
-        <% end %>
+<!-- Flat navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
+      <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
     </div>
-
-    <div class="col-xs-12 col-md-4">
-      <h1>Critères de sélection</h1>
-      <div>
-        <%= @flat.income_ratio %>
-        <%= @flat.has_warrantor %>
-        <%= @flat.warrantor_income_ratio %>
-        <%= @flat.deposit %>
-      </div>
-
+    <div class="<%= 'active' if current_page?(flat_dossiers_path(@flat)) %>">
+      <%= link_to "Candidats", flat_dossiers_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
+      <%= link_to "Réservations", flat_reservations_path(@flat), class: "navbar-wagon-link" %>
     </div>
   </div>
 </div>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <div id="candidates" class="marged-top">
+
+        <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_slots_cancelled', slots_cancelled: @slots_cancelled, flat: @flat %>
+
+      </div>
+    </div>
+
+    <div class="col-xs-12 col-md-4" id="criteres">
+      <div class="text-center affix" id="sidebar">
+
+        <h1 class="text-center">Vos exigences</h1>
+
+        <%= simple_form_for @flat, method: 'patch', url: flat_filter_path(@flat), remote: true do |f| %>
+
+          <%= f.label :income_ratio, "Ratio minimum Salaire du locataire / Loyer :", class: "control-label" %>
+
+          <%= f.input :income_ratio, label: false, class: "form-control", input_html: {value: @flat.income_ratio, min: '1', max: '10', step: '0.1' } %>
+
+          <div class="hidden" id="rent"><%= @flat.rent + @flat.rental_costs %></div>
+          <div>Salaire minimun :</div>
+          <div id="income"><%= (@flat.income_ratio * (@flat.rent + @flat.rental_costs)).round(0) %> €</div>
+
+          <%= f.input :has_warrantor, label: "Garant",
+          :collection => [[true, 'Oui'], [false, 'Non']],
+          :label_method => :last,
+          :value_method => :first,
+          :as => :radio_buttons,
+          :item_wrapper_class => 'inline',
+          :checked => @flat.has_warrantor %>
+
+          <div class="hidden" id="warrantor-income-box">
+            <%= f.input :warrantor_income_ratio, label: "Ratio minimum Salaire du garant / Loyer :", input_html: {value: @flat.warrantor_income_ratio, min: '1', max: '10', step: '0.1' } %>
+            <div>Salaire minimun du garant :</div>
+            <div id="warrantor-income"><%= @flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs) %> €</div>
+          </div>
+
+          <%= f.input :deposit, label: "Vous exigez une caution de :", input_html: {value: @flat.deposit, min: '0' , max: ((@flat.rent + @flat.rental_costs) * 2).to_s , step: '10' } %>
+
+          <%= f.button :submit, "Enregistrer les modifications de vos exigences", class:"btn btn-danger"%>
+
+          <div id="message-modif"></div>
+        <% end %>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%= content_for(:after_js) do %>
+  <script>
+    $(document).ready(function() {
+      <% if @flat.has_warrantor %>
+        $('#warrantor-income-box').removeClass('hidden');
+      <% end %>
+    });
+  </script>
+<% end %>

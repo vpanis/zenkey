@@ -5,9 +5,11 @@ Rails.application.routes.draw do
   get "dashboard" => "pages#dashboard"
 
   resources :flats do
+    resources :slots, only: [:create, :update, :destroy]
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
-    resources :slots, only: [:update]
+    patch "filter" => "flats#filter"
+    get "reservations" => "flats#reservations"
   end
   mount Attachinary::Engine => "/attachinary"
 end

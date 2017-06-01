@@ -1,5 +1,5 @@
 <!-- Flat navbar -->
-<div class="navbar-flat">
+<div class="navbar-flat navbar-flat-wagon-fixed">
   <div class="navbar-flat-content">
     <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
       <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
@@ -10,14 +10,14 @@
     <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
       <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
     </div>
-    <div class="<%= 'active' if current_page?(root_path) %>">
-      <%= link_to "Réservations", root_path, class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
+      <%= link_to "Réservations", flat_reservations_path(@flat), class: "navbar-wagon-link" %>
     </div>
   </div>
 </div>
 
 <div class="container text-center">
-  <h2>Publier votre annonce :</h2>
+  <h2>Partager mon annonce</h2>
   <div >
     <textarea class="js-copytextarea"><%= "http://localhost:3000/flats/#{@flat.id}" %></textarea>
     <button class="js-textareacopybtn">
@@ -29,7 +29,7 @@
 <div class="container padded top">
   <div class="row">
     <div class="form col-xs-12 col-md-6 col-md-offset-3">
-      <h2 class="text-center">Editer votre annonce</h2>
+      <h2 class="text-center">Mon annonce</h2>
       <%= simple_form_for(@flat) do |f| %>
         <%= f.error_notification %>
         <div class="form-inputs">

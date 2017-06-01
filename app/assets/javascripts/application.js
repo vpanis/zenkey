@@ -3,6 +3,8 @@
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
 //= require datepicker-loading
+//= require moment
+//= require bootstrap-datetimepicker
 //= require copy_clipboard
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary

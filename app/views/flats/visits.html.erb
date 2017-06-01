@@ -1,0 +1,135 @@
+<!-- Flat navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
+      <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_dossiers_path(@flat)) %>">
+      <%= link_to "Candidats", flat_dossiers_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
+      <%= link_to "Réservations", flat_reservations_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+
+<div class="container card text-center">
+  <h2 class="highlight">Définir un créneau</h2>
+  <div class="row">
+    <%= simple_form_for([@flat, @slot]) do |f| %>
+    <%= f.error_notification %>
+    <div class="col-xs-12 col-sm-6">
+      <div style="overflow:hidden;">
+        <div class="form-group">
+          <div class="col-xs-10 col-xs-offset-1">
+            <div id="datetimepicker"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <div class="form-inputs">
+        <%= f.input :starts_at, as: :hidden, :input_html => { :id => "datetimepicker_hidden_field", value: DateTime.now.strftime("%d/%m/%Y %H:%M")} %>
+        <div class="col-xs-10 col-xs-offset-1">
+          <%= f.input :availability_length, label: "Durée du créneau (h) :", input_html: {value: 0} %>
+        </div>
+        <div class="col-xs-10 col-xs-offset-1">
+          <%= f.input :length, label: "Durée de la visite (min) :", input_html: {value: 0} %>
+        </div>
+      </div>
+      <div class="form-actions text-center">
+        <%= f.button :submit, "Ajouter un créneau", class:"btn btn-danger"%>
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+  <!-- Next slots -->
+  <% if @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now.midnight]).length >= 1 %>
+    <div class="container card text-center">
+      <h2 class="highlight">Mes prochaines visites</h2>
+      <% @flat.slots.order("starts_at asc").where(['starts_at >= ?', DateTime.now.midnight]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
+        <h4><strong><%= date %></strong></h4>
+        <div class="row">
+          <% slots.each do |slot| %>
+            <% if slot.status == "Booked" %>
+              <div class="col-xs-6 col-sm-3">
+                <div class="slot-card-booked" %>
+                  <div class="card-category">
+                    <p><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
+                  </div>
+                  <div class="card-description">
+                    <%= cl_image_tag 'https://unsplash.it/400/400', class: "avatar-large" %>
+                    <p><%= slot.tenant.email %>
+                    <%= slot.tenant.status %></p>
+                    <%= link_to [@flat, slot], data: {:confirm => 'Êtes-vous sûr ?'}, :method => :delete do %>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+            <div class="col-xs-6 col-sm-3">
+                <div class="slot-card-vacant" %>
+                  <div class="card-category">
+                    <h><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
+                  </div>
+                  <div class="card-description">
+                    <p><%= slot.status %></p>
+                    <%= link_to [@flat, slot], data: {:confirm => 'Êtes-vous sûr ?'}, :method => :delete do %>
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Past slots -->
+  <% if @flat.slots.order("starts_at asc").where(['starts_at < ?', DateTime.now.midnight]).length >= 1 %>
+    <div class="container card text-center">
+      <h2 class="highlight">Mes visites passées</h2>
+      <% @flat.slots.order("starts_at asc").where(['starts_at < ?', DateTime.now.midnight]).group_by{|slot| slot.starts_at.strftime("%A %e %B %Y")}.each do |date, slots| %>
+        <h4><strong><%= date %></strong></h4>
+        <div class="row">
+          <% slots.each do |slot| %>
+            <% if slot.status == "Booked" %>
+              <div class="col-xs-6 col-sm-3">
+                <div class="slot-card-booked" %>
+                  <div class="card-category">
+                    <p><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
+                  </div>
+                  <div class="card-description">
+                    <%= cl_image_tag 'https://unsplash.it/400/400', class: "avatar-large" %>
+                    <p><%= slot.tenant.email %>
+                    <%= slot.tenant.status %></p>
+                  </div>
+                </div>
+              </div>
+            <% else %>
+            <div class="col-xs-6 col-sm-3">
+                <div class="slot-card-vacant" %>
+                  <div class="card-category">
+                    <h><strong><%= slot.starts_at.strftime(format="%H:%M") %></strong></p>
+                  </div>
+                  <div class="card-description">
+                    <p><%= slot.status %></p>
+                  </div>
+
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
