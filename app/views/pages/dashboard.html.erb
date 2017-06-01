@@ -28,8 +28,9 @@
           <div class="card-description">
             <h2><%= user_flat.title %></h2>
             <p>
-            <%= user_flat.booking.starting_date %>
-            <%= user_flat.booking.end_date %>
+            Loué depuis le <%= user_flat.booking.starting_date %>
+            Fin du bail: <%= user_flat.booking.end_date %>
+            Loyer: <%= user_flat.rent %>
             </p>
           </div>
         </div>
