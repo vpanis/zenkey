@@ -4,17 +4,19 @@
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Profil de <%= set_fullname(booking.tenant) %></h4>
       </div>
 
       <div class="modal-body">
-        <%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large" %>
-        <%= booking.tenant.first_name %>
-        <%= booking.tenant.last_name %>
-        <%= booking.tenant.status %>
-        <%= booking.status %>
-        <%= set_grade(booking.tenant, flat) %>
-        <%= booking.tenant.description %>
+
+
+        <div><%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large-square" %></div>
+        <div>Prénom : <%= booking.tenant.first_name %></div>
+        <div>Nom : <%= booking.tenant.last_name %></div>
+        <div>Situation Professionnelle : <br><%= booking.tenant.status %></div>
+        <div><%= booking.status %></div>
+        <div>Note attribué : <%= set_grade(booking.tenant, flat) %></div>
+        <div><%= booking.tenant.description %></div>
       </div>
 
       <div class="modal-footer">
