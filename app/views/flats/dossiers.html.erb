@@ -1,13 +1,43 @@
+<!-- Flat navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
+      <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_dossiers_path(@flat)) %>">
+      <%= link_to "Candidats", flat_dossiers_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
+      <%= link_to "Réservations", flat_reservations_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-xs-12 col-md-8">
-      <div id="candidates">
-        <%= render 'candidates', bookings_pending: @bookings_pending, bookings_confirmed: @bookings_confirmed, bookings_cancelled: @bookings_cancelled, flat: @flat %>
+      <div id="candidates" class="marged-top">
+
+        <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %>
+
+        <%= render 'flats/candidates/candidates_slots_cancelled', slots_cancelled: @slots_cancelled, flat: @flat %>
+
       </div>
+    </div>
 
     <div class="col-xs-12 col-md-4" id="criteres">
-      <h1 class="text-center">Critères de sélection</h1>
-      <div class="text-center">
+      <div class="text-center affix" id="sidebar">
+
+        <h1 class="text-center">Vos exigences</h1>
 
         <%= simple_form_for @flat, method: 'patch', url: flat_filter_path(@flat), remote: true do |f| %>
 
@@ -35,9 +65,9 @@
 
           <%= f.input :deposit, label: "Vous exigez une caution de :", input_html: {value: @flat.deposit, min: '0' , max: ((@flat.rent + @flat.rental_costs) * 2).to_s , step: '10' } %>
 
-          <div id="message-modif"></div>
+          <%= f.button :submit, "Enregistrer les modifications de vos exigences", class:"btn btn-danger"%>
 
-          <%= f.button :submit, "Enregistrer les modifications de vos critères", class:"btn btn-danger"%>
+          <div id="message-modif"></div>
         <% end %>
 
       </div>

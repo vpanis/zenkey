@@ -1,0 +1,18 @@
+<div>
+  <% if !@slots_booked.first.nil? %>
+    <h2  class="highlight text-center"><%= pluralize @slots_booked.count, "dossier annulé" %></h2>
+    <% @slots_booked.each do |slot| %>
+      <div class="card-candidates" id="<%= slot.id %>">
+        <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>
+        <div class="card-candidates-content">
+          <div><%= set_fullname(slot.tenant) %></div>
+          <div><%= slot.tenant.status %></div>
+          <div>Status du dossier : <%= slot.status %></div>
+          <div>Note du dossier : <%= render 'flats/grade', slot: slot, user: slot.tenant, flat: @flat %></div>
+        </div>
+        <a class="card-candidates-link" data-toggle="modal" data-target="#modal-slot-<%= slot.id %>"></a>
+        <%= render 'flats/modals/modal_candidates_slots', slot: slot, flat: @flat %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

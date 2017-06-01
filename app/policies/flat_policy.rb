@@ -36,4 +36,8 @@ class FlatPolicy < ApplicationPolicy
   def dossiers?
     record.landlord == user || user.admin
   end
+
+  def reservations?
+    record.landlord == user || user.admin
+  end
 end
