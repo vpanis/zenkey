@@ -1,10 +1,9 @@
 var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
+if (copyTextareaBtn) {
 copyTextareaBtn.addEventListener('click', function(event) {
   var copyTextarea = document.querySelector('.js-copytextarea');
   copyTextarea.select();
   window.alert("Lien copié dans le presse-papier");
-
   try {
     var successful = document.execCommand('copy');
     var msg = successful ? 'successful' : 'unsuccessful';
@@ -13,3 +12,4 @@ copyTextareaBtn.addEventListener('click', function(event) {
     console.log('Oops, unable to copy');
   }
 });
+}

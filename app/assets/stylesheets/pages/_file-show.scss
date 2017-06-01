@@ -1,0 +1,39 @@
+.day {
+  background: white;
+  color: #484848;
+  border: 1px solid #EBECEB !important;
+  border-radius: 0px !important;
+}
+
+.day.active{
+  background: $red !important;
+  color: white;
+  border: 1px solid #EBECEB;
+  border-radius: 0px;
+}
+
+.day.disabled {
+  background: #EEEEEF !important;
+  color: #DCE0E0 !important;
+  border-radius: 0px;
+  border: 1px solid #EBECEB;
+  // display: none;
+}
+
+.day.disabled:hover {
+  background: #EEEEEF !important;
+  color: #DCE0E0 !important;
+  border-radius: 0px;
+  border: 1px solid #EBECEB;
+}
+
+.day:hover {
+  background: #FF8383 !important;
+  color: white !important;
+  border-radius: 0px;
+}
+
+.slot {
+  margin: 5px 0px;
+  width: 100%;
+}

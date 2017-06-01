@@ -1,12 +1,10 @@
 class FlatsController < ApplicationController
+  skip_before_action :authenticate_user!, only: :show
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
   before_action :set_nested_flat, only: [:dossiers]
 
   def index
     @flats = policy_scope(Flat.all)
-  end
-
-  def show
   end
 
   def new
@@ -43,6 +41,18 @@ class FlatsController < ApplicationController
   end
 
   def show
+    @slot = Slot.new
+    @start_date = @flat.slots.order(starts_at: :asc).first.starts_at.strftime("%d/%m/%Y") # next slot date
+    @slots_date = []
+    @flat.slots.each do |slot|
+    @slots_date << slot.starts_at.yesterday.strftime("%d/%m/%Y")
+    end
+    @slots_date.uniq!
+
+    @flat.slots.each do |slot|
+      slot.starts_at.strftime("%d/%m/%Y")
+    end
+
     @flat_coordinates = { lat: @flat.latitude, lng: @flat.longitude }
     @flats = Flat.where.not(latitude: nil, longitude: nil)
 
