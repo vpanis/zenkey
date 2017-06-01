@@ -13,6 +13,10 @@ class SlotPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    return true
+  end
+
   def destroy?
     record.flat.landlord == user
   end

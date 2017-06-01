@@ -1,31 +1,13 @@
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(function() {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function() {
-        markers = handler.addMarkers(<%= raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        if (markers.length == 0) {
-          handler.getMap().setZoom(2);
-        } else if (markers.length == 1) {
-          handler.getMap().setZoom(14);
-        }
-      });
-    });
-  <% end %>
-<% end %>
 
 
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-md-4"><h2>Loyer: <%= @flat.rent%>€</h2></div>
-  </div>
     <!-- Colonne de gauche -->
   <div class="row">
-    <div class="col-xs-12 col-md-8">
-      <%= cl_image_tag(@flat.photos.first.path, :alt => "banner_image", height:300, width: 720, crop: :fill) %>
-      <h2><%= @flat.title%></h2>
+    <div class="col-xs-12 col-md-7">
+    <%= set_flat_image(@flat) %>
+      <div class="page-header">
+        <h1><%= @flat.title%> <small>Loyer: <%= @flat.rent%>€</small></h1>
+      </div>
       <br>
       <h4>DESCRIPTION</h4>
       <hr>
@@ -38,14 +20,61 @@
         <li>Disponible: <%= @flat.availability_date %></li>
         <li><%= @flat.description %></li>
       </ul>
+      <div id="map" style="width: 100%; height: 300px;"></div>
     </div>
     <!-- Colonne de droite -->
-    <div class="col-xs-12 col-md-4" id="sidebar">
-      <div id="map" style="width: 100%; height: 300px;"></div>
-      <h3>Prochaines visites</h3>
-      <%= render 'pickvisitform' %>
+    <div class="col-xs-12 col-md-3 affix centered" id="sidebar">
+    <h3>Prochaines visites</h3>
+    <%= render 'pickvisitform' %>
     </div>
   </div>
 </div>
 
 
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready(function() {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function() {
+        markers = handler.addMarkers(<%= raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        if (markers.length == 0) {
+          handler.getMap().setZoom(2);
+        } else if (markers.length == 1) {
+          handler.getMap().setZoom(14);
+        }
+      });
+
+      $(function() {
+          $('#datepicker-slots').datepicker({
+          format: "dd/mm/yyyy",
+           weekStart: 1,
+           startDate: "<%= @start_date %>",
+           todayHighlight: true,
+           multidate: false,
+           beforeShowDay: function(date){
+            var disabled_dates = <%= raw @slots_date %>;
+            var formattedDate = $.fn.datepicker.DPGlobal.formatDate(date, 'dd/mm/yyyy', 'pl');
+            if ($.inArray(formattedDate.toString(), disabled_dates) != -1){
+               return {
+                  enabled : true
+              }
+            } else {
+                return {
+                  enabled : false
+                }
+            };
+          }
+         });
+        $(".datepicker-days .day:not(.disabled)").eq(0).click()
+        $('.slot-form[data-date="<%= @start_date %>"]').removeClass("hidden");
+        $('#datepicker-slots').on('changeDate', function(e) {
+           var date = strftime("%d/%m/%Y", e.date);
+           $('.slot-form').addClass("hidden");
+           $('.slot-form[data-date="' + date + '"]').removeClass("hidden");
+        });
+       });
+    });
+  </script>
+<% end %>

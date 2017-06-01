@@ -1,5 +1,4 @@
 var copyTextareaBtn = document.querySelector('.js-textareacopybtn');
-
 if (copyTextareaBtn) {
 copyTextareaBtn.addEventListener('click', function(event) {
   var copyTextarea = document.querySelector('.js-copytextarea');

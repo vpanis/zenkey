@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_filter :store_current_location, :unless => :devise_controller?
   before_action :authenticate_user!
 
   def configure_permitted_parameters
@@ -22,8 +23,17 @@ class ApplicationController < ActionController::Base
     #   redirect_to(root_path)
     # end
 
-    private
+    # def after_sign_in_path_for(resource)
+    #   session["user_return_to"] || root_path
+    # end
 
+    def store_current_location
+      if request.method == "GET"
+        store_location_for(:user, request.url)
+      end
+    end
+
+    private
     def skip_pundit?
       devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
     end
