@@ -1,8 +1,10 @@
 $(document).ready(function() {
   $(".flat-form-choice").click(function(){
-    console.log("Hello");
-    var test = $(this);
-    console.log(test)
     $(this).toggleClass("active");
+  });
+
+  $(".flat-radio-button").click(function(){
+   $(".flat-radio-button").removeClass("active");
+   $(this).toggleClass("active");
   });
 });

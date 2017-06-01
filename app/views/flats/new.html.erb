@@ -13,17 +13,23 @@
                 <%= f.input :rental_type, label: "Type de location", collection: ["Location", "Colocation"], include_blank: true %>
               </div>
               <div class="col-xs-3">
-                <%= f.input :furnished, label: "Meublé", input_html: { class: "hidden" } %>
+                <div class="checkbox">
+                  <input value="0" type="hidden" name="flat[furnished]">
+                  <input class="hidden" type="checkbox" value="1" name="flat[furnished]" id="flat_furnished">
+                  <label class="boolean optional flat-form-choice" for="flat_furnished">Meublé</label>
+                </div>
               </div>
             </div>
+
+<!-- f.input :furnished, label: "Meublé", input_html: { class: "hidden" } -->
 
             <!-- Availability date and minimum duration -->
             <div class="row">
               <div class="col-xs-12 col-md-6">
-                <%= f.input :availability_date, required: true, as: :string, input_html: { class: "datepicker" } %>
+                <%= f.input :availability_date, label: "Date de disponibilité", required: true, as: :string, input_html: { class: "datepicker" } %>
               </div>
               <div class="col-xs-12 col-md-6">
-                <%= f.input :min_duration, label: "Durée minimum (mois)", required: true %>
+                <%= f.input :min_duration, label: "Durée minimum (mois)", input_html: { value: 1, min: 1, step: 'any' }, required: true %>
               </div>
 
             <%= f.input :photos, as: :attachinary %>
@@ -33,37 +39,81 @@
                 <%= f.input :address, label: "Adresse", required: true %>
               </div>
               <div class="col-xs-3">
-                <%= f.input :is_address_public, label: "Afficher l'addresse", input_html: { class: "hidden" } %>
+                <div class="checkbox">
+                  <input value="0" type="hidden" name="flat[is_address_public]">
+                  <input class="hidden " type="checkbox" value="1" name="flat[is_address_public]" id="flat_is_address_public">
+                  <label class="boolean optional flat-form-choice" for="flat_is_address_public">Publique</label>
+                </div>
               </div>
             </div>
 
             <%= f.input :subway, label: "Métro à proximité", collection: @metro_stations %>
-            <%= f.input :size, label: "Superficie", input_html: { min: '9', step: 'any' }, required: true %>
+            <%= f.input :size, label: "Superficie", input_html: { value: 9, min: 9, step: 'any' }, required: true %>
             <%= f.input :description, label: "Description", required: true %>
 
             <!-- Rent and rental costs -->
             <div class="row">
               <div class="col-xs-6 col-md-6">
-                <%= f.input :rent, label: "Loyer", placeholder: "Montant du loyer", input_html: { min: '0', step: 'any' }, required: true, default: 0 %>
+                <%= f.input :rent, label: "Loyer", placeholder: "Montant du loyer", input_html: { value: 0, min: 0, step: 'any' }, required: true, default: 0 %>
               </div>
               <div class="col-xs-6 col-md-6">
-              <%= f.input :rental_costs, label: "Charges locatives", placeholder: "Montant des charges", input_html: { min: '0', step: 'any' }, required: true, default: 0 %>
+              <%= f.input :rental_costs, label: "Charges locatives", placeholder: "Montant des charges", input_html: { value: 0, min: 0, step: 'any' }, required: true, default: 0 %>
               </div>
             </div>
 
-            <%= f.input :floor, label: "Etage", collection: [0, 1, 2, 3, 4, 5, 6, 7], required: true %>
+            <!-- f.input :floor, label: "Etage", as: :radio_buttons, collection: [0, 1, 2, 3, 4, 5, 6, 7], required: true -->
+            <!-- Radio buttons for the floor -->
+            <div class="form-group radio_buttons required flat_floor">
+              <label class="control-label radio_buttons required">Etage</label>
+              <input type="hidden" name="flat[floor]" value="">
+              <div class="flat-radio-buttons">
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="0" name="flat[floor]" id="flat_floor_0">
+                  <label for="flat_floor_0">RDC</label>
+                </div>
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="1" name="flat[floor]" id="flat_floor_1">
+                  <label for="flat_floor_1">1</label>
+                </div>
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="2" name="flat[floor]" id="flat_floor_2">
+                  <label for="flat_floor_2">2</label>
+                </div>
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="3" name="flat[floor]" id="flat_floor_3">
+                  <label for="flat_floor_3">3</label>
+                </div>
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="4" name="flat[floor]" id="flat_floor_4">
+                  <label for="flat_floor_4">4</label>
+                </div>
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="5" name="flat[floor]" id="flat_floor_5">
+                  <label for="flat_floor_5">5</label>
+                </div>
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="6" name="flat[floor]" id="flat_floor_6">
+                  <label for="flat_floor_6">6</label>
+                </div>
+                <div class="radio flat-radio-button">
+                  <input class="radio_buttons required hidden" required="required" aria-required="true" type="radio" value="7" name="flat[floor]" id="flat_floor_7">
+                  <label for="flat_floor_7">7</label>
+                </div>
+              </div>
+            </div>
 
             <!-- Number of rooms and bedrooms -->
             <div class="row">
               <div class="col-xs-12 col-md-6">
-                <%= f.input :rooms, label: "Nombre de pièces", required: true %>
+                <%= f.input :rooms, label: "Nombre de pièces", input_html: { value: 0, min: 0, step: 'any' }, required: true %>
               </div>
               <div class="col-xs-12 col-md-6">
-                <%= f.input :bedrooms, label: "Nombre de chambres", required: true %>
+                <%= f.input :bedrooms, label: "Nombre de chambres", input_html: { value: 0, min: 0, step: 'any' }, required: true %>
               </div>
             </div>
 
             <!-- Plus -->
+            <label class="control-label">Autres caractéristiques</label>
             <div class="flat-form-choices">
               <div class="checkbox">
                 <input value="0" type="hidden" name="flat[balcony]">
