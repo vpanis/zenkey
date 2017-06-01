@@ -3,24 +3,51 @@
 
   <div class="row">
     <div class="col-xs-12 col-sm-4 sm-marged-bottom">
-      <div class="card-new text-center">
-          <h2>Créer une annonce</h2>
-        <%= link_to '', new_flat_path, class:"card-new-link" %>
+      <div class="card text-center">
+          <h2>
+            <%= link_to 'Créer une annonce', new_flat_path, class:"card-new-link" %>
+          </h2>
+
       </div>
     </div>
-    <% @user_flats.each do |user_flat| %>
-    <div class="col-xs-12 col-sm-4 sm-marged-bottom">
-      <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path user_flat.photos , crop: :scale %>');">
 
-        <div class="card-category"><span class="badge"><%= user_flat.bookings.size %></span></div>
+    <% @user_flats.where(status: "Busy").each do |user_flat|%>
+      <div class="col-xs-12 col-sm-4 sm-marged-bottom">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%=user_flat.photos.first.nil? ? "" : cl_image_path(user_flat.photos.first , crop: :scale) %>');">
+          <div class="row">
+            <div class="col-xs-6">
+              <div class="btn btn-primary"> <%= user_flat.status %> </div>
+            </div>
+            <div class="col-xs-6">
+              <div class="flat-user-photo">
+               <%= image_tag(set_user_photo(user_flat.booking.tenant)) %>
+              </div>
+            </div>
+          </div>
 
-        <div class="card-description">
-          <h2><%= user_flat.title %></h2>
-          <p><%= user_flat.description %> <%= user_flat.landlord.first_name %></p>
+          <div class="card-description">
+            <h2><%= user_flat.title %></h2>
+            <p>
+            <%= user_flat.booking.starting_date %>
+            <%= user_flat.booking.end_date %>
+            </p>
+          </div>
         </div>
-
       </div>
-    </div>
     <% end %>
+
+    <% @user_flats.where(status: "Available").each do |user_flat|%>
+      <div class="col-xs-12 col-sm-4 sm-marged-bottom">
+        <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%=user_flat.photos.first.nil? ? "" : cl_image_path(user_flat.photos.first , crop: :scale) %>');">
+          <div class="btn btn-primary"> <%= user_flat.status %> </div>
+
+          <div class="card-description">
+            <h2><%= user_flat.title %></h2>
+            <p><%= user_flat.description %> <%= user_flat.landlord.first_name %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
   </div>
 </div>
