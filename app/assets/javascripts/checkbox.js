@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $(".flat-form-choice").click(function(){
-    $(this).toggleClass("active");
+    $(this).toggleClass("active")
   });
 
   $(".flat-radio-button").click(function(){
