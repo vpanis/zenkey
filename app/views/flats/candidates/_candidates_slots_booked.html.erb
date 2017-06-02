@@ -1,54 +1,31 @@
-<div>
-  <% if !@slots_booked.first.nil? %>
-
-    <% @slots_booked.each do |slot| %>
-
-      <% if slot.starts_at - Time.now > 0 %>
-
-        <div class="card-candidates slot-to-come" id="<%= slot.id %>">
-          <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>
-          <div class="card-candidates-content">
-            <div><%= set_fullname(slot.tenant) %></div>
-            <div><%= slot.tenant.status %></div>
-            <div>Date de la visite : <%= slot.starts_at.strftime('%d/%m/%Y') %></div>
-            <div>Heure de la visite : <%= slot.starts_at.strftime('%H:%M') %></div>
-            <div>Note du dossier : <%= render 'flats/grade', slot: slot, user: slot.tenant, flat: @flat %></div>
-            <div>Visite à venir !</div>
-          </div>
-
-          <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-slots<%= slot.id %>" data-dismiss="modal">Annuler cette visite</button>
-
-          <a class="card-candidates-link" data-toggle="modal" data-target="#modal-slot-<%= slot.id %>"></a>
-
-          <%= render 'flats/modals/modal_candidates_slots', slot: slot, flat: @flat %>
-          <%= render 'flats/modals/modal_confirm_slots', slot: slot, flat: @flat %>
-        </div>
-
-      <% else %>
-
-        <div class="card-candidates slot-passed" id="<%= slot.id %>">
-            <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>
-            <div class="card-candidates-content">
-              <div><%= set_fullname(slot.tenant) %></div>
-              <div><%= slot.tenant.status %></div>
-              <div>Date de la visite : <%= slot.starts_at.strftime('%d/%m/%Y') %></div>
-              <div>Heure de la visite : <%= slot.starts_at.strftime('%H:%M') %></div>
-              <div>Note du dossier : <%= render 'flats/grade', slot: slot, user: slot.tenant, flat: @flat %></div>
-              <div>Visite effectuée !</div>
+<% if !@slots_booked.first.nil? %>
+        <div class="container reservation">
+          <div class="row">
+          <% @slots_booked.each do |slot| %>
+          <div class="col-xs-12 col-sm-3">
+            <!-- insert <div class="card"> -->
+            <div class="card-tenant text-center">
+            <%= image_tag set_user_photo(slot.tenant), class: "card-tenant-avatar avatar-large-bordered" %>
+              <div class="card-tenant-name"></div>
+                <div class="card-tenant-description text-center">
+                  <h2><%= render 'flats/grade', slot: slot, user: slot.tenant, flat: @flat %></h2>
+                  <H2><%= set_fullname(slot.tenant) %></H2>
+                  <%#= slot.tenant.status %>
+                  <%#= slot.status %>
+                  <ul class="list-inline">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                    <li>06 50 34 17 17</li>
+                  </ul>
+                  <ul class="list-inline">
+                    <li>Visite: <%= slot.starts_at.strftime("%d/%m/%Y %H:%M")%></li>
+                  </ul>
+                  <a class="btn btn-primary" data-toggle="modal" data-target="#modal-slot-<%= slot.id %>">Voir candidat</a>
+                  <%= render 'flats/modals/modal_candidates_slots', slot: slot, flat: @flat %>
+                  <%= render 'flats/modals/modal_confirm_slots', slot: slot, flat: @flat %>
+                </div>
+              </div>
             </div>
-
-          <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirm-slots<%= slot.id %>" data-dismiss="modal">Demander le dossier</button>
-
-           <!--  <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-slots<%= slot.id %>" data-dismiss="modal">Annuler cette visite</button> -->
-
-            <a class="card-candidates-link" data-toggle="modal" data-target="#modal-slot-<%= slot.id %>"></a>
-
-            <%= render 'flats/modals/modal_candidates_slots', slot: slot, flat: @flat %>
-            <%= render 'flats/modals/modal_confirm_slots', slot: slot, flat: @flat %>
+            <% end %>
           </div>
-
-        <% end %>
-
+        </div>
     <% end %>
-  <% end %>
-</div>

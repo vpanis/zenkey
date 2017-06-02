@@ -1,6 +1,6 @@
 <% if !@bookings_confirmed.first.nil? %>
 <div class="container reservation">
-<h2><%= pluralize @bookings_confirmed.count, "dossier confirmé" %></h2>
+
 <hr>
   <div class="row">
   <% @bookings_confirmed.each do |booking| %>
