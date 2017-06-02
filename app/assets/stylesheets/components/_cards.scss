@@ -1,8 +1,10 @@
 .card {
-  background-color: white;
-  margin-top: 30px;
-  padding: 50px;
-  border: solid 1px #ffe0e0;
+    background-color: white;
+    margin-top: 30px;
+    border-top: solid #FF696A;
+    padding: 50px;
+    box-shadow: 0px 1px 50px 3px rgba(0, 32, 126, 0.1);
+    border-radius: 0px 0px 6px 6px;
 }
 
 // Booking card stylesheet
@@ -40,7 +42,7 @@
   bottom: 0;
   right: 0;
   width: 100%;
-  z-index:2;
+  z-index: 3;
   background: $blue;
   opacity: 0;
 }
@@ -57,7 +59,7 @@
   background-color: #F7F7F7;
   border: solid 1px #e8e8e8;
   margin: 5px;
-  padding: 20px;
+  padding: 10px;
 }
 
 .slot-card-booked {
@@ -65,9 +67,9 @@
   background-color: #fff7f7;
   border: solid 1px #ffb2b2;
   margin: 5px;
-  padding: 20px;
+  padding: 10px;
   .avatar-large {
-    margin: 20px 0px;
+    margin: 1 0px 0px;
   }
   p {
     margin-bottom: 0px;
@@ -75,13 +77,18 @@
 }
 
 .card-dashboard {
+  color: #424242;
   background-color: white;
   margin-top: 30px;
   padding: 0px 30px;
-  border: solid 1px #ffe0e0;
+  border: solid 1px #ffcccc;
+  border-top: solid 1px $red;
   min-height: 420px;
-
-
+  border-radius: 0px 0px 6px 6px;
+  opacity: 0.8;
+  &:hover {
+    opacity: 1;
+  }
 }
 
 .card-category {
@@ -96,12 +103,14 @@
 }
 
 .card-dashboard-description {
+  color: #424242;
   h2 {
     font-size: 20px;
     text-transform: uppercase;
     font-weight: bolder
   }
-
+  p {
+  }
 }
 
 .card-dashboard-image {
@@ -111,6 +120,7 @@
   border: solid 1px #ffe0e0;
   min-height: 200px;
   position: relative;
+  margin-bottom: 30px;
 }
 .card-flat-creation {
   background-color: white;
@@ -170,11 +180,3 @@
     margin-top: 20px;
   }
 }
-
-
-
-
-
-
-
-

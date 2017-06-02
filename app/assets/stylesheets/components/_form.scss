@@ -25,14 +25,12 @@
   background-color: white;
   padding: 20px;
   border-radius: 3px;
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
   h2 {
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 30px;
     text-align: center;
   }
-
   a {
     color: #FF696A;
     text-decoration: none;
@@ -43,6 +41,17 @@
   }
   textarea {
     height: 120px !important;
+  }
+}
+
+// New flat form
+#flat_rental_type, #flat_address {
+  height: 50px;
+}
+.checkbox {
+  margin: 0px !important;
+  label {
+    padding-left: 15px !important;
   }
 }
 
@@ -119,18 +128,34 @@
   list-style: none;
   li {
     padding: 15px;
+    text-align: center;
     img {
       margin-right: 20px;
     }
   }
 }
 
-#flat_rental_type, #flat_address {
-  height: 50px;
+// Visits form
+#slot_availability_length {
+  width: 60px;
+  text-align: right;
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid #FF696A;
 }
-.checkbox {
-  margin: 0px !important;
-  label {
-    padding-left: 15px !important;
+
+#label_slot_availability_length {
+    font-weight: normal !important;
   }
+
+#slot_length {
+  width: 60px;
+  text-align: right;
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid #FF696A;
 }
+
+#label_slot_length {
+    font-weight: normal !important;
+  }

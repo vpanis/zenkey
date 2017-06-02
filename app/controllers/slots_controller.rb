@@ -36,6 +36,26 @@ class SlotsController < ApplicationController
     redirect_to :back
   end
 
+  def slot_cancel
+    @slot = Slot.find(params[:slot_id])
+    authorize @slot
+    @flat = @slot.flat
+    @slots = Slot.where(flat_id: params[:flat_id]).where.not(tenant_id: nil).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}
+    @slots_booked = @slots.select { |slot| slot.status == "Booked" }
+    @slots_cancelled = @slots.select { |slot| slot.status == "Cancelled" }
+    if @slot.update(status: "Vacant", tenant_id: nil)
+      respond_to do |format|
+        format.html { redirect_to flat_dossiers_path(@flat) }
+        format.js  # <-- will render `app/views/flats/filter.js.erb`
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to flat_dossiers_path(@flat) }
+        format.js  # <-- idem
+      end
+    end
+  end
+
   private
 
   def slot_params

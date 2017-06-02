@@ -16,14 +16,14 @@
 
           <div class="text-center">Note du Dossier : <%= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></div>
 
-          <div><%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large-square" %></div>
+          <div><%= image_tag set_user_photo(booking.tenant), class: "card-candidates-user avatar-large-square" %></div>
           <div>Prénom : <%= booking.tenant.first_name %></div>
           <div>Nom : <%= booking.tenant.last_name %></div>
           <div>Situation Professionnelle : <br><%= booking.tenant.status %></div>
           <div><%= booking.tenant.description %></div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Choisir ce locataire</button>
+            <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Choisir ce locataire</button>
           </div>
 
 
@@ -35,14 +35,14 @@
 
           <div class="text-center">Note du Dossier : <%= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></div>
 
-          <div><%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large-square" %></div>
+          <div><%= image_tag set_user_photo(booking.tenant), class: "card-candidates-user avatar-large-square" %></div>
           <div>Prénom : <%= booking.tenant.first_name %></div>
           <div>Nom : <%= booking.tenant.last_name %></div>
           <div>Situation Professionnelle : <br><%= booking.tenant.status %></div>
           <div><%= booking.tenant.description %></div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Changez de locataire</button>
+            <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Changez de locataire</button>
           </div>
 
 
@@ -53,14 +53,14 @@
 
           <div class="text-center">Note du Dossier : <%= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></div>
 
-          <div><%= image_tag set_user_photo(booking.tenant), class: "card-booking-user avatar-large-square" %></div>
+          <div><%= image_tag set_user_photo(booking.tenant), class: "card-candidates-user avatar-large-square" %></div>
           <div>Prénom : <%= booking.tenant.first_name %></div>
           <div>Nom : <%= booking.tenant.last_name %></div>
           <div>Situation Professionnelle : <br><%= booking.tenant.status %></div>
           <div><%= booking.tenant.description %></div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Choisir ce locataire</button>
+            <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Choisir ce locataire</button>
           </div>
 
 

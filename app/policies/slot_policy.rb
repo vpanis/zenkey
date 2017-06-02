@@ -18,6 +18,10 @@ class SlotPolicy < ApplicationPolicy
   end
 
   def destroy?
-    record.flat.landlord == user
+    record.flat.landlord == user || user.admin
+  end
+
+  def slot_cancel?
+    record.flat.landlord == user || user.admin
   end
 end

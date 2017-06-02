@@ -24,6 +24,9 @@
 .marged-bottom {
   margin-bottom: 50px;
 }
+.sm-marged-bottom {
+  margin-bottom: 30px;
+}
 
 // Backgrounds
 .bg-black {
@@ -48,7 +51,7 @@
 }
 textarea {
   width: 20em;
-  height: 30px;
+  height: 30px !important;
 }
 
 // Links
