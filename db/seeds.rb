@@ -59,9 +59,14 @@ fiona.photo_url     = url_fiona
 
 puts 'Creating Flats...'
 
+<<<<<<< HEAD
 oberkampf           = Flat.new(title: "Studio 20m2 rue oberkampf", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: charles)
 oberkampf.description = 'Cet appartement 2 pièces de 20 m² avec une vue mer dégagée, est situé au dernier étage dans une petite résidence de standing calme et recherchée au Mourillon.'
 oberkampf.save!
+=======
+oberkampf           = Flat.create!(title: "Studio 20m2 rue oberkampf", description: "Studio 20m2 meublé kitchinette", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: alexis)
+
+>>>>>>> db6cd6c5281c8a1c22ec3e7bd47557dfd725828c
 urls_oberkampf      = [
   'https://unsplash.it/300/300',
   'https://unsplash.it/300/300',
@@ -70,9 +75,14 @@ urls_oberkampf      = [
 ]
 oberkampf.photo_urls = urls_oberkampf
 
+<<<<<<< HEAD
 pyrenees           = Flat.new(title: "Studio 35m2 pyrénées", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "100 Rue Des Pyrénées, 75019 PARIS", is_address_public: true, subway: "Pyrénées", furnished: true, size: 35, rent: 700, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 2.5, has_warrantor: true, warrantor_income_ratio: 2.5, deposit: 800, landlord: charles)
 pyrenees.description = 'Cet appartement 2 pièces de 35 m² avec une vue mer dégagée, est situé au dernier étage dans une petite résidence de standing calme et recherchée au Mourillon.'
 pyrenees.save!
+=======
+pyrenees           = Flat.create!(title: "Studio 20m2 pyrénées", description: "Studio 20m2 meublé kitchinette", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "100 Rue Des Pyrénées, 75019 PARIS", is_address_public: true, subway: "Pyrénées", furnished: true, size: 20, rent: 700, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: alexis)
+
+>>>>>>> db6cd6c5281c8a1c22ec3e7bd47557dfd725828c
 urls_pyrenees      = [
   'https://unsplash.it/300/300',
   'https://unsplash.it/300/300',
@@ -81,9 +91,14 @@ urls_pyrenees      = [
 ]
 pyrenees.photo_urls = urls_pyrenees
 
+<<<<<<< HEAD
 reuilly           = Flat.new(title: "Studio 20m2 reuilly", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "60 Rue De Reuilly, 75020 PARIS", is_address_public: true, subway: "Montgallet", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: charles)
 reuilly.description = 'Cet appartement 2 pièces de 20 m² avec une vue mer dégagée, est situé au dernier étage dans une petite résidence de standing calme et recherchée au Mourillon.'
 reuilly.save!
+=======
+reuilly           = Flat.create!(title: "Studio 20m2 reuilly", description: "Studio 20m2 meublé kitchinette", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "60 Rue De Reuilly, 75020 PARIS", is_address_public: true, subway: "Montgallet", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: alexis)
+
+>>>>>>> db6cd6c5281c8a1c22ec3e7bd47557dfd725828c
 urls_reuilly      = [
   'https://unsplash.it/300/300',
   'https://unsplash.it/300/300',
@@ -92,9 +107,14 @@ urls_reuilly      = [
 ]
 reuilly.photo_urls = urls_reuilly
 
+<<<<<<< HEAD
 nation           = Flat.new(title: "Studio 20m2 nation", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "1 Avenue Du Trone, 75012 PARIS", is_address_public: true, subway: "Nation", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 2.5, has_warrantor: true, warrantor_income_ratio: 2.5, deposit: 800, landlord: alban)
 nation.description = 'Cet appartement 2 pièces de 20 m² avec une vue mer dégagée, est situé au dernier étage dans une petite résidence de standing calme et recherchée au Mourillon.'
 nation.save!
+=======
+nation           = Flat.create!(title: "Studio 20m2 nation", description: "Studio 20m2 meublé kitchinette", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "1 Avenue Du Trone, 75012 PARIS", is_address_public: true, subway: "Nation", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: alexis)
+
+>>>>>>> db6cd6c5281c8a1c22ec3e7bd47557dfd725828c
 urls_nation      = [
   'https://unsplash.it/300/300',
   'https://unsplash.it/300/300',
@@ -103,9 +123,14 @@ urls_nation      = [
 ]
 nation.photo_urls = urls_nation
 
+<<<<<<< HEAD
 poissonniere           = Flat.new(title: "Studio 20m2 poissonniere", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "10 Rue De Chantilly, 75009 PARIS", is_address_public: true, subway: "Poissonière", furnished: true, size: 20, rent: 600, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: alban)
 poissonniere.description = 'Cet appartement 2 pièces de 20 m² avec une vue mer dégagée, est situé au dernier étage dans une petite résidence de standing calme et recherchée au Mourillon.'
 poissonniere.save!
+=======
+poissonniere           = Flat.create!(title: "Studio 20m2 poissonniere", description: "Studio 20m2 meublé kitchinette", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "10 Rue De Chantilly, 75009 PARIS", is_address_public: true, subway: "Poissonière", furnished: true, size: 20, rent: 800, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: alexis)
+
+>>>>>>> db6cd6c5281c8a1c22ec3e7bd47557dfd725828c
 urls_poissonniere      = [
   'https://unsplash.it/300/300',
   'https://unsplash.it/300/300',
@@ -114,9 +139,14 @@ urls_poissonniere      = [
 ]
 poissonniere.photo_urls = urls_poissonniere
 
+<<<<<<< HEAD
 rebeval           = Flat.new(title: "T5 100m2 rebeval", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "87 Rue Rebeval, 75019 PARIS", is_address_public: true, subway: "Pyrénées", furnished: true, size: 100, rent: 2200, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 2.5, has_warrantor: true, warrantor_income_ratio: 2.5, deposit: 800, landlord: alban)
 rebeval.description = 'Cet appartement 5 pièces de 100 m² avec une vue mer dégagée, est situé au dernier étage dans une petite résidence de standing calme et recherchée au Mourillon.'
 rebeval.save!
+=======
+rebeval           = Flat.create!(title: "T5 100m2 rebeval", description: "T5 100m2 rebeval", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "87 Rue Rebeval, 75019 PARIS", is_address_public: true, subway: "Pyrénées", furnished: true, size: 100, rent: 2200, rental_costs: 50, floor: 4, rooms: 1, bedrooms: 1, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 800, landlord: alexis)
+
+>>>>>>> db6cd6c5281c8a1c22ec3e7bd47557dfd725828c
 urls_rebeval      = [
   'https://unsplash.it/300/300',
   'https://unsplash.it/300/300',
