@@ -5,9 +5,9 @@
       <h1>Louer son appartement n'a jamais été aussi simple</h1>
       <p>Trouver un locataire ne devrait pas être si complexe. Zenkey simplifie l'organisation des visites et la recherche d'un locataire</p>
       <% if user_signed_in? %>
-        <%= link_to t(".top_call_to_action", default: "Mon dashboard"), dashboard_path, class: "btn btn-home" %>
+        <%= link_to t(".top_call_to_action", default: "Mon dashboard"), dashboard_path, class: "btn btn-red" %>
       <% else %>
-        <%= link_to t(".top_call_to_action", default: "Se connecter"), new_user_session_path, class: "btn btn-home" %>
+        <%= link_to t(".top_call_to_action", default: "Se connecter"), new_user_session_path, class: "btn btn-red" %>
       <% end %>
     </div>
   </div>

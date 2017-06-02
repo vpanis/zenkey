@@ -11,7 +11,7 @@
           <div>Note du dossier : <%= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></div>
         </div>
 
-          <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Changez de locataire</button>
+          <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Changez de locataire</button>
 
         <a class="card-candidates-link" data-toggle="modal" data-target="#modal-booking-<%= booking.id %>"></a>
 
