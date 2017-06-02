@@ -14,13 +14,13 @@
   color: white;
   position: relative;
   .fa-star {
-    color: $yellow;
+    color: #FCF4B2;
   }
   .fa-star-half-o {
-    color: $yellow;
+    color: #FCF4B2;
   }
   .fa-star-o {
-    color: $yellow;
+    color: #FCF4B2;
   }
 }
 .card-candidates-user {
@@ -127,3 +127,54 @@
     font-size: 16px;
   }
 }
+
+// Card for tenants candidates
+.card-tenant {
+  background-color: white;
+  margin-top: 30px;
+  padding-bottom: 50px;
+  border-radius: 4px;
+  position:relative;
+  box-shadow: 0 15px 35px rgba(50,50,93,.1), 0 5px 15px rgba(0,0,0,.07);
+}
+
+// .card-tenant:before {
+//     content: '';
+//     position: absolute;
+//     top: 250px;
+//     left: 0;
+//     right: 0;
+//     height: 1000px;
+//     background: $red;
+//     transform: skewY(-12deg);
+//     z-index: -1;
+// }
+
+.card-tenant-avatar {
+  top: -15px;
+  right: 50%;
+  transform: translateY(-30%)
+}
+
+.card-tenant-description {
+  margin: -25px;
+  h2 {
+    font-size: 20px !important;
+    font-weight: 900;
+    color: #555459;
+  }
+  p, i {
+   color: #555459;
+  }
+  a {
+    margin-top: 20px;
+  }
+}
+
+
+
+
+
+
+
+
