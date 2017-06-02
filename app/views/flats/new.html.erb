@@ -61,10 +61,10 @@
               <!-- Rent and rental costs -->
               <div class="row">
                 <div class="col-xs-6 col-md-6">
-                  <%= f.input :rent, label: "Loyer", placeholder: "Montant du loyer", input_html: { value: 0, min: 0, step: 'any' }, required: true, default: 0 %>
+                  <%= f.input :rent, label: "Loyer", placeholder: "Montant du loyer", input_html: { value: 1, min: 1, step: 'any' }, required: true, default: 1 %>
                 </div>
                 <div class="col-xs-6 col-md-6">
-                <%= f.input :rental_costs, label: "Charges locatives", placeholder: "Montant des charges", input_html: { value: 0, min: 0, step: 'any' }, required: true, default: 0 %>
+                <%= f.input :rental_costs, label: "Charges locatives", placeholder: "Montant des charges", input_html: { value: 1, min: 1, step: 'any' }, required: true, default: 1 %>
                 </div>
               </div>
 
