@@ -80,8 +80,14 @@
   padding: 0px 30px;
   border: solid 1px #ffe0e0;
   min-height: 420px;
-
-
+  a:hover {
+    text-decoration: none;
+    color: $red !important;
+  }
+  a:focus {
+    text-decoration: none;
+    color: $red !important;
+  }
 }
 
 .card-category {
@@ -101,7 +107,6 @@
     text-transform: uppercase;
     font-weight: bolder
   }
-
 }
 
 .card-dashboard-image {
