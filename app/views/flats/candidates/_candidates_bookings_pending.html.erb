@@ -1,6 +1,6 @@
 <div>
   <% if !@bookings_pending.first.nil? %>
-    <h2 class="highlight text-center"><%= pluralize @bookings_pending.count, "dossier" %> en attente</h2>
+
     <% @bookings_pending.each do |booking| %>
       <div class="card-candidates" id="<%= booking.id %>">
         <%= image_tag set_user_photo(booking.tenant), class: "card-candidates-user avatar-large" %>

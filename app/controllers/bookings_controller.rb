@@ -29,7 +29,7 @@ class BookingsController < ApplicationController
     @bookings_pending = @bookings.select { |booking| booking.status == "Pending" }
     @bookings_confirmed = @bookings.select { |booking| booking.status == "Confirmed" }
     @bookings_cancelled = @bookings.select { |booking| booking.status == "Cancelled" }
-    if @booking.update(status: "Cancelled")
+    if @booking.update(status: "Pending")
       respond_to do |format|
         format.html { redirect_to flat_reservations_path(@flat) }
         format.js  # <-- will render `app/views/flats/filter.js.erb`

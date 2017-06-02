@@ -1,6 +1,6 @@
 <div>
   <% if !@slots_cancelled.first.nil? %>
-    <h2 class="highlight text-center"><%= pluralize @slots_cancelled.count, "visite" %> <%= "annulée".pluralize %></h2>
+
     <% @slots_cancelled.each do |slot| %>
       <div class="card-candidates" id="<%= slot.id %>">
         <%= image_tag set_user_photo(slot.tenant), class: "card-candidates-user avatar-large" %>

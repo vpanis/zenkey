@@ -21,22 +21,22 @@
     <div class="col-xs-12 col-md-8">
       <div id="candidates" class="marged-top">
 
-        <div id="candidates-bookings-confirmed">
-          <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+        <div id="candidates-bookings" class="<%= 'hidden' if @bookings_confirmed.first.nil? && @bookings_pending.first.nil? %>">
+          <h2 class="highlight"><%= pluralize @bookings_pending.count, "Réservations" %></h2>
+          <div id="candidates-bookings-confirmed">
+            <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
+          </div>
+          <div id="candidates-bookings-pending">
+            <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+          </div>
         </div>
 
-        <div id="candidates-bookings-pending">
-          <%= render 'flats/candidates/candidates_bookings_pending', bookings_pending: @bookings_pending, flat: @flat %>
+        <div id="candidates-slots" class="<%= 'hidden' if @slots_booked.first.nil? %>">
+          <h2 class="highlight"><%= pluralize @slots_booked.count, "Visites" %></h2>
+          <div id="candidates-slots-booked">
+            <%= render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %>
+          </div>
         </div>
-
-        <div id="candidates-slots-booked">
-          <%= render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %>
-        </div>
-
-        <div id="candidates-bookings-cancelled">
-          <%= render 'flats/candidates/candidates_bookings_cancelled', bookings_cancelled: @bookings_cancelled, flat: @flat %>
-        </div>
-
 
       </div>
     </div>
