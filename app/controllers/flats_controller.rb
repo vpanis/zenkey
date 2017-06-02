@@ -17,6 +17,8 @@ class FlatsController < ApplicationController
     @flat = Flat.new(flat_params)
     @flat.landlord = current_user
     @flat.status = "Available"
+    @flat.income_ratio = 1
+    @flat.warrantor_income_ratio = 1
     authorize @flat
     if @flat.save
       redirect_to edit_flat_path(@flat)
