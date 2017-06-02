@@ -25,14 +25,12 @@
   background-color: white;
   padding: 20px;
   border-radius: 3px;
-  box-shadow: 1px 1px 2px rgba(0,0,0,0.1);
   h2 {
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 30px;
     text-align: center;
   }
-
   a {
     color: #FF696A;
     text-decoration: none;
@@ -130,6 +128,7 @@
   list-style: none;
   li {
     padding: 15px;
+    text-align: center;
     img {
       margin-right: 20px;
     }
@@ -140,6 +139,9 @@
 #slot_availability_length {
   width: 60px;
   text-align: right;
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid #FF696A;
 }
 
 #label_slot_availability_length {
@@ -149,6 +151,9 @@
 #slot_length {
   width: 60px;
   text-align: right;
+  border: none;
+  box-shadow: none;
+  border-bottom: 1px solid #FF696A;
 }
 
 #label_slot_length {
