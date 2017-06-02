@@ -12,15 +12,20 @@ module UsersHelper
   end
 
   def set_grade(user, flat)
-    grade = (user.income + (user.warrantor_income * 0.5)) / (flat.rent + flat.rental_costs)
-    grade = ((grade * 2).round).fdiv(2)
-    if grade >= 5
-      grade = 5
-    elsif grade <= 0
+
+    if (flat.rent + flat.rental_costs) == 0
       grade = 0
     else
+      grade = (user.income + (user.warrantor_income * 0.5)) / (flat.rent + flat.rental_costs)
+      grade = ((grade * 2).round).fdiv(2)
+      if grade >= 5
+        grade = 5
+      elsif grade <= 0
+        grade = 0
+      else
+        grade
+      end
       grade
     end
-    grade
   end
 end
