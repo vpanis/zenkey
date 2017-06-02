@@ -16,13 +16,70 @@
   </div>
 </div>
 
+
 <div class="container">
   <div class="row">
-    <div class="col-xs-12 col-md-8">
+
+    <div class="col-xs-12" id="criteres">
+          <div class="text-center">
+
+            <h1 class="text-center">Vos exigences</h1>
+            <%= simple_form_for @flat, method: 'patch', url: flat_filter_path(@flat) do |f| %>
+
+
+              <div class="col-xs-4">
+                <%= f.label :income_ratio, "Ratio minimum Salaire du locataire / Loyer :", class: "control-label" %>
+
+                <%= f.input :income_ratio, label: false, class: "form-control", input_html: {value: @flat.income_ratio, min: '1', max: '10', step: '0.1' } %>
+
+                <div class="hidden" id="rent"><%= @flat.rent + @flat.rental_costs %></div>
+                <div>Salaire minimun :</div>
+                <div id="income"><%= (@flat.income_ratio * (@flat.rent + @flat.rental_costs)).round(0) %> €</div>
+              </div>
+
+              <div class="col-xs-4">
+                <%= f.input :has_warrantor, label: "Garant",
+                :collection => [[true, 'Oui'], [false, 'Non']],
+                :label_method => :last,
+                :value_method => :first,
+                :as => :radio_buttons,
+                :item_wrapper_class => 'inline',
+                :checked => @flat.has_warrantor %>
+
+                <div class="hidden" id="warrantor-income-box">
+                  <%= f.input :warrantor_income_ratio, label: "Ratio minimum Salaire du garant / Loyer :", input_html: {value: @flat.warrantor_income_ratio, min: '1', max: '10', step: '0.1' } %>
+                  <div>Salaire minimun du garant :</div>
+                  <div id="warrantor-income"><%= @flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs) %> €</div>
+                </div>
+              </div>
+
+
+
+              <div class="col-xs-4">
+                <%= f.input :deposit, label: "Vous exigez une caution de :", input_html: {value: @flat.deposit, min: '0' , max: ((@flat.rent + @flat.rental_costs) * 2).to_s , step: '10' } %>
+
+                <%= f.button :submit, "Enregistrer les modifications de vos exigences", class:"btn btn-red"%>
+
+                <div id="message-modif"></div>
+
+              </div>
+
+
+
+
+            <% end %>
+
+          </div>
+        </div>
+
+
+
+
+    <div class="col-xs-12">
       <div id="candidates" class="marged-top">
 
         <div id="candidates-bookings" class="<%= 'hidden' if @bookings_confirmed.first.nil? && @bookings_pending.first.nil? %>">
-          <h2 class="highlight"><%= pluralize @bookings_pending.count, "Réservations" %></h2>
+          <h2 class="highlight"><%= set_number(pluralize @bookings_pending.size, "Réservation") %></h2>
           <div id="candidates-bookings-confirmed">
             <%= render 'flats/candidates/candidates_bookings_confirmed', bookings_confirmed: @bookings_confirmed, flat: @flat %>
           </div>
@@ -32,7 +89,7 @@
         </div>
 
         <div id="candidates-slots" class="<%= 'hidden' if @slots_booked.first.nil? %>">
-          <h2 class="highlight"><%= pluralize @slots_booked.count, "Visites" %></h2>
+          <h2 class="highlight"><%= set_number(pluralize @slots_booked.count, "Visites") %></h2>
           <div id="candidates-slots-booked">
             <%= render 'flats/candidates/candidates_slots_booked', slots_booked: @slots_booked, flat: @flat %>
           </div>
@@ -41,44 +98,7 @@
       </div>
     </div>
 
-    <div class="col-xs-12 col-md-4" id="criteres">
-      <div class="text-center affix" id="sidebar-dossiers">
 
-        <h1 class="text-center">Vos exigences</h1>
-
-        <%= simple_form_for @flat, method: 'patch', url: flat_filter_path(@flat), remote: true do |f| %>
-
-          <%= f.label :income_ratio, "Ratio minimum Salaire du locataire / Loyer :", class: "control-label" %>
-
-          <%= f.input :income_ratio, label: false, class: "form-control", input_html: {value: @flat.income_ratio, min: '1', max: '10', step: '0.1' } %>
-
-          <div class="hidden" id="rent"><%= @flat.rent + @flat.rental_costs %></div>
-          <div>Salaire minimun :</div>
-          <div id="income"><%= (@flat.income_ratio * (@flat.rent + @flat.rental_costs)).round(0) %> €</div>
-
-          <%= f.input :has_warrantor, label: "Garant",
-          :collection => [[true, 'Oui'], [false, 'Non']],
-          :label_method => :last,
-          :value_method => :first,
-          :as => :radio_buttons,
-          :item_wrapper_class => 'inline',
-          :checked => @flat.has_warrantor %>
-
-          <div class="hidden" id="warrantor-income-box">
-            <%= f.input :warrantor_income_ratio, label: "Ratio minimum Salaire du garant / Loyer :", input_html: {value: @flat.warrantor_income_ratio, min: '1', max: '10', step: '0.1' } %>
-            <div>Salaire minimun du garant :</div>
-            <div id="warrantor-income"><%= @flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs) %> €</div>
-          </div>
-
-          <%= f.input :deposit, label: "Vous exigez une caution de :", input_html: {value: @flat.deposit, min: '0' , max: ((@flat.rent + @flat.rental_costs) * 2).to_s , step: '10' } %>
-
-          <%= f.button :submit, "Enregistrer les modifications de vos exigences", class:"btn btn-red"%>
-
-          <div id="message-modif"></div>
-        <% end %>
-
-      </div>
-    </div>
 
   </div>
 </div>

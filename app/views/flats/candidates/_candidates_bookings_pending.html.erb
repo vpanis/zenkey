@@ -1,6 +1,6 @@
 <% if !@bookings_pending.first.nil? %>
 <div class="container reservation">
-<h2><%= pluralize @bookings_pending.count, "dossier" %> en attente</h2>
+
 <hr>
   <div class="row">
   <% @bookings_pending.each do |booking| %>
