@@ -1,23 +1,56 @@
-<div>
-  <% if !@bookings_cancelled.first.nil? %>
-
-    <% @bookings_cancelled.each do |booking| %>
-      <div class="card-candidates" id="<%= booking.id %>">
-        <%= image_tag set_user_photo(booking.tenant), class: "card-candidates-user avatar-large" %>
-        <div class="card-candidates-content">
-          <div><%= set_fullname(booking.tenant) %></div>
-          <div><%= booking.tenant.status %></div>
-          <div>Status du dossier : <%= booking.status %></div>
-          <div>Note du dossier : <%= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></div>
-        </div>
-
-          <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirm-bookings<%= booking.id %>" data-dismiss="modal">Choisir ce locataire</button>
-
-        <a class="card-candidates-link" data-toggle="modal" data-target="#modal-booking-<%= booking.id %>"></a>
-
+<% if !@bookings_cancelled.first.nil? %>
+<div class="container reservation">
+<h1><%= pluralize @bookings_cancelled.count, "dossier annulé" %></h1>
+<hr>
+  <div class="row">
+  <% @bookings_cancelled.each do |booking| %>
+  <div class="col-xs-12 col-sm-3">
+    <!-- insert <div class="card"> -->
+    <div class="card-tenant text-center">
+    <%= image_tag set_user_photo(booking.tenant), class: "card-tenant-avatar avatar-large-bordered" %>
+      <div class="card-tenant-name"></div>
+        <div class="card-tenant-description text-center">
+          <h2><%= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></h2>
+          <H2><%= set_fullname(booking.tenant) %></H2>
+          <ul class="list-inline">
+            <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+            <li>06 50 34 17 17</li>
+          </ul>
+          <ul class="list-inline">
+            <li><i class="fa fa-envelope" aria-hidden="true"></i></li>
+            <li><%= booking.tenant.email %></li>
+          </ul>
+          <a class="btn btn-primary" data-toggle="modal" data-target="#modal-booking-<%= booking.id %>">Voir candidat</a>
         <%= render 'flats/modals/modal_candidates_bookings', booking: booking, flat: @flat %>
         <%= render 'flats/modals/modal_confirm_bookings', booking: booking, flat: @flat  %>
+        </div>
       </div>
+    </div>
     <% end %>
-  <% end %>
+  </div>
 </div>
+<% end %>
+
+
+<!-- <div>
+  <%# if !@bookings_cancelled.first.nil? %>
+    <h2 class="highlight text-center"><%#= pluralize @bookings_cancelled.count, "dossier annulé" %></h2>
+    <%# @bookings_cancelled.each do |booking| %>
+      <div class="card-candidates" id="<%#= booking.id %>">
+        <%#= image_tag set_user_photo(booking.tenant), class: "card-candidates-user avatar-large" %>
+        <div class="card-candidates-content">
+          <div><%#= set_fullname(booking.tenant) %></div>
+          <div><%#= booking.tenant.status %></div>
+          <div>Status du dossier : <%#= booking.status %></div>
+          <div>Note du dossier : <%#= render 'flats/grade', booking: booking, user: booking.tenant, flat: @flat %></div>
+        </div>
+
+          <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirm-bookings<%#= booking.id %>" data-dismiss="modal">Choisir ce locataire</button>
+
+        <a class="card-candidates-link" data-toggle="modal" data-target="#modal-booking-<%#= booking.id %>"></a>
+
+
+      </div>
+    <%# end %>
+  <%# end %>
+</div> -->

@@ -24,9 +24,19 @@
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }
+
+.avatar-xl-bordered {
+  width: 100px;
+  border-radius: 50%;
+  border: 3px solid #DCE0E0;
+}
+
 .avatar-large-square {
   width: 90px;
   border-radius: 0px;
   box-shadow: 0 1px 2px rgba(0,0,0,0.2);
   border: white 1px solid;
 }
+
+
+
