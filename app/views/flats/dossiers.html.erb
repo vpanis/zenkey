@@ -21,19 +21,20 @@
   <div class="row">
 
     <div class="col-xs-12" id="criteres">
-          <div class="text-center">
+          <h1 class="text-center">Vos exigences</h1>
 
-            <h1 class="text-center">Vos exigences</h1>
+          <div class="text-center card-critere">
+
             <%= simple_form_for @flat, method: 'patch', url: flat_filter_path(@flat) do |f| %>
 
-
-              <div class="col-xs-4">
+            <div class="row texte-center">
+              <div class="col-xs-3">
                 <%= f.label :income_ratio, "Ratio minimum Salaire du locataire / Loyer :", class: "control-label" %>
 
                 <%= f.input :income_ratio, label: false, class: "form-control", input_html: {value: @flat.income_ratio, min: '1', max: '10', step: '0.1' } %>
 
                 <div class="hidden" id="rent"><%= @flat.rent + @flat.rental_costs %></div>
-                <div>Salaire minimun :</div>
+                <div>soit un salaire minimun :</div>
                 <div id="income"><%= (@flat.income_ratio * (@flat.rent + @flat.rental_costs)).round(0) %> €</div>
               </div>
 
@@ -48,9 +49,10 @@
 
                 <div class="hidden" id="warrantor-income-box">
                   <%= f.input :warrantor_income_ratio, label: "Ratio minimum Salaire du garant / Loyer :", input_html: {value: @flat.warrantor_income_ratio, min: '1', max: '10', step: '0.1' } %>
-                  <div>Salaire minimun du garant :</div>
+                  <div>soit un salaire minimun du garant :</div>
                   <div id="warrantor-income"><%= @flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs) %> €</div>
                 </div>
+
               </div>
 
 
@@ -58,22 +60,25 @@
               <div class="col-xs-4">
                 <%= f.input :deposit, label: "Vous exigez une caution de :", input_html: {value: @flat.deposit, min: '0' , max: ((@flat.rent + @flat.rental_costs) * 2).to_s , step: '10' } %>
 
-                <%= f.button :submit, "Enregistrer les modifications de vos exigences", class:"btn btn-red"%>
 
                 <div id="message-modif"></div>
 
               </div>
 
+            </div>
+            <div class="row">
 
+              <div class="col-xs-12"><%= f.button :submit, "Filtrer", class:"btn btn-red"%>
+            <% end %></div>
 
-
-            <% end %>
+            </div>
 
           </div>
+
         </div>
 
-
-
+  </div>
+  <div class="row">
 
     <div class="col-xs-12">
       <div id="candidates" class="marged-top">

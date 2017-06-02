@@ -7,6 +7,16 @@
     border-radius: 0px 0px 6px 6px;
 }
 
+.card-critere {
+    background-color: white;
+    margin-top: 30px;
+    border-top: solid #FF696A;
+    padding: 50px;
+    box-shadow: 0px 1px 50px 3px rgba(0, 32, 126, 0.1);
+    border-radius:0px 0px 6px 6px;
+    height: 330px;
+  }
+
 // Booking card stylesheet
 .card-candidates {
   height: 90px;
@@ -173,6 +183,7 @@
   }
   p, i {
    color: #555459;
+   marged-top: 3px;
   }
   a {
     margin-top: 20px;
