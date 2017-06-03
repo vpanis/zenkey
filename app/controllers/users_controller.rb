@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_action :set_user, only: [:show, :new, :edit, :update, :locataire, :recherche]
+  before_action :set_user, only: [:show, :new, :edit, :update, :locataire, :recherche, :visites]
 
   def edit
   end
@@ -14,6 +14,11 @@ class UsersController < ApplicationController
 
   def locataire
     authorize @user
+    # if @user.save
+    #   redirect_to user_recherche_path(@user)
+    # else
+    #   render :new
+    # end
   end
 
   def recherche

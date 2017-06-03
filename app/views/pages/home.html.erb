@@ -5,8 +5,10 @@
       <h1>Louer mon <span class="typer" data-delay="150" data-words="appartement, logement, chalet, gîte, château" data-colors="white"></span></h1>
       <h1>simplement</h1>
       <p>Trouver un locataire ne devrait pas être si complexe. <br> Zenkey simplifie l'organisation des visites et la recherche d'un locataire</p>
-      <% if user_signed_in? %>
+      <% if user_signed_in? && current_user.is_landlord %>
         <%= link_to t(".top_call_to_action", default: "Mon dashboard"), dashboard_path, class: "btn btn-red" %>
+      <% elsif user_signed_in? %>
+        <%= link_to t(".top_call_to_action", default: "Ma recherche d'appartement"), user_locataire_path(current_user), class: "btn btn-red" %>
       <% else %>
         <%= link_to t(".top_call_to_action", default: "Se connecter"), new_user_session_path, class: "btn btn-red" %>
       <% end %>

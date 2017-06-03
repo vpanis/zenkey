@@ -12,4 +12,8 @@ class UserPolicy < ApplicationPolicy
   def recherche?
     scope.where(user: user)
   end
+
+  def visites?
+    scope.where(user: user)
+  end
 end
