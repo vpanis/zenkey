@@ -60,7 +60,6 @@
               <div class="form-group radio_buttons optional user_status">
                 <label class="control-label radio_buttons optional">Votre activité</label>
                 <input type="hidden" name="user[status]" value="">
-
                 <div class="row text-center">
                   <div class="col-xs-6 col-md-3">
                     <span class="radio status-tenant-radio-button">
@@ -91,7 +90,56 @@
 
               <%= f.input :income, label: "Revenu net mensuel", input_html: { min: 0, step: 'any', class: "form-sm-input" } %>
               <%= f.input :has_warrantor %>
-              <%= f.input :warrantor_type, label: "Garant", collection: ["Famille", "Amis", "Banque", "Employeur", "Organisme", "Autre"], as: :radio_buttons %>
+
+
+              <div class="form-group radio_buttons optional user_warrantor_type">
+                <label class="control-label radio_buttons optional">Garant</label>
+                <input type="hidden" name="user[warrantor_type]" value="">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_famille">Famille</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Famille" name="user[warrantor_type]" id="user_warrantor_type_famille">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_amis">Amis</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Amis" name="user[warrantor_type]" id="user_warrantor_type_amis">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_banque">Banque</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Banque" name="user[warrantor_type]" id="user_warrantor_type_banque">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_employeur">Employeur</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Employeur" name="user[warrantor_type]" id="user_warrantor_type_employeur">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_organisme">Organisme</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Organisme" name="user[warrantor_type]" id="user_warrantor_type_organisme">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_autre">Aucun</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Aucun" name="user[warrantor_type]" id="user_warrantor_type_autre">
+                    </span>
+                  </div>
+                </div>
+                </div>
+
               <%= f.input :warrantor_income, label: "Revenu net mensuel", input_html: { min: 0, step: 'any', class: "form-sm-input" } %>
             </div>
 
