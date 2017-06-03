@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :slots, dependent: :destroy, foreign_key: :tenant_id
   has_many :searches, dependent: :destroy, foreign_key: :tenant_id
 
-  validates :status, inclusion: { in: ["Etudiant", "Entrepreneur", "Sans profession", "Retraité", "Fonctionnaire", "Cadre supérieur", "Ouvrier", "Agriculteur", "Technicien", "Profession libérale"] }
+  validates :status, inclusion: { in: ["Etudiant", "Salarié", "Indépendant", "Autre"] }
+  validates :warrantor_type, inclusion: { in: ["Famille", "Amis", "Banque", "Employeur", "Organisme", "Autre"] }
 
   validate :has_warrantor_or_not, :warrantor_income_or_not
 

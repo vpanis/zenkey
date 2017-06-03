@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users, only: [:show, :edit, :update]
 
   root to: 'pages#home'
-  get "profile" => "pages#profile"
-  get "dashboard" => "pages#dashboard"
+
+  resources :users, only: [:show, :edit, :update] do
+    get "locataire" => "users#locataire"
+    get "recherche" => "users#recherche"
+  end
 
   resources :flats do
     resources :slots, only: [:create, :update, :destroy] do
@@ -20,5 +22,9 @@ Rails.application.routes.draw do
       patch "booking_cancel" => "bookings#booking_cancel"
     end
   end
+
+  get "profile" => "pages#profile"
+  get "dashboard" => "pages#dashboard"
+
   mount Attachinary::Engine => "/attachinary"
 end
