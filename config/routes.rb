@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     end
     get "visits" => "flats#visits"
     get "dossiers" => "flats#dossiers"
+    get "etat_des_lieux" => "flats#etat_des_lieux"
     patch "filter" => "flats#filter"
     get "reservations" => "flats#reservations"
     resources :bookings, only: [] do
