@@ -4,7 +4,9 @@ class FlatsController < ApplicationController
   before_action :set_nested_flat, only: [:filter, :dossiers, :reservations, :visits]
 
   def index
+    @user = current_user
     @flats = policy_scope(Flat.all)
+    # @flats = policy_scope(Flat.all.near(current_user.searches.last.address, 500))
   end
 
   def new

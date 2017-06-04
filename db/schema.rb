@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601091147) do
+ActiveRecord::Schema.define(version: 20170603142707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -88,8 +88,6 @@ ActiveRecord::Schema.define(version: 20170601091147) do
   create_table "searches", force: :cascade do |t|
     t.string   "address"
     t.integer  "size_min"
-    t.integer  "size_max"
-    t.integer  "rent_min"
     t.integer  "rent_max"
     t.integer  "tenant_id"
     t.datetime "created_at", null: false
@@ -126,13 +124,15 @@ ActiveRecord::Schema.define(version: 20170601091147) do
     t.string   "last_name"
     t.string   "gender"
     t.string   "status"
-    t.string   "job_description"
-    t.string   "description"
+    t.text     "description"
     t.integer  "income",                 default: 0
     t.boolean  "has_warrantor",          default: false
     t.integer  "warrantor_income",       default: 0
     t.boolean  "is_landlord",            default: false
     t.boolean  "admin"
+    t.string   "phone_number"
+    t.integer  "birth_year"
+    t.string   "warrantor_type"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end

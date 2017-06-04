@@ -10,10 +10,12 @@
     <!-- Different navigation if login or not -->
     <% if user_signed_in? %>
 
-      <!-- Login text link -->
-      <div class="<%= 'active' if current_page?(dashboard_path) %>">
-        <%= link_to t(".sign_in", default: "Dashboard"), dashboard_path, class: "navbar-wagon-link" %>
-      </div>
+      <!-- Dashboard -->
+      <% if current_user.is_landlord %>
+        <div class="<%= 'active' if current_page?(dashboard_path) %>">
+          <%= link_to t(".sign_in", default: "Dashboard"), dashboard_path, class: "navbar-wagon-link" %>
+        </div>
+      <% end %>
 
       <!-- Profile picture and dropdown -->
       <div class="navbar-wagon-item">

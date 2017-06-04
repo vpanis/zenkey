@@ -8,7 +8,7 @@ puts 'Creating Users...'
 
 admin               = User.create!(email: "admin@gmail.com", password: 'azerty', admin: true, status: "Etudiant")
 
-charles             = User.create!(first_name: "Charles", last_name: "Bénard", email: "charles@gmail.com", password: '123456', status: "Cadre supérieur", income: 2000, has_warrantor: true, warrantor_income: 3000)
+charles             = User.create!(first_name: "Charles", last_name: "Bénard", email: "charles@gmail.com", password: '123456', status: "Salarié", income: 2000, has_warrantor: true, warrantor_income: 3000)
 url_charles         = 'https://avatars2.githubusercontent.com/u/5082751?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 charles.photo_url   = url_charles
@@ -16,15 +16,15 @@ nikolay             = User.create!(first_name: "Nikolay", last_name: "Martynov",
 url_nikolay         = 'https://avatars2.githubusercontent.com/u/22763571?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 nikolay.photo_url   = url_nikolay
-vincent             = User.create!(first_name: "Vincent", last_name: "Panis", email: "vincent@gmail.com", password: '123456', status: "Agriculteur", income: 1500, has_warrantor: false, warrantor_income: 0)
+vincent             = User.create!(first_name: "Vincent", last_name: "Panis", email: "vincent@gmail.com", password: '123456', status: "Indépendant", income: 1500, has_warrantor: false, warrantor_income: 0)
 url_vincent         = 'https://avatars0.githubusercontent.com/u/25386031?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 vincent.photo_url   = url_vincent
-alban               = User.create!(first_name: "Alban", last_name: "Porcheron", email: "alban@gmail.com", password: '123456', status: "Profession libérale", income: 3500, has_warrantor: true, warrantor_income: 6000)
+alban               = User.create!(first_name: "Alban", last_name: "Porcheron", email: "alban@gmail.com", password: '123456', status: "Salarié", income: 3500, has_warrantor: true, warrantor_income: 6000)
 url_alban           = 'https://avatars1.githubusercontent.com/u/25384564?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 alban.photo_url     = url_alban
-mathieu             = User.create!(first_name: "Mathieu", last_name: "Cochet", email: "mathieu@gmail.com", password: '123456', status: "Cadre supérieur", income: 1800, has_warrantor: true, warrantor_income: 2000)
+mathieu             = User.create!(first_name: "Mathieu", last_name: "Cochet", email: "mathieu@gmail.com", password: '123456', status: "Indépendant", income: 1800, has_warrantor: true, warrantor_income: 2000)
 url_mathieu         = 'https://avatars3.githubusercontent.com/u/25053116?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 mathieu.photo_url   = url_mathieu
@@ -32,15 +32,15 @@ xavier              = User.create!(first_name: "Xavier", last_name: "Martinet", 
 url_xavier          = 'https://avatars0.githubusercontent.com/u/1410430?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 xavier.photo_url    = url_xavier
-achille             = User.create!(first_name: "Achille", last_name: "Miklitarian", email: "achille@gmail.com", password: '123456', status: "Agriculteur", income: 1500, has_warrantor: false, warrantor_income: 0)
+achille             = User.create!(first_name: "Achille", last_name: "Miklitarian", email: "achille@gmail.com", password: '123456', status: "Salarié", income: 1500, has_warrantor: false, warrantor_income: 0)
 url_achille         = 'https://avatars0.githubusercontent.com/u/25386031?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 achille.photo_url   = url_achille
-nico                = User.create!(first_name: "Nicolas", last_name: "Bresson", email: "nico@gmail.com", password: '123456', status: "Profession libérale", income: 2500, has_warrantor: true, warrantor_income: 5000)
+nico                = User.create!(first_name: "Nicolas", last_name: "Bresson", email: "nico@gmail.com", password: '123456', status: "Salarié", income: 2500, has_warrantor: true, warrantor_income: 5000)
 url_nico            = 'https://avatars1.githubusercontent.com/u/26443990?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 nico.photo_url      = url_nico
-alexis              = User.create!(first_name: "Alexis", last_name: "Guinebretière", email: "alexis@gmail.com", password: '123456', status: "Cadre supérieur", income: 2000, has_warrantor: true, warrantor_income: 5000)
+alexis              = User.create!(first_name: "Alexis", last_name: "Guinebretière", email: "alexis@gmail.com", password: '123456', status: "Autre", income: 2000, has_warrantor: true, warrantor_income: 5000)
 url_alexis          = 'https://avatars1.githubusercontent.com/u/25386153?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 alexis.photo_url    = url_alexis
@@ -48,11 +48,11 @@ gautier             = User.create!(first_name: "Gautier", last_name: "Weigert", 
 url_gautier         = 'https://avatars3.githubusercontent.com/u/26283143?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 gautier.photo_url   = url_gautier
-patrick             = User.create!(first_name: "Patrick", last_name: "Berczelly", email: "patrick@gmail.com", password: '123456', status: "Agriculteur", income: 1500, has_warrantor: false, warrantor_income: 0)
+patrick             = User.create!(first_name: "Patrick", last_name: "Berczelly", email: "patrick@gmail.com", password: '123456', status: "Autre", income: 1500, has_warrantor: false, warrantor_income: 0)
 url_patrick         = 'https://avatars1.githubusercontent.com/u/27200234?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 patrick.photo_url   = url_patrick
-fiona               = User.create!(first_name: "Fiona", last_name: "Picot", email: "fiona@gmail.com", password: '123456', status: "Profession libérale", income: 2000, has_warrantor: true, warrantor_income: 2000)
+fiona               = User.create!(first_name: "Fiona", last_name: "Picot", email: "fiona@gmail.com", password: '123456', status: "Indépendant", income: 2000, has_warrantor: true, warrantor_income: 2000)
 url_fiona           = 'https://avatars2.githubusercontent.com/u/25432253?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 fiona.photo_url     = url_fiona

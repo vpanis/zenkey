@@ -1,0 +1,190 @@
+<!-- Locataire navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(user_locataire_path(@user)) %>">
+      <%= link_to "Mon profil", user_locataire_path(@user), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(user_recherche_path(@user)) %>">
+      <%= link_to "Critères de recherche", user_recherche_path(@user), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flats_path) %>">
+      <%= link_to "Annonces", flats_path, class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(user_visites_path(@user)) %>">
+      <%= link_to "Visites", user_visites_path(@user), class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="card col-xs-12">
+      <div class="row">
+        <div class="form col-xs-12 col-md-6 col-md-offset-3">
+          <h2 class="text-center sm-marged-bottom highlight">Renseigner mon profil</h2>
+          <%= simple_form_for(@user, url: user_recherche_path(@user)) do |f| %>
+            <%= f.error_notification %>
+
+            <!-- Form inputs -->
+            <div class="form-inputs">
+
+              <!-- Gender -->
+              <div class="form-group radio_buttons optional user_gender">
+                <label class="control-label radio_buttons optional">Vous êtes</label>
+                <input type="hidden" name="user[gender]" value="">
+                <div class="row text-center">
+                  <div class="col-xs-12 col-md-6">
+                    <span class="radio tenant-radio-button">
+                      <label for="user_gender_un_homme">Un homme</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Un homme" name="user[gender]" id="user_gender_un_homme">
+                    </span>
+                  </div>
+                  <div class="col-xs-12 col-md-6">
+                    <span class="radio tenant-radio-button">
+                      <label for="user_gender_une_femme">Une femme</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Une femme" name="user[gender]" id="user_gender_une_femme">
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="form col-xs-12 col-md-6">
+                  <%= f.input :first_name, label: "Prénom" %>
+                </div>
+                <div class="form col-xs-12 col-md-6">
+                  <%= f.input :last_name, label: "Nom" %>
+                </div>
+              </div>
+              <%= f.input :birth_year, label: "Année de naissance", input_html: { value: 2017, min: 1900, max: 2017, class: "form-sm-input"} %>
+              <%= f.input :phone_number, label: "Téléphone", placeholder: "0600000000", input_html: {class: "form-sm-input"} %>
+              <%= f.input :description, label: "Description", placeholder: "Afin de mettre toutes les chances de votre côté, vous pouvez vous décrire en quelques lignes." %>
+
+              <div class="form-group radio_buttons optional user_status">
+                <label class="control-label radio_buttons optional">Votre activité</label>
+                <input type="hidden" name="user[status]" value="">
+                <div class="row text-center">
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_status_etudiant">Etudiant</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Etudiant" name="user[status]" id="user_status_etudiant">
+                    </span>
+                  </div>
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_status_salari">Salarié</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Salarié" name="user[status]" id="user_status_salari">
+                    </span>
+                  </div>
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_status_indpendant">Indépendant</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Indépendant" name="user[status]" id="user_status_indpendant">
+                    </span>
+                  </div>
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_status_autre">Autre</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Autre" name="user[status]" id="user_status_autre">
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <%= f.input :income, label: "Revenu net mensuel", input_html: { min: 0, step: 'any', class: "form-sm-input" } %>
+
+              <div class="form-group boolean optional user_has_warrantor">
+                <div class="checkbox hidden">
+                  <label class="boolean optional" for="user_has_warrantor">Has warrantor</label>
+                  <input value="0" type="hidden" id="user_has_warrantor" name="user[has_warrantor]">
+                  <input class="boolean optional" type="checkbox" value="1" checked="checked" name="user[has_warrantor]" id="user_has_warrantor">
+                </div>
+              </div>
+
+
+              <div class="form-group radio_buttons optional user_warrantor_type">
+                <label class="control-label radio_buttons optional">Garant</label>
+                <input type="hidden" name="user[warrantor_type]" value="">
+                <div class="row">
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_famille">Famille</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Famille" name="user[warrantor_type]" id="user_warrantor_type_famille">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_amis">Amis</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Amis" name="user[warrantor_type]" id="user_warrantor_type_amis">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_banque">Banque</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Banque" name="user[warrantor_type]" id="user_warrantor_type_banque">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_employeur">Employeur</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Employeur" name="user[warrantor_type]" id="user_warrantor_type_employeur">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button">
+                      <label for="user_warrantor_type_organisme">Organisme</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Organisme" name="user[warrantor_type]" id="user_warrantor_type_organisme">
+                    </span>
+                  </div>
+
+                  <div class="col-xs-6 col-md-3">
+                    <span class="radio status-tenant-radio-button" id="warrantor_type_none">
+                      <label for="user_warrantor_type_autre">Aucun</label>
+                      <input class="radio_buttons optional hidden" type="radio" value="Aucun" name="user[warrantor_type]" id="user_warrantor_type_autre">
+                    </span>
+                  </div>
+                </div>
+                </div>
+
+              <%= f.input :warrantor_income, label: "Revenu net mensuel", input_html: { min: 0, step: 'any', class: "form-sm-input" } %>
+            </div>
+
+            <!-- Form actions -->
+            <div class="form-actions text-center">
+              <%= f.button :submit, "Renseigner mon profil", class:"btn btn-red"%>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<% content_for(:after_js) do %>
+  <script>
+    $(document).ready(function() {
+      // Add active class to radio buttons
+      $(".tenant-radio-button").click(function(){
+       $(".tenant-radio-button").removeClass("active");
+       $(this).toggleClass("active");
+      });
+
+      $(".status-tenant-radio-button").click(function(){
+       $(".status-tenant-radio-button").removeClass("active");
+       $(this).toggleClass("active");
+      // Add value to has_warrantor if warrantor status is none
+      if ($("#warrantor_type_none").hasClass("active")) {
+        document.getElementById("user_has_warrantor").value = 0;
+      } else {
+        document.getElementById("user_has_warrantor").value = 1;
+      }
+      });
+
+    });
+  </script>
+<% end %>
