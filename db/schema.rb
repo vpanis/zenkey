@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601091147) do
+ActiveRecord::Schema.define(version: 20170604083437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,19 @@ ActiveRecord::Schema.define(version: 20170601091147) do
     t.index ["tenant_id"], name: "index_bookings_on_tenant_id", using: :btree
   end
 
+  create_table "documents", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "booking_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "status"
+    t.boolean  "is_signed_by_landlord"
+    t.boolean  "is_signed_by_tenant"
+    t.datetime "creation_date"
+    t.datetime "signing_date"
+    t.index ["booking_id"], name: "index_documents_on_booking_id", using: :btree
+  end
+
   create_table "flats", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -88,8 +101,6 @@ ActiveRecord::Schema.define(version: 20170601091147) do
   create_table "searches", force: :cascade do |t|
     t.string   "address"
     t.integer  "size_min"
-    t.integer  "size_max"
-    t.integer  "rent_min"
     t.integer  "rent_max"
     t.integer  "tenant_id"
     t.datetime "created_at", null: false
@@ -126,13 +137,15 @@ ActiveRecord::Schema.define(version: 20170601091147) do
     t.string   "last_name"
     t.string   "gender"
     t.string   "status"
-    t.string   "job_description"
-    t.string   "description"
+    t.text     "description"
     t.integer  "income",                 default: 0
     t.boolean  "has_warrantor",          default: false
     t.integer  "warrantor_income",       default: 0
     t.boolean  "is_landlord",            default: false
     t.boolean  "admin"
+    t.string   "phone_number"
+    t.integer  "birth_year"
+    t.string   "warrantor_type"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -140,6 +153,7 @@ ActiveRecord::Schema.define(version: 20170601091147) do
   add_foreign_key "availabilities", "flats"
   add_foreign_key "bookings", "flats"
   add_foreign_key "bookings", "users", column: "tenant_id"
+  add_foreign_key "documents", "bookings"
   add_foreign_key "flats", "users", column: "landlord_id"
   add_foreign_key "searches", "users", column: "tenant_id"
   add_foreign_key "slots", "flats"

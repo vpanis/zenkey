@@ -9,15 +9,22 @@ Rails.application.routes.draw do
       patch "slot_confirm" => "slots#slot_confirm"
       patch "slot_cancel" => "slots#slot_cancel"
     end
-    get "visits" => "flats#visits"
-    get "dossiers" => "flats#dossiers"
-    get "etat_des_lieux" => "flats#etat_des_lieux"
-    patch "filter" => "flats#filter"
-    get "reservations" => "flats#reservations"
+
     resources :bookings, only: [] do
       patch "booking_confirm" => "bookings#booking_confirm"
       patch "booking_cancel" => "bookings#booking_cancel"
+
+      resources :bookings, only: [] do
+        resources :documents, only: [:create, :update]
+      end
     end
+
+    get "visits" => "flats#visits"
+    get "dossiers" => "flats#dossiers"
+    get "etat_des_lieux" => "flats#etat_des_lieux"
+    get "reservations" => "flats#reservations"
+    patch "filter" => "flats#filter"
   end
+
   mount Attachinary::Engine => "/attachinary"
 end
