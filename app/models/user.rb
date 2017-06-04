@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :searches, dependent: :destroy, foreign_key: :tenant_id
 
   validates :status, inclusion: { in: ["Etudiant", "Entrepreneur", "Sans profession", "Retraité", "Fonctionnaire", "Cadre supérieur", "Ouvrier", "Agriculteur", "Technicien", "Profession libérale"] }
+  validates :gender, inclusion: { in: ["Homme", "Femme"] }
 
   validate :has_warrantor_or_not, :warrantor_income_or_not
 
