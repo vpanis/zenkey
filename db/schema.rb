@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170604083437) do
+ActiveRecord::Schema.define(version: 20170604084016) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170604083437) do
     t.boolean  "is_signed_by_tenant"
     t.datetime "creation_date"
     t.datetime "signing_date"
+    t.string   "type"
     t.index ["booking_id"], name: "index_documents_on_booking_id", using: :btree
   end
 

@@ -1,5 +1,5 @@
 class Document < ApplicationRecord
-  belongs_to :booking
+  belongs_to :booking, foreign_key: :booking_id, class_name: "Booking"
 
   validates :title, presence: true
   validates :type, presence: true, inclusion: { in: ["Etat des lieux", "Bail", "Quittance"] }
