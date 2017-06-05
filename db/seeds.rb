@@ -70,7 +70,7 @@ url_arnaud          = 'https://avatars3.githubusercontent.com/u/26063436?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 arnaud.photo_url    = url_arnaud
 aurore              = User.create!(gender: "Femme", first_name: "Aurore", last_name: "Courtois", email: "aurore@gmail.com", password: '123456', status: "Indépendant", income: 2000, has_warrantor: true, warrantor_income: 2000, warrantor_type: "Famille", phone_number: "06.00.00.00.20")
-url_aurore          = 'https://avatars2.githubusercontent.com/u/25432253?v=3'
+url_aurore          = 'https://avatars2.githubusercontent.com/u/25520042?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 aurore.photo_url    = url_aurore
 benjamin            = User.create!(gender: "Homme", first_name: "Benjamin", last_name: "Poucin", email: "benjamin@gmail.com", password: '123456', status: "Indépendant", income: 2000, has_warrantor: true, warrantor_income: 2000, warrantor_type: "Famille", phone_number: "06.00.00.00.21")
@@ -78,11 +78,11 @@ url_benjamin        = 'https://avatars0.githubusercontent.com/u/25391939?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 benjamin.photo_url  = url_benjamin
 benoit              = User.create!(gender: "Homme", first_name: "Benoit", last_name: "Paternot", email: "benoit@gmail.com", password: '123456', status: "Indépendant", income: 2000, has_warrantor: true, warrantor_income: 2000, warrantor_type: "Famille", phone_number: "06.00.00.00.22")
-url_benoit          = 'https://avatars2.githubusercontent.com/u/25432253?v=3'
+url_benoit          = 'https://avatars0.githubusercontent.com/u/26824782?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 benoit.photo_url    = url_benoit
 bruno               = User.create!(gender: "Homme", first_name: "Bruno", last_name: "Lajoie", email: "bruno@gmail.com", password: '123456', status: "Indépendant", income: 2000, has_warrantor: true, warrantor_income: 2000, warrantor_type: "Famille", phone_number: "06.00.00.00.23")
-url_bruno           = 'https://avatars2.githubusercontent.com/u/25432253?v=3'
+url_bruno           = 'https://avatars2.githubusercontent.com/u/22095643?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 bruno.photo_url     = url_bruno
 

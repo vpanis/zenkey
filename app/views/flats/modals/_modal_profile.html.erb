@@ -9,86 +9,78 @@
 
       <div class="modal-body">
 
-        <% if !candidate.bookings.where(flat: @flat).first.nil? %>
+        <% if !candidate.bookings.where(flat: @flat).first.nil? && candidate.bookings.where(flat: @flat).first.status == "Confirmed" %>
 
-          <% if candidate.bookings.where(flat: @flat).first.status == "Confirmed" %>
+          <h5>Vous avez choisi <%= set_fullname(candidate) %></h5>
+          <h5>pour être le locataire de votre bien.</h5>
+          <h5>Vous pouvez changer d'avis et refuser ce dossier</h5>
 
-            <h5>Vous avez choisi <%= set_fullname(candidate) %></h5>
-            <h5>pour être le locataire de votre bien.</h5>
-            <h5>Vous pouvez changer d'avis et refuser ce dossier</h5>
+          <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
 
-            <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
+          <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
+          <div>Prénom : <%= candidate.first_name %></div>
+          <div>Nom : <%= candidate.last_name %></div>
+          <div>Situation Professionnelle : <br><%= candidate.status %></div>
+          <div><%= candidate.description %></div>
 
-            <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
-            <div>Prénom : <%= candidate.first_name %></div>
-            <div>Nom : <%= candidate.last_name %></div>
-            <div>Situation Professionnelle : <br><%= candidate.status %></div>
-            <div><%= candidate.description %></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+            <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Changez de locataire</button>
+          </div>
 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-              <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Changez de locataire</button>
-            </div>
+        <% elsif !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
 
-          <% elsif candidate.bookings.where(flat: @flat).first.status == "Pending" %>
+          <h5><%= set_fullname(candidate) %> n'a pas encore visité.</h5>
+          <h5>Vous avez la possibilité d'annuler la visite.</h5>
 
-            <h5><%= set_fullname(candidate) %> est intéressé par votre bien.</h5>
-            <h5>Il attend que vous choisissiez ce dossier pour devenir votre locataire. </h5>
+          <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
 
-            <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
+          <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
+          <div>Prénom : <%= candidate.first_name %></div>
+          <div>Nom : <%= candidate.last_name %></div>
+          <div>Situation Professionnelle : <br><%= candidate.status %></div>
+          <div><%= candidate.description %></div>
 
-            <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
-            <div>Prénom : <%= candidate.first_name %></div>
-            <div>Nom : <%= candidate.last_name %></div>
-            <div>Situation Professionnelle : <br><%= candidate.status %></div>
-            <div><%= candidate.description %></div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Annuler la visite</button>
+          </div>
 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-              <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Choisir ce locataire</button>
-            </div>
+        <% elsif !candidate.bookings.where(flat: @flat).first.nil? && candidate.bookings.where(flat: @flat).first.status == "Pending" %>
 
-          <% end %>
+          <h5><%= set_fullname(candidate) %> est intéressé par votre bien.</h5>
+          <h5>Il attend que vous choisissiez ce dossier pour devenir votre locataire. </h5>
 
-        <% elsif !candidate.slots.where(flat: @flat).first.nil? %>
+          <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
 
-          <% if candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
+          <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
+          <div>Prénom : <%= candidate.first_name %></div>
+          <div>Nom : <%= candidate.last_name %></div>
+          <div>Situation Professionnelle : <br><%= candidate.status %></div>
+          <div><%= candidate.description %></div>
 
-            <h5><%= set_fullname(candidate) %> n'a pas encore visité.</h5>
-            <h5>Vous avez la possibilité d'annuler la visite.</h5>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+            <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Choisir ce locataire</button>
+          </div>
 
-            <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
+        <% elsif !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
 
-            <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
-            <div>Prénom : <%= candidate.first_name %></div>
-            <div>Nom : <%= candidate.last_name %></div>
-            <div>Situation Professionnelle : <br><%= candidate.status %></div>
-            <div><%= candidate.description %></div>
+          <h5><%= set_fullname(candidate) %> n'a pas encore déposé son dossier après sa visite.</h5>
+          <h5>Vous avez la possibilité de lui demander son dossier</h5>
 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Annuler la visite</button>
-            </div>
+          <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
 
-          <% elsif candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
+          <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
+          <div>Prénom : <%= candidate.first_name %></div>
+          <div>Nom : <%= candidate.last_name %></div>
+          <div>Situation Professionnelle : <br><%= candidate.status %></div>
+          <div><%= candidate.description %></div>
 
-            <h5><%= set_fullname(candidate) %> n'a pas encore déposé son dossier après sa visite.</h5>
-            <h5>Vous avez la possibilité de lui demander son dossier</h5>
-
-            <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
-
-            <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
-            <div>Prénom : <%= candidate.first_name %></div>
-            <div>Nom : <%= candidate.last_name %></div>
-            <div>Situation Professionnelle : <br><%= candidate.status %></div>
-            <div><%= candidate.description %></div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
-              <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Demander le dossier</button>
-            </div>
-
-          <% end %>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Demander le dossier</button>
+          </div>
 
         <% else %>
 
