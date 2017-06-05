@@ -13,6 +13,7 @@ class User < ApplicationRecord
 
   validates :status, inclusion: { in: ["Etudiant", "Salarié", "Indépendant", "Autre"] }
   validates :warrantor_type, inclusion: { in: ["Famille", "Amis", "Banque", "Employeur", "Organisme", "Aucun"] }
+  validates :gender, inclusion: { in: ["Homme", "Femme"] }
 
   validate :has_warrantor_or_not, :warrantor_income_or_not
 

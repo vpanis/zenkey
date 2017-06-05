@@ -1,0 +1,46 @@
+<div class="container">
+  <h2 class="highlight text-center"><strong>QUITTANCE DE LOYER - MAI 2017</strong></h2>
+  <p>
+    <strong>Émetteur :</strong> <%= @booking.flat.landlord.first_name %> <%= @booking.flat.landlord.last_name %>
+    <br>
+    <strong>Téléphone :</strong> <%= @booking.flat.landlord.phone_number %>
+    <br>
+    <strong>Email :</strong> <%= @booking.flat.landlord.email %>
+    <br>
+    <br>
+
+    <span>
+      Je soussigné
+      <% if @booking.flat.landlord.gender.nil? %>
+        (e)
+      <% elsif @booking.flat.landlord.gender == "Homme" %>
+      <% elsif @booking.flat.landlord.gender == "Femme" %>
+        e
+      <% end %>
+    </span>
+     : <%= @booking.flat.landlord.first_name %> <%= @booking.flat.landlord.last_name %>,
+    <br>
+    <br>
+    certifie que
+    <% if @booking.tenant.gender.nil? %>
+    <% elsif @booking.tenant.gender == "Homme" %>
+      Monsieur
+    <% elsif @booking.tenant.gender == "Femme" %>
+      Madame
+    <% end %>
+    <%= @booking.tenant.first_name %> <%= @booking.tenant.last_name %>,
+    locataire, depuis le <%= @booking.flat.availability_date.strftime("%d/%m/%Y") %>,
+    d'un logement, sise <%= @booking.flat.address %>,
+    est à jour du règlement du loyer d'un montant mensuel de
+    <%= @booking.flat.rent %> euros
+    et des charges locatives d'un montant mensuel de
+    <%= @booking.flat.rental_costs %> euros.
+    <br>
+    <br>
+    Fait à Paris, le <%= @document.creation_date %>
+    <br>
+    <br>
+    <br>
+    Signature
+  </p>
+</div>
