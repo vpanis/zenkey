@@ -10,22 +10,19 @@ Rails.application.routes.draw do
   end
 
   resources :flats do
+    get "visits" => "flats#visits"
+    get "candidates" => "flats#candidates"
+    patch "filter" => "flats#filter"
+    get "etat_des_lieux" => "flats#etat_des_lieux"
     resources :slots, only: [:create, :update, :destroy] do
       patch "slot_confirm" => "slots#slot_confirm"
       patch "slot_cancel" => "slots#slot_cancel"
     end
-
     resources :bookings, only: [] do
       patch "booking_confirm" => "bookings#booking_confirm"
       patch "booking_cancel" => "bookings#booking_cancel"
       resources :documents, only: [:show, :create, :update, :index]
     end
-
-    get "visits" => "flats#visits"
-    get "dossiers" => "flats#dossiers"
-    get "etat_des_lieux" => "flats#etat_des_lieux"
-    get "reservations" => "flats#reservations"
-    patch "filter" => "flats#filter"
   end
 
   get "profile" => "pages#profile"

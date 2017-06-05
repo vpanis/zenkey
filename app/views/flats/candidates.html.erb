@@ -1,0 +1,52 @@
+<!-- Flat navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_candidates_path(@flat)) %>">
+      <%= link_to "Candidats", flat_candidates_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
+      <%= link_to "Docs", root_path, class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+<div id="matches" class="tabs">
+  <a class="tab">
+    <h3>Matches</h3>
+  </a>
+  <a id="visits" class="tab active">
+    <h3>Visites</h3>
+  </a>
+  <a id="reservations" class="tab">
+    <h3>Réservations</h3>
+  </a>
+</div>
+
+<div class="container">
+
+  <div class="row">
+
+    <div class="col-xs-12">
+
+      <div id="candidates" class="marged-top">
+
+        <div id="candidates-matches" class="tab-content hidden">
+          <%#= render 'flats/candidates/matches', candidates: @candidates, flat: @flat %>
+        </div>
+
+        <div id="candidates-visits" class="tab-content">
+          <%= render 'flats/candidates/visits', candidates: @candidates, candidates_visits: @candidates_visits, candidates_visits_to_come: @candidates_visits_to_come, candidates_visits_done: @candidates_visits_done, flat: @flat %>
+        </div>
+
+        <div id="candidates-reservations" class="tab-content">
+          <%= render 'flats/candidates/reservations', candidates: @candidates, candidates_reservations: @candidates_reservations, candidates_reservations_confirmed: @candidates_reservations_confirmed, candidates_reservations_pending: @candidates_reservations_pending, flat: @flat %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
