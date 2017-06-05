@@ -1,0 +1,92 @@
+<div class="modal fade" tabindex="-1" role="dialog" id="modal-confirmation">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Confirmez votre choix !</h4>
+      </div>
+
+        <% if !candidate.bookings.where(flat: @flat).first.nil? %>
+
+          <% if candidate.bookings.where(flat: @flat).first.status == "Confirmed" %>
+
+            <div class="modal-body">
+              <p>Vous êtes sur le point d'annuler cette réservation.</p>
+              <p>Si vous confirmez, vous pourrez changer de locataire.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+
+              <%= simple_form_for [@flat, candidate.bookings.where(flat: @flat).first], url: flat_booking_booking_cancel_path(@flat, candidate.bookings.where(flat: @flat).first), method: :patch do |f| %>
+                <%= f.submit "J'annule cette réservation !", class: "btn btn-red" %>
+              <% end %>
+
+            </div>
+
+          <% elsif candidate.bookings.where(flat: @flat).first.status == "Pending" %>
+
+            <div class="modal-body">
+              <p>Vous êtes sur le point de choisir ce locataire.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+
+              <%= simple_form_for [@flat, candidate.bookings.where(flat: @flat).first], url: flat_booking_booking_confirm_path(@flat, candidate.bookings.where(flat: @flat).first), method: :patch do |f| %>
+                <%= f.submit "Je choisis ce locataire !", class: "btn btn-red" %>
+              <% end %>
+
+            </div>
+
+          <% end %>
+
+        <% elsif !candidate.slots.where(flat: @flat).first.nil? %>
+
+          <% if candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
+
+            <div class="modal-body">
+              <p>Vous êtes sur le point d'annuler cette visite.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+
+              <%= simple_form_for [@flat, candidate.slots.where(flat: @flat).first], url: flat_slot_slot_cancel_path(@flat, candidate.slots.where(flat: @flat).first), method: :patch do |f| %>
+                <%= f.submit "J'annule cette visite !", class: "btn btn-red" %>
+              <% end %>
+
+            </div>
+
+          <% elsif candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
+
+            <div class="modal-body">
+              <p>Vous êtes sur le point de faire une demande de dossier à ce locataire.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+
+              <%= simple_form_for [@flat, candidate.slots.where(flat: @flat).first], url: flat_slot_slot_cancel_path(@flat, candidate.slots.where(flat: @flat).first) do |f| %>
+                <%= f.submit "Je demande le dossier !", class: "btn btn-red" %>
+              <% end %>
+
+            </div>
+
+          <% end %>
+
+        <% else %>
+
+          <div class="modal-body">
+            <p>Vous êtes sur le point de choisir ce locataire.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+
+            <%= simple_form_for [@flat, candidate.bookings.where(flat: @flat).first], url: flat_booking_booking_confirm_path(@flat, candidate.bookings.where(flat: @flat).first), method: :patch do |f| %>
+              <%= f.submit "Choisir ce locataire !", class: "btn btn-red" %>
+            <% end %>
+
+          </div>
+
+        <% end %>
+
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

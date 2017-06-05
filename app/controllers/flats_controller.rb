@@ -1,7 +1,7 @@
 class FlatsController < ApplicationController
   skip_before_action :authenticate_user!, only: :show
   before_action :set_flat, only: [:show, :edit, :update, :destroy]
-  before_action :set_nested_flat, only: [:filter, :dossiers, :reservations, :visits]
+  before_action :set_nested_flat, only: [:candidates, :filter, :dossiers, :reservations, :visits]
 
   def index
     @user = current_user
@@ -36,6 +36,49 @@ class FlatsController < ApplicationController
     authorize @flat
     @flat.update(flat_params)
     redirect_to edit_flat_path(@flat)
+  end
+
+  def candidates
+    @candidates = []
+    @candidates_reservations = []
+    @candidates_reservations_confirmed = []
+    @candidates_reservations_pending = []
+    @candidates_visits = []
+    @candidates_visits_to_come = []
+    @candidates_visits_done = []
+
+    @flat.bookings.each do |booking|
+      @candidates << booking.tenant if !booking.tenant.nil?
+      @candidates_reservations << booking.tenant if !booking.tenant.nil?
+    end
+    @candidates_reservations.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
+
+    Booking.where(flat: @flat, status: "Pending").each do |booking|
+      @candidates_reservations_pending << booking.tenant if !booking.tenant.nil?
+    end
+    @candidates_reservations_pending.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
+
+    Booking.where(flat: @flat, status: "Confirmed").each do |booking|
+      @candidates_reservations_confirmed << booking.tenant if !booking.tenant.nil?
+    end
+    @candidates_reservations_confirmed.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
+
+    @flat.slots.each do |slot|
+      @candidates << slot.tenant if !slot.tenant.nil?
+      @candidates_visits << slot.tenant if !slot.tenant.nil?
+    end
+    @candidates_visits.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
+
+    Slot.where(flat: @flat).where("starts_at > ?", Time.now).each do |slot|
+      @candidates_visits_to_come << slot.tenant if !slot.tenant.nil?
+    end
+    @candidates_visits_to_come.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
+
+    Slot.where(flat: @flat).where("starts_at <= ?", Time.now).each do |slot|
+      @candidates_visits_done << slot.tenant if !slot.tenant.nil?
+    end
+    @candidates_visits_done.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
+
   end
 
   def filter
@@ -125,5 +168,22 @@ class FlatsController < ApplicationController
   def set_nested_flat
     @flat = Flat.find(params[:flat_id])
     authorize @flat
+  end
+
+  def set_grade_in_controller(user, flat)
+    if (flat.rent + flat.rental_costs) == 0
+      grade = 0
+    else
+      grade = (user.income + (user.warrantor_income * 0.5)) / (flat.rent + flat.rental_costs)
+      grade = ((grade * 2).round).fdiv(2)
+      if grade >= 5
+        grade = 5
+      elsif grade <= 0
+        grade = 0
+      else
+        grade
+      end
+      grade
+    end
   end
 end
