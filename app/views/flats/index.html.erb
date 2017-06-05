@@ -1,17 +1,21 @@
-<!-- Locataire navbar -->
+<!-- Tenant navbar -->
 <div class="navbar-flat navbar-flat-wagon-fixed">
   <div class="navbar-flat-content">
-    <div class="<%= 'active' if current_page?(user_locataire_path(@user)) %>">
-      <%= link_to "Mon profil", user_locataire_path(@user), class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(edit_user_registration_path) %>">
+      <%= link_to "Mon profil", edit_user_registration_path, class: "navbar-wagon-link" %>
     </div>
-    <div class="<%= 'active' if current_page?(user_recherche_path(@user)) %>">
-      <%= link_to "Critères de recherche", user_recherche_path(@user), class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(new_search_path || edit_search_path(@search)) %>">
+      <% if current_user.searches.size == 0 %>
+        <%= link_to "Critères de recherche", new_search_path, class: "navbar-wagon-link" %>
+      <% else %>
+        <%= link_to "Critères de recherche", edit_search_path(current_user.searches.last), class: "navbar-wagon-link" %>
+      <% end %>
     </div>
     <div class="<%= 'active' if current_page?(flats_path) %>">
       <%= link_to "Annonces", flats_path, class: "navbar-wagon-link" %>
     </div>
-    <div class="<%= 'active' if current_page?(user_visites_path(@user)) %>">
-      <%= link_to "Visites", user_visites_path(@user), class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(visites_path) %>">
+      <%= link_to "Visites", visites_path, class: "navbar-wagon-link" %>
     </div>
   </div>
 </div>
@@ -26,7 +30,7 @@
         <% if @flats.size == 0 %>
           <div class="text-center">
             <p class="sm-marged-bottom">Malheureusement, aucun appartement ne correspond à votre recherche. Mais ne perdez pas courage et affinez votre recherche.</p>
-            <%= link_to "Modifier mes critères de recherche", user_recherche_path(@user), class: "btn btn-red" %>
+            <%= link_to "Modifier mes critères de recherche", edit_search_path(current_user.searches.last), class: "btn btn-red" %>
           </div>
 
         <!-- Results if flats are available -->

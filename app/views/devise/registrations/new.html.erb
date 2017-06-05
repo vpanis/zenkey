@@ -9,13 +9,15 @@
 
           <div class="form-inputs">
             <!-- Toggle button Propriétaire / Locataire -->
-            <div class="form-group boolean optional user_is_landlord">
+            <!-- <div class="form-group boolean optional user_is_landlord">
               <div class="checkbox">
                 <label class="boolean optional btn btn-toggle btn-toggle-active" for="user_is_landlord">Propriétaire</label>
                 <label class="boolean optional btn btn-toggle" for="user_is_landlord">Locataire</label>
                 <input class="boolean optional hidden" type="checkbox" value="1" name="user[is_landlord]" id="user_is_landlord">
               </div>
-            </div>
+            </div> -->
+
+            <%= f.input :is_landlord %>
             <%= f.input :email, placeholder:"dupont@gmail.com", required: true, autofocus: true %>
             <%= f.input :password, label: "Mot de passe",  placeholder:"********", required: true, hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length) %>
             <%= f.input :password_confirmation, label: "Confirmation du mot de passe",  placeholder:"********", required: true %>
