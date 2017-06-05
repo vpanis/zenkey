@@ -14,3 +14,27 @@
 .btn:focus {
   color: white;
 }
+
+.btn-toggle {
+  background-color: white;
+  border: solid 1px $red;
+  color: $red;
+  width: 150px !important;
+  transition: 0.2s;
+}
+.btn-toggle:hover {
+  opacity: 0.9;
+  color: $red;
+}
+
+.btn-toggle-active {
+  background-color: $red;
+  border: solid 1px $red;
+  color: white;
+  width: 150px !important;
+  transition: 0.2s;
+}
+.btn-toggle-active:hover {
+  opacity: 0.9;
+  color: white;
+}

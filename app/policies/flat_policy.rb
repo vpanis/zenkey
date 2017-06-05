@@ -1,7 +1,7 @@
 class FlatPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.where(user: user)
+      scope.where.not(landlord: user)
     end
   end
 

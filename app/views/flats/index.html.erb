@@ -1,0 +1,65 @@
+<!-- Locataire navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(user_locataire_path(@user)) %>">
+      <%= link_to "Mon profil", user_locataire_path(@user), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(user_recherche_path(@user)) %>">
+      <%= link_to "Critères de recherche", user_recherche_path(@user), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flats_path) %>">
+      <%= link_to "Annonces", flats_path, class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(user_visites_path(@user)) %>">
+      <%= link_to "Visites", user_visites_path(@user), class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="card col-xs-12">
+      <div class="row">
+        <h2 class="text-center sm-marged-bottom highlight">Résultats de ma recherche</h2>
+
+        <!-- Results if no flat is available -->
+        <% if @flats.size == 0 %>
+          <div class="text-center">
+            <p class="sm-marged-bottom">Malheureusement, aucun appartement ne correspond à votre recherche. Mais ne perdez pas courage et affinez votre recherche.</p>
+            <%= link_to "Modifier mes critères de recherche", user_recherche_path(@user), class: "btn btn-red" %>
+          </div>
+
+        <!-- Results if flats are available -->
+        <% else %>
+          <% @flats.each do |flat| %>
+            <%= link_to flat_path(flat) do %>
+              <div class="col-xs-12 col-sm-4 sm-marged-bottom">
+                <div class="card-dashboard">
+                  <div class="card-dashboard-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=flat.photos.first.nil? ? "" : (cl_image_path flat.photos.first.public_id , crop: :scale) %>);">
+                    <% if flat.slots.size == 0 %>
+                      <div class="card-category badge-red">Visites en cours</div>
+                    <% end %>
+                  </div>
+                  <div class="card-dashboard-description ">
+                    <h2 class="highlight" style="height: 40px; margin-bottom: 20px"><%= flat.title %></h2>
+                    <p>
+                      <%= flat.size %>m²
+                      <br>
+                      <%= flat.rent + flat.rental_costs %>€/mois
+                      <br>
+                      <% if flat.slots.size == 0 %>
+                        Pas de visite organisée
+                      <% else %>
+                        Prochaine visite : <%= flat.slots.order("starts_at asc").first.starts_at.strftime("%d/%m/%Y") %>
+                      <% end %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
