@@ -1,6 +1,21 @@
 <!-- Flat navbar -->
 <div class="navbar-flat navbar-flat-wagon-fixed">
   <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
+      <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_candidates_path(@flat)) %>">
+      <%= link_to "Candidats", flat_candidates_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_booking_documents_path(@flat, @flat.bookings.where(status: "Confirmed"))) %>">
+      <%= link_to "Docs", flat_booking_documents_path(@flat, @flat.bookings.where(status: "Confirmed")), class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+<!-- Document tabs -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
     <div class="<%= 'active' if current_page?("#") %>">
       <%= link_to "Etat des lieux", "#", class: "navbar-wagon-link" %>
     </div>
@@ -22,25 +37,65 @@
 </div>
 
 <!-- Bail -->
-<div class="">
-  <div class="container card text-center marged-top">
+<div class="container card text-center marged-top">
+  <% if @documents.where(document_type:"Bail").size == 0 %>
     <h2 class="highlight">Bail immobilier</h2>
-    <div class="card">
-      <div class="row">
-        <div class="col-xs-6">
-          Title
+    <p>Nous attendons que la demande de réservation soit confirmée avant de générer un bail.</p>
+  <% else %>
+    <h2 class="highlight">Bail immobilier</h2>
+
+    <% @documents.where(document_type:"Bail").each do |document| %>
+      <div class="card">
+        <div class="row">
+          <div class="col-xs-6">
+            <strong><%= document.title %></strong>
+          </div>
+          <div class="col-xs-2">
+            <span class="highlight"><b><%= document.status %></b></span>
+          </div>
+          <div class="col-xs-2">
+            <%= document.created_at.strftime("%d/%m/%Y") %>
+          </div>
+          <div class="col-xs-2">
+            <%= link_to flat_booking_document_path(@flat, @booking, document, format: 'pdf') do %>
+              <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+            <% end %>
+          </div>
         </div>
-        <div class="col-xs-2">
-          <span class="highlight"><b>Signé</b></span>
-        </div>
-        <div class="col-xs-2">
-          Date
-        </div>
-        <div class="col-xs-2">
-          Icones pour télécharger ou partager
-        </div>
+        <div class="line-separator"></div>
       </div>
-      <div class="line-separator">
-    </div>
-  </div>
+    <% end %>
+  <% end %>
+</div>
+
+<!-- Quittances de loyer  -->
+<div class="container card text-center marged-top">
+  <% if @documents.where(document_type:"Quittance").size == 0 %>
+    <h2 class="highlight">Quittances de loyer</h2>
+    <p>Nous attendons que le bail soit signé avant de générer la première quittance de loyer.</p>
+  <% else %>
+    <h2 class="highlight">Quittances de loyer</h2>
+
+    <% @documents.where(document_type:"Quittance").each do |document| %>
+      <div class="card">
+        <div class="row">
+          <div class="col-xs-6">
+            <strong><%= document.title %></strong>
+          </div>
+          <div class="col-xs-2">
+            <span class="highlight"><b><%= document.status %></b></span>
+          </div>
+          <div class="col-xs-2">
+            <%= document.created_at.strftime("%d/%m/%Y") %>
+          </div>
+          <div class="col-xs-2">
+            <%= link_to flat_booking_document_path(@flat, @booking, document, format: 'pdf') do %>
+              <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+            <% end %>
+          </div>
+        </div>
+        <div class="line-separator"></div>
+      </div>
+    <% end %>
+  <% end %>
 </div>
