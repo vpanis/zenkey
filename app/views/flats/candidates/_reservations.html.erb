@@ -23,9 +23,9 @@
                     <span class="label label-danger">Profil non conforme à vos exigences !</span>
                   <% end %>
 
-                  <% if !candidate.slots.where(flat: @flat).nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
+                  <% if !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
                     <span class="label label-warning">Visite à venir !</span>
-                  <% elsif !candidate.slots.where(flat: @flat).nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
+                  <% elsif !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
                     <span class="label label-success">Visite effectué !</span>
                   <% else %>
                     <span class="label label-danger">Aucune visite prévue !</span>
@@ -56,9 +56,9 @@
             </div>
 
           <% end %>
+      <% end %>
 
-
-      <% elsif !Booking.where(flat: @flat, status: "Pending").first.nil? %>
+      <% if !Booking.where(flat: @flat, status: "Pending").first.nil? %>
 
         <h2 class="highlight">Vos dossiers déposés (<%= @candidates_reservations_pending.count %>)</h2>
 
@@ -77,9 +77,9 @@
                     <span class="label label-danger">Profil non conforme à vos exigences !</span>
                   <% end %>
 
-                  <% if !candidate.slots.where(flat: @flat).nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
+                  <% if !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
                     <span class="label label-warning">Visite à venir !</span>
-                  <% elsif !candidate.slots.where(flat: @flat).nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
+                  <% elsif !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
                     <span class="label label-success">Visite effectué !</span>
                   <% else %>
                     <span class="label label-danger">Aucune visite prévue !</span>

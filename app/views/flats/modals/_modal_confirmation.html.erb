@@ -79,7 +79,7 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
 
-            <%= simple_form_for [@flat, candidate.bookings.where(flat: @flat).first], url: flat_booking_booking_confirm_path(@flat, candidate.bookings.where(flat: @flat).first), method: :patch do |f| %>
+            <%= simple_form_for [@flat], url: flat_candidates_path(@flat), method: :patch do |f| %>
               <%= f.submit "Choisir ce locataire !", class: "btn btn-red" %>
             <% end %>
 

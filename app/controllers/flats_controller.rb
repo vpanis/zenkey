@@ -5,7 +5,7 @@ class FlatsController < ApplicationController
 
   def index
     @user = current_user
-    @flats = policy_scope(Flat).near(current_user.searches.last.address, 1)
+    @flats = policy_scope(Flat).where("size >= ?", current_user.searches.last.size_min).where("rent <= ?", current_user.searches.last.rent_max).near(current_user.searches.last.address, 1)
   end
 
   def new
@@ -39,37 +39,48 @@ class FlatsController < ApplicationController
 
   def candidates
     @candidates = []
-    @candidates_matches = []
-    @candidates_reservations = []
-    @candidates_reservations_confirmed = []
-    @candidates_reservations_pending = []
-    @candidates_visits = []
-    @candidates_visits_to_come = []
-    @candidates_visits_done = []
 
+#definition of matches
+    @candidates_matches = []
+    Search.where("size_min <= ?", @flat.size).where("rent_max >= ?", @flat.rent).near(@flat.address, 1).each do |search|
+      @candidates_matches << search.tenant if search.tenant.slots.where(flat: @flat).first.nil? && search.tenant.bookings.where(flat: @flat).first.nil?
+    end
+
+#definition of candidates for reservations
+    @candidates_reservations = []
     @flat.bookings.each do |booking|
       @candidates << booking.tenant if !booking.tenant.nil?
       @candidates_reservations << booking.tenant if !booking.tenant.nil?
     end
     @candidates_reservations.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
-    Booking.where(flat: @flat, status: "Pending").each do |booking|
-      @candidates_reservations_pending << booking.tenant if !booking.tenant.nil?
-    end
-    @candidates_reservations_pending.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
+#definition of candidates for confirmed reservations sort by grade
+    @candidates_reservations_confirmed = []
     Booking.where(flat: @flat, status: "Confirmed").each do |booking|
       @candidates_reservations_confirmed << booking.tenant if !booking.tenant.nil?
     end
     @candidates_reservations_confirmed.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
+#definition of candidates for pending reservations sort by grade
+    @candidates_reservations_pending = []
+    Booking.where(flat: @flat, status: "Pending").each do |booking|
+      @candidates_reservations_pending << booking.tenant if !booking.tenant.nil?
+    end
+    @candidates_reservations_pending.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
 
+#definition of candidates for visits
+    @candidates_visits = []
     @flat.slots.each do |slot|
       @candidates << slot.tenant if !slot.tenant.nil?
       @candidates_visits << slot.tenant if !slot.tenant.nil?
     end
     @candidates_visits.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
+#definition of candidates for visits to come sort by starts at
+    @candidates_visits_to_come = []
     Slot.where(flat: @flat).where("starts_at > ?", Time.now).where.not(tenant_id: nil).each do |slot|
       @candidates_visits_to_come << slot.tenant if !slot.tenant.nil?
     end
     @candidates_visits_to_come.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
+#definition of candidates for visits done sort by starts at
+    @candidates_visits_done = []
     Slot.where(flat: @flat).where("starts_at <= ?", Time.now).where.not(tenant_id: nil).each do |slot|
       @candidates_visits_done << slot.tenant if !slot.tenant.nil?
     end

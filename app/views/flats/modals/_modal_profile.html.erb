@@ -90,20 +90,38 @@
 
           <% end %>
 
+        <% elsif @candidates_matches.include?(candidate) %>
+
+          <h5>Vous avez un match avec <%= set_fullname(candidate) %></h5>
+          <h5>Vous pouvez lui demander son dossier</h5>
+
+          <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
+
+          <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
+          <div>Prénom : <%= candidate.first_name %></div>
+          <div>Nom : <%= candidate.last_name %></div>
+          <div>Situation Professionnelle : <br><%= candidate.status %></div>
+          <div><%= candidate.description %></div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+            <button type="button" class="btn btn-red" data-toggle="modal" href="#modal-confirmation" data-dismiss="modal">Demander le dossier</button>
+          </div>
+
         <% else %>
 
           <h5>ERREUR</h5>
 
-          <h5>Vous avez refuser le dossier de <%= set_fullname(user) %></h5>
+          <h5>Vous avez refuser le dossier de <%= set_fullname(candidate) %></h5>
           <h5>Vous pouvez le recontacter si vous souhaitez.</h5>
 
-          <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: user, flat: @flat %></div>
+          <div class="text-center">Note du Dossier : <%= render 'flats/grade', user: candidate, flat: @flat %></div>
 
-          <div><%= image_tag set_user_photo(user), class: "card-candidates-user avatar-large-square" %></div>
-          <div>Prénom : <%= user.first_name %></div>
-          <div>Nom : <%= user.last_name %></div>
-          <div>Situation Professionnelle : <br><%= user.status %></div>
-          <div><%= user.description %></div>
+          <div><%= image_tag set_user_photo(candidate), class: "card-candidates-user avatar-large-square" %></div>
+          <div>Prénom : <%= candidate.first_name %></div>
+          <div>Nom : <%= candidate.last_name %></div>
+          <div>Situation Professionnelle : <br><%= candidate.status %></div>
+          <div><%= candidate.description %></div>
 
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>

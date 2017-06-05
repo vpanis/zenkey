@@ -1,0 +1,44 @@
+<% if !@candidates_matches.first.nil? %>
+
+  <div class="container reservation">
+
+    <div class="row">
+
+      <h2 class="highlight">Matches (<%= @candidates_matches.count %>)</h2>
+
+        <% @candidates_matches.each do |candidate| %>
+
+          <div class="col-xs-12 col-sm-3">
+              <!-- insert <div class="card"> -->
+            <div class="card-tenant text-center">
+
+              <%= image_tag set_user_photo(candidate), class: "card-tenant-avatar avatar-large-bordered" %>
+
+              <div class="card-tenant-description text-center">
+                <h2><%= render 'flats/grade', user: candidate, flat: @flat %></h2>
+
+                <% if !((candidate.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (candidate.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (candidate.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))) %>
+                  <span class="label label-danger">Profil non conforme à vos exigences !</span>
+                <% end %>
+
+                <h2><%= set_fullname(candidate) %></h2>
+
+                <ul class="list-inline">
+                  <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                  <li><%= candidate.phone_number %></li>
+                </ul>
+
+                <a class="btn btn-primary" data-toggle="modal" data-target="#modal-profile-<%= candidate.id %>">Voir</a>
+
+                <%= render 'flats/modals/modal_profile', candidate: candidate, flat: @flat %>
+                <%= render 'flats/modals/modal_confirmation', candidate: candidate, flat: @flat %>
+
+              </div>
+            </div>
+          </div>
+
+        <% end %>
+
+    </div>
+  </div>
+<% end %>
