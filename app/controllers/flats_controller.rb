@@ -5,8 +5,7 @@ class FlatsController < ApplicationController
 
   def index
     @user = current_user
-    @flats = policy_scope(Flat.all)
-    # @flats = policy_scope(Flat.all.near(current_user.searches.last.address, 500))
+    @flats = policy_scope(Flat).near(current_user.searches.last.address, 1)
   end
 
   def new

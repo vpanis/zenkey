@@ -6,18 +6,12 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  # resources :users, only: [:show, :edit, :update] do
-  #   get "locataire" => "users#locataire"
-  #   get "recherche" => "users#recherche"
-  #   get "visites" => "users#visites"
-  # end
-
   resources :flats do
     resources :slots, only: [:create, :update, :destroy] do
       patch "slot_confirm" => "slots#slot_confirm"
       patch "slot_cancel" => "slots#slot_cancel"
     end
-    get "visits" => "flats#visits"
+    get "visits" => "flats#visits" # Visits for landlords
     get "dossiers" => "flats#dossiers"
     patch "filter" => "flats#filter"
     get "reservations" => "flats#reservations"
@@ -27,8 +21,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :searches, only: [:new, :create, :edit, :update]
+
   get "profile" => "pages#profile"
   get "dashboard" => "pages#dashboard"
+  get "visites" => "pages#visites" # Visits for tenants
 
   mount Attachinary::Engine => "/attachinary"
 end

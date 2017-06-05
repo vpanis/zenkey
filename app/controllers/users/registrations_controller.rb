@@ -9,7 +9,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    edit_user_registration_path
+    if current_user.searches.size == 0
+      new_search_path
+    else
+      edit_search_path(current_user.searches.last)
+    end
   end
   # GET /resource/sign_up
   # def new

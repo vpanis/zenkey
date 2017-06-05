@@ -7,4 +7,9 @@ class PagesController < ApplicationController
   def dashboard
      @user_flats = current_user.flats
   end
+
+  def visites
+    @user = current_user
+    @slots = current_user.slots
+  end
 end

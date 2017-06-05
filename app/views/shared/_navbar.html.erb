@@ -12,15 +12,13 @@
 
       <!-- Dashboard -->
       <% if current_user.is_landlord %>
-          <% if current_user.is_landlord %>
-            <div class="<%= 'active' if current_page?(dashboard_path) %>">
-              <%= link_to t(".sign_in", default: "Dashboard"), dashboard_path, class: "navbar-wagon-link" %>
-            </div>
-          <% else %>
-            <div class="<%= 'active' if current_page?(edit_user_registration_path) %>">
-              <%= link_to "Mes recherches", edit_user_registration_path, class: "navbar-wagon-link" %>
-            </div>
-          <% end %>
+        <div class="<%= 'active' if current_page?(dashboard_path) %>">
+          <%= link_to t(".sign_in", default: "Dashboard"), dashboard_path, class: "navbar-wagon-link" %>
+        </div>
+      <% else %>
+        <div class="<%= 'active' if current_page?(edit_user_registration_path) %>">
+          <%= link_to "Mes recherches", edit_user_registration_path, class: "navbar-wagon-link" %>
+        </div>
       <% end %>
 
       <!-- Profile picture and dropdown -->

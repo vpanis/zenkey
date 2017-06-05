@@ -4,14 +4,18 @@
     <div class="<%= 'active' if current_page?(edit_user_registration_path) %>">
       <%= link_to "Mon profil", edit_user_registration_path, class: "navbar-wagon-link" %>
     </div>
-    <div class="<%= 'active' if current_page?("#") %>">
-      <%= link_to "Critères de recherche", "#", class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(new_search_path || edit_search_path(@search)) %>">
+      <% if current_user.searches.size == 0 %>
+        <%= link_to "Critères de recherche", new_search_path, class: "navbar-wagon-link" %>
+      <% else %>
+        <%= link_to "Critères de recherche", edit_search_path(current_user.searches.last), class: "navbar-wagon-link" %>
+      <% end %>
     </div>
-    <div class="<%= 'active' if current_page?("#") %>">
-      <%= link_to "Annonces", "#", class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(flats_path) %>">
+      <%= link_to "Annonces", flats_path, class: "navbar-wagon-link" %>
     </div>
-    <div class="<%= 'active' if current_page?("#") %>">
-      <%= link_to "Visites", "#", class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(visites_path) %>">
+      <%= link_to "Visites", visites_path, class: "navbar-wagon-link" %>
     </div>
   </div>
 </div>

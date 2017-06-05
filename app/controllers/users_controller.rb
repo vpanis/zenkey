@@ -18,10 +18,6 @@ class UsersController < ApplicationController
     # end
   end
 
-  def recherche
-    @search = Search.new
-  end
-
   private
 
   def set_user
