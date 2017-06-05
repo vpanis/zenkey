@@ -65,5 +65,4 @@ class SlotsController < ApplicationController
   def slot_params
     params.require(:slot).permit(:starts_at)
   end
-
 end

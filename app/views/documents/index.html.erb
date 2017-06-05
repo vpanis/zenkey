@@ -1,0 +1,46 @@
+<!-- Flat navbar -->
+<div class="navbar-flat navbar-flat-wagon-fixed">
+  <div class="navbar-flat-content">
+    <div class="<%= 'active' if current_page?("#") %>">
+      <%= link_to "Etat des lieux", "#", class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?("#") %>">
+      <%= link_to "Bail", "#", class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?("#") %>">
+      <%= link_to "Quittances", "#", class: "navbar-wagon-link" %>
+    </div>
+  </div>
+</div>
+
+<!-- Etat des lieux -->
+<div class="hidden">
+  <div class="container card text-center marged-top">
+    <h2 class="highlight">Etat des lieux</h2>
+    <% render "documents/etat_des_lieux" %>
+  </div>
+</div>
+
+<!-- Bail -->
+<div class="">
+  <div class="container card text-center marged-top">
+    <h2 class="highlight">Bail immobilier</h2>
+    <div class="card">
+      <div class="row">
+        <div class="col-xs-6">
+          Title
+        </div>
+        <div class="col-xs-2">
+          <span class="highlight"><b>Signé</b></span>
+        </div>
+        <div class="col-xs-2">
+          Date
+        </div>
+        <div class="col-xs-2">
+          Icones pour télécharger ou partager
+        </div>
+      </div>
+      <div class="line-separator">
+    </div>
+  </div>
+</div>

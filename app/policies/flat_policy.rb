@@ -29,6 +29,10 @@ class FlatPolicy < ApplicationPolicy
     record.landlord == user || user.admin
   end
 
+  def candidates?
+    record.landlord == user || user.admin
+  end
+
   def filter?
     record.landlord == user || user.admin
   end

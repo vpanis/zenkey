@@ -1,0 +1,104 @@
+<% if !@candidates_visits.first.nil? %>
+
+  <div class="container reservation">
+
+    <div class="row">
+
+      <% if !Slot.where(flat: @flat).where("starts_at > ?", Time.now).first.nil? %>
+
+        <h2 class="highlight">Visites à venir (<%= @candidates_visits_to_come.count %>)</h2>
+
+          <% @candidates_visits_to_come.each do |candidate| %>
+
+            <div class="col-xs-12 col-sm-3">
+                <!-- insert <div class="card"> -->
+              <div class="card-tenant text-center">
+
+                <%= image_tag set_user_photo(candidate), class: "card-tenant-avatar avatar-large-bordered" %>
+
+                <div class="card-tenant-description text-center">
+                  <h2><%= render 'flats/grade', user: candidate, flat: @flat %></h2>
+
+                  <% if candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
+                    <span class="label label-warning">Visite à venir !</span>
+                  <% else %>
+                    <span class="label label-success">Visite effectué !</span>
+                  <% end %>
+
+                  <% if candidate.bookings.where(flat: @flat).first.nil? %>
+                    <span class="label label-warning">Dossier non deposé !</span>
+                  <% else %>
+                    <span class="label label-success">Dossier deposé !</span>
+                  <% end %>
+
+                  <h2><%= set_fullname(candidate) %></h2>
+
+                  <ul class="list-inline">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                    <li><%= candidate.phone_number %></li>
+                  </ul>
+                  <ul class="list-inline">
+                    <li>Visite: <%= candidate.slots.where(flat: @flat).first.starts_at.strftime("%d/%m/%Y %H:%M")%></li>
+                  </ul>
+                  <a class="btn btn-primary" data-toggle="modal" data-target="#modal-profile-<%= candidate.id %>">Voir</a>
+
+                  <%= render 'flats/modals/modal_profile', candidate: candidate, flat: @flat %>
+                  <%= render 'flats/modals/modal_confirmation', candidate: candidate, flat: @flat %>
+
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+
+      <% elsif !Slot.where(flat: @flat).where("starts_at <= ?", Time.now).first.nil? %>
+
+        <h2 class="highlight">Visites effectuées (<%= @candidates_visits_done.count %>)</h2>
+
+          <% @candidates_visits_done.each do |candidate| %>
+
+            <div class="col-xs-12 col-sm-3">
+                <!-- insert <div class="card"> -->
+              <div class="card-tenant text-center">
+
+                <%= image_tag set_user_photo(candidate), class: "card-tenant-avatar avatar-large-bordered" %>
+
+                <div class="card-tenant-description text-center">
+                  <h2><%= render 'flats/grade', user: candidate, flat: @flat %></h2>
+
+                  <% if candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
+                    <span class="label label-warning">Visite à venir !</span>
+                  <% else %>
+                    <span class="label label-success">Visite effectué !</span>
+                  <% end %>
+
+                  <% if candidate.bookings.where(flat: @flat).first.nil? %>
+                    <span class="label label-warning">Dossier non deposé !</span>
+                  <% else %>
+                    <span class="label label-success">Dossier deposé !</span>
+                  <% end %>
+
+                  <h2><%= set_fullname(candidate) %></h2>
+
+                  <ul class="list-inline">
+                    <li><i class="fa fa-phone" aria-hidden="true"></i></li>
+                    <li><%= candidate.phone_number %></li>
+                  </ul>
+                  <ul class="list-inline">
+                    <li>Visite: <%= candidate.slots.where(flat: @flat).first.starts_at.strftime("%d/%m/%Y %H:%M")%></li>
+                  </ul>
+                  <a class="btn btn-primary" data-toggle="modal" data-target="#modal-profile-<%= candidate.id %>">Voir</a>
+
+                  <%= render 'flats/modals/modal_profile', candidate: candidate, flat: @flat %>
+                  <%= render 'flats/modals/modal_confirmation', candidate: candidate, flat: @flat %>
+
+                </div>
+              </div>
+            </div>
+          <% end %>
+
+
+      <% end %>
+    </div>
+  </div>
+<% end %>
