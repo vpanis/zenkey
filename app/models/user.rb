@@ -11,10 +11,10 @@ class User < ApplicationRecord
   has_many :slots, dependent: :destroy, foreign_key: :tenant_id
   has_many :searches, dependent: :destroy, foreign_key: :tenant_id
 
-  validates :status, inclusion: { in: ["Etudiant", "Salarié", "Indépendant", "Autre"] }
-  validates :warrantor_type, inclusion: { in: ["Famille", "Amis", "Banque", "Employeur", "Organisme", "Aucun"] }
+  # validates :status, inclusion: { in: ["Etudiant", "Salarié", "Indépendant", "Autre"] } on: update
+  # validates :warrantor_type, inclusion: { in: ["Famille", "Amis", "Banque", "Employeur", "Organisme", "Aucun"] }
 
-  validate :has_warrantor_or_not, :warrantor_income_or_not
+  # validate :has_warrantor_or_not, :warrantor_income_or_not
 
   def has_warrantor_or_not
     if warrantor_income > 0 and has_warrantor == false
