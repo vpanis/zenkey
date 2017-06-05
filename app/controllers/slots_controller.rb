@@ -36,6 +36,10 @@ class SlotsController < ApplicationController
     redirect_to :back
   end
 
+  def index
+    @slots = Slot.all.where(tenant: :current_user)
+  end
+
   def slot_cancel
     @slot = Slot.find(params[:slot_id])
     authorize @slot

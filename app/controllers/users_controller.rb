@@ -5,9 +5,6 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def edit
-  end
-
   def update
     authorize @user
   end
@@ -19,10 +16,6 @@ class UsersController < ApplicationController
     # else
     #   render :new
     # end
-  end
-
-  def recherche
-    @search = Search.new
   end
 
   private
