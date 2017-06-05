@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     get "visits" => "flats#visits"
     get "candidates" => "flats#candidates"
     patch "filter" => "flats#filter"
+    get "etat_des_lieux" => "flats#etat_des_lieux"
     resources :slots, only: [:create, :update, :destroy] do
       patch "slot_confirm" => "slots#slot_confirm"
       patch "slot_cancel" => "slots#slot_cancel"
@@ -20,6 +21,7 @@ Rails.application.routes.draw do
     resources :bookings, only: [] do
       patch "booking_confirm" => "bookings#booking_confirm"
       patch "booking_cancel" => "bookings#booking_cancel"
+      resources :documents, only: [:show, :create, :update, :index]
     end
   end
 
