@@ -42,67 +42,38 @@ class FlatsController < ApplicationController
     @candidates_matches = []
     @candidates_reservations = []
     @candidates_reservations_confirmed = []
-    @candidates_reservations_confirmed_not_conform = []
     @candidates_reservations_pending = []
-    @candidates_reservations_pending_not_conform = []
     @candidates_visits = []
     @candidates_visits_to_come = []
-    @candidates_visits_to_come_not_conform = []
     @candidates_visits_done = []
-    @candidates_visits_done_not_conform = []
 
     @flat.bookings.each do |booking|
       @candidates << booking.tenant if !booking.tenant.nil?
       @candidates_reservations << booking.tenant if !booking.tenant.nil?
     end
     @candidates_reservations.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
-
-    Booking.where(flat: @flat, status: "Pending").select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |booking|
+    Booking.where(flat: @flat, status: "Pending").each do |booking|
       @candidates_reservations_pending << booking.tenant if !booking.tenant.nil?
     end
     @candidates_reservations_pending.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
-
-    Booking.where(flat: @flat, status: "Pending").reject { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |booking|
-      @candidates_reservations_pending_not_conform << booking.tenant if !booking.tenant.nil?
-    end
-    @candidates_reservations_pending_not_conform.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
-
-    Booking.where(flat: @flat, status: "Confirmed").select { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |booking|
+    Booking.where(flat: @flat, status: "Confirmed").each do |booking|
       @candidates_reservations_confirmed << booking.tenant if !booking.tenant.nil?
     end
     @candidates_reservations_confirmed.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
-
-    Booking.where(flat: @flat, status: "Confirmed").reject { |booking| (booking.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (booking.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (booking.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |booking|
-      @candidates_reservations_confirmed_not_conform << booking.tenant if !booking.tenant.nil?
-    end
-    @candidates_reservations_confirmed_not_conform.sort_by! { |candidate| set_grade_in_controller(candidate, @flat) }.reverse!
 
     @flat.slots.each do |slot|
       @candidates << slot.tenant if !slot.tenant.nil?
       @candidates_visits << slot.tenant if !slot.tenant.nil?
     end
     @candidates_visits.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
-
-    Slot.where(flat: @flat).where("starts_at > ?", Time.now).where.not(tenant_id: nil).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |slot|
+    Slot.where(flat: @flat).where("starts_at > ?", Time.now).where.not(tenant_id: nil).each do |slot|
       @candidates_visits_to_come << slot.tenant if !slot.tenant.nil?
     end
     @candidates_visits_to_come.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
-
-    Slot.where(flat: @flat).where("starts_at > ?", Time.now).where.not(tenant_id: nil).reject { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |slot|
-      @candidates_visits_to_come_not_conform << slot.tenant if !slot.tenant.nil?
-    end
-    @candidates_visits_to_come_not_conform.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
-
-    Slot.where(flat: @flat).where("starts_at <= ?", Time.now).where.not(tenant_id: nil).select { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |slot|
+    Slot.where(flat: @flat).where("starts_at <= ?", Time.now).where.not(tenant_id: nil).each do |slot|
       @candidates_visits_done << slot.tenant if !slot.tenant.nil?
     end
     @candidates_visits_done.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
-
-    Slot.where(flat: @flat).where("starts_at <= ?", Time.now).where.not(tenant_id: nil).reject { |slot| (slot.tenant.has_warrantor == @flat.has_warrantor || @flat.has_warrantor == false) && (slot.tenant.income >= (@flat.income_ratio * (@flat.rent + @flat.rental_costs))) && (slot.tenant.warrantor_income >= (@flat.warrantor_income_ratio * (@flat.rent + @flat.rental_costs)))}.each do |slot|
-      @candidates_visits_done_not_conform << slot.tenant if !slot.tenant.nil?
-    end
-    @candidates_visits_done_not_conform.sort_by! { |candidate| Slot.where(tenant: candidate, flat: @flat).first.starts_at }
-
   end
 
   def filter
