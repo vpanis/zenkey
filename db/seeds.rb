@@ -33,7 +33,7 @@ url_xavier          = 'https://avatars0.githubusercontent.com/u/1410430?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 xavier.photo_url    = url_xavier
 achille             = User.create!(first_name: "Achille", last_name: "Miklitarian", email: "achille@gmail.com", password: '123456', status: "Salarié", income: 1500, has_warrantor: false, warrantor_income: 0)
-url_achille         = 'https://avatars0.githubusercontent.com/u/25386031?v=3'
+url_achille         = 'https://avatars2.githubusercontent.com/u/25741493?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 achille.photo_url   = url_achille
 nico                = User.create!(first_name: "Nicolas", last_name: "Bresson", email: "nico@gmail.com", password: '123456', status: "Salarié", income: 2500, has_warrantor: true, warrantor_income: 5000)
