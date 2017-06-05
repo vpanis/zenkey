@@ -8,7 +8,7 @@
       <% if user_signed_in? && current_user.is_landlord %>
         <%= link_to t(".top_call_to_action", default: "Mon dashboard"), dashboard_path, class: "btn btn-red" %>
       <% elsif user_signed_in? %>
-        <%= link_to t(".top_call_to_action", default: "Ma recherche d'appartement"), user_locataire_path(current_user), class: "btn btn-red" %>
+        <%= link_to t(".top_call_to_action", default: "Ma recherche d'appartement"), edit_user_registration_path, class: "btn btn-red" %>
       <% else %>
         <%= link_to t(".top_call_to_action", default: "Se connecter"), new_user_session_path, class: "btn btn-red" %>
       <% end %>

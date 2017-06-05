@@ -1,13 +1,16 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users,
+    controllers: {
+      registrations: "users/registrations"
+    }
 
   root to: 'pages#home'
 
-  resources :users, only: [:show, :edit, :update] do
-    get "locataire" => "users#locataire"
-    get "recherche" => "users#recherche"
-    get "visites" => "users#visites"
-  end
+  # resources :users, only: [:show, :edit, :update] do
+  #   get "locataire" => "users#locataire"
+  #   get "recherche" => "users#recherche"
+  #   get "visites" => "users#visites"
+  # end
 
   resources :flats do
     resources :slots, only: [:create, :update, :destroy] do
