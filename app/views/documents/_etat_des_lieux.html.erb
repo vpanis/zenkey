@@ -1,1 +1,39 @@
-_etat_des_lieux.html.erb
+<div class="container">
+  <h2 class="highlight text-center"><strong>Etat des lieux</strong></h2>
+
+  <%= simple_form_for :etat_des_lieux do |f| %>
+    <%= f.error_notification %>
+    <%= f.full_error :confirmation_token %>
+
+    <div class="form-inputs">
+      <% @rooms.each do |room| %>
+        <%= f.input :title %>
+        <%= f.input :wall_A %>
+        <%= f.input :wall_B %>
+        <%= f.input :wall_C %>
+        <%= f.input :wall_D %>
+        <%= f.input :description %>
+        <br>
+      <% end %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Soumettre mon inventaire", class:"btn btn-red" %>
+    </div>
+  <% end %>
+
+  <p>
+    Nombre de pièces
+    Photos
+    Etat string ["Mauvais état", "Bon état", "Très bon état"]
+    Description text
+    Mur A
+    Mur B
+    Mur C
+    Mur D
+    Plaintes
+
+    Date
+    Signature
+  </p>
+</div>

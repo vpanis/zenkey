@@ -5,12 +5,14 @@
  * ------------------------------------- */
 
 // Body
-
 .highlight {
   color: #FF696A;
   margin: 0px 0px 30px 0px;
 }
-
+.line-separator {
+  border-bottom: solid 1px #FF696A;
+  width: 100%;
+}
 // Paddings
 .padded {
   padding-top: 5em;
