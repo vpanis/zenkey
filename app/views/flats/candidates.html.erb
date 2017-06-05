@@ -7,8 +7,8 @@
     <div class="<%= 'active' if current_page?(flat_candidates_path(@flat)) %>">
       <%= link_to "Candidats", flat_candidates_path(@flat), class: "navbar-wagon-link" %>
     </div>
-    <div>
-      <%= link_to "Docs", root_path, class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(flat_booking_documents_path(@flat, @flat.bookings.where(status: "Confirmed"))) %>">
+      <%= link_to "Docs", flat_booking_documents_path(@flat, @flat.bookings.where(status: "Confirmed")), class: "navbar-wagon-link" %>
     </div>
   </div>
 </div>

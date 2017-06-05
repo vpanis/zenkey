@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     resources :bookings, only: [] do
       patch "booking_confirm" => "bookings#booking_confirm"
       patch "booking_cancel" => "bookings#booking_cancel"
-      resources :documents, only: [:show, :create, :update, :index]
+      resources :documents, only: [:show, :index, :create, :update]
     end
   end
 

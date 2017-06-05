@@ -19,6 +19,9 @@ class BookingsController < ApplicationController
         format.js  # <-- idem
       end
     end
+
+    # Creation of "Bail de location"
+    Document.create(title: "Bail de location - #{@booking.flat.address}", booking_id: @booking, status: "Signatures manquantes", is_signed_by_landlord: false, is_signed_by_tenant: false, document_type: "Bail")
   end
 
   def booking_cancel

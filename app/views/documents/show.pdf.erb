@@ -1,0 +1,353 @@
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+
+<% if @booking.flat.furnished %>
+  <div class="container">
+    <h2 class="highlight text-center"><strong>CONTRAT DE <%= @booking.flat.rental_type.upcase %> DE LOGEMENT MEUBLE</strong></h2>
+
+    <h4 class="highlight"><strong>I. Désignation des parties</strong></h2>
+    <p>
+      Le présent contrat est conclu entre les soussignés :
+      <br>
+      <ul>
+        <li>
+          <%= @booking.flat.landlord.first_name %> <%= @booking.flat.landlord.last_name %>, personne physique (adresse électronique : <%= @booking.flat.landlord.email %>), désigné ci-après « le bailleur » ;
+        </li>
+        <li>
+          <%= @booking.tenant.first_name %> <%= @booking.tenant.last_name %>, personne physique (adresse électronique : <%= @booking.tenant.email %>), désigné ci-après « le locataire » ;
+        </li>
+      </ul>
+      Il a été convenu ce qui suit :
+      <br>
+    </p>
+    <br>
+    <br>
+
+    <h4 class="highlight"><strong>II. Objet du contrat</strong></h2>
+    <p>
+      Le présent contrat a pour objet la location d’un logement ainsi déterminé :
+    </p>
+    <p>
+    A. Consistance du logement
+    <ul>
+      <li>
+        localisation du logement : <%= @booking.flat.address %> ;
+      </li>
+      <li>
+        surface habitable : <%= @booking.flat.size %> m2 ;
+      </li>
+      <li>
+        nombre de pièces principales : <%= @booking.flat.rooms %> ;
+      </li>
+    </ul>
+
+    B. Destination des locaux : usage d’habitation
+    <br>
+
+    <% if @booking.flat.parking && @booking.flat.elevator  %>
+        C. Equipement accessoire de l’immeuble à usage privatif du locataire :
+        <ul>
+          <li>
+            Parking.
+          </li>
+        </ul>
+        D. Equipement de l’immeuble à usage commun :
+        <ul>
+          <li>
+            Ascenseur.
+          </li>
+        </ul>
+      <% elsif @booking.flat.parking %>
+        C. Equipement accessoire de l’immeuble à usage privatif du locataire :
+        <ul>
+          <li>
+            Parking.
+          </li>
+        </ul>
+      <% elsif @booking.flat.elevator %>
+        C. Equipement de l’immeuble à usage commun :
+        <ul>
+          <li>
+            Ascenseur.
+          </li>
+        </ul>
+      <% end %>
+      <br>
+    </p>
+
+    <h4 class="highlight"><strong>III. Date de prise d’effet et durée du contrat</strong></h2>
+      <p>
+        La durée du contrat et sa date de prise d’effet sont ainsi définies :
+        <br>
+        A. Date de prise d’effet du contrat : <%= @booking.flat.availability_date.strftime("%d/%m/%Y") %>
+        <br>
+        B. Durée du contrat : <%= [@booking.flat.min_duration, 12].min %> mois
+        <br>
+        Les contrats de location de logements meublés sont reconduits tacitement à leur terme pour une durée d’un an et
+        dans les mêmes conditions. Le locataire peut mettre fin au bail à tout moment, après avoir donné
+        congé. Le bailleur peut, quant à lui, mettre fin au bail à son échéance et après avoir donné congé, soit
+        pour reprendre le logement en vue de l’occuper lui-même ou une personne de sa famille, soit pour le
+        vendre, soit pour un motif sérieux et légitime.
+      </p>
+      <br>
+
+    <h4 class="highlight"><strong>IV. Conditions financières</strong></h2>
+    <p>
+      Les parties conviennent des conditions financières suivantes :
+    </p>
+
+    <p>
+      A. Loyer
+      <br>
+      1. Fixation du loyer initial :
+      <br>
+      Montant du loyer mensuel : <%= @booking.flat.rent %> €
+    </p>
+
+    <p>
+      2. Modalités de révision :
+      <br>
+      a) Date de révision : <%= (@booking.flat.availability_date + 1.years).strftime("%d/%m/%Y") %>
+      <br>
+      b) Date ou trimestre de référence de l’IRL : 2ème trimestre 2017
+      <br>
+    </p>
+
+    <p>
+      B. Charges récupérables
+      <br>
+      1. Modalité de règlement des charges récupérables : provisions sur charges avec régularisation annuelle
+      <br>
+      2. Montant des provisions sur charges ou du forfait de charges: <%= @booking.flat.rental_costs %> €
+      <br>
+    </p>
+
+    <p>
+      C. Modalités de paiement
+      <ul>
+        <li>
+          Périodicité du paiement : mensuelle
+        </li>
+        <li>
+          Paiement à terme échu
+        </li>
+        <li>
+          Date : 1er de chaque mois
+        </li>
+        <li>
+          Montant total dû à la première échéance de paiement pour une période complète de location :
+          <ul>
+            <li>
+              somme des montants relatifs au loyer : <%= @booking.flat.rent %> €
+            </li>
+            <li>
+              charges récupérables : <%= @booking.flat.rental_costs %> €
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+
+    <h4 class="highlight"><strong>V. Garanties</strong></h2>
+      <p>
+        Le cas échéant, Montant du dépôt de garantie de l’exécution des obligations du locataire : [inférieur ou égal
+        à deux mois de loyers hors charges] : <%= @booking.flat.deposit %> €
+      </p>
+
+    <h4 class="highlight"><strong>VI. Clause résolutoire</strong></h2>
+      <p>
+        Modalités de résiliation de plein droit du contrat : défaut de paiement du loyer ou des charges aux termes
+        convenus, non versement du dépôt de garantie, non-souscription d’une assurance des
+        risques locatifs ou le non-respect de l’obligation d’user paisiblement des locaux loués, résultant
+        de troubles de voisinage constatés par une décision de justice passée en force de chose
+        jugée
+      </p>
+
+      <p>
+        Fait à Paris, le <%= @document.creation_date %>
+        <br>
+        <br>
+        Signature du bailleur
+        <br>
+        <br>
+        Signature du locataire
+        <br>
+      </p>
+  </div>
+<% else %>
+  <div class="container">
+    <h2 class="highlight text-center"><strong>CONTRAT DE <%= @booking.flat.rental_type.upcase %> DE LOGEMENT MEUBLE</strong></h2>
+
+    <h4 class="highlight"><strong>I. Désignation des parties</strong></h2>
+    <p>
+      Le présent contrat est conclu entre les soussignés :
+      <br>
+      <ul>
+        <li>
+          <%= @booking.flat.landlord.first_name %> <%= @booking.flat.landlord.last_name %>, personne physique (adresse électronique : <%= @booking.flat.landlord.email %>), désigné ci-après « le bailleur » ;
+        </li>
+        <li>
+          <%= @booking.tenant.first_name %> <%= @booking.tenant.last_name %>, personne physique (adresse électronique : <%= @booking.tenant.email %>), désigné ci-après « le locataire » ;
+        </li>
+      </ul>
+      Il a été convenu ce qui suit :
+      <br>
+    </p>
+    <br>
+    <br>
+
+    <h4 class="highlight"><strong>II. Objet du contrat</strong></h2>
+    <p>
+      Le présent contrat a pour objet la location d’un logement ainsi déterminé :
+    </p>
+    <p>
+    A. Consistance du logement
+    <ul>
+      <li>
+        localisation du logement : <%= @booking.flat.address %> ;
+      </li>
+      <li>
+        surface habitable : <%= @booking.flat.size %> m2 ;
+      </li>
+      <li>
+        nombre de pièces principales : <%= @booking.flat.rooms %> ;
+      </li>
+    </ul>
+
+    B. Destination des locaux : usage d’habitation
+    <br>
+
+    <% if @booking.flat.parking && @booking.flat.elevator  %>
+        C. Equipement accessoire de l’immeuble à usage privatif du locataire :
+        <ul>
+          <li>
+            Parking.
+          </li>
+        </ul>
+        D. Equipement de l’immeuble à usage commun :
+        <ul>
+          <li>
+            Ascenseur.
+          </li>
+        </ul>
+      <% elsif @booking.flat.parking %>
+        C. Equipement accessoire de l’immeuble à usage privatif du locataire :
+        <ul>
+          <li>
+            Parking.
+          </li>
+        </ul>
+      <% elsif @booking.flat.elevator %>
+        C. Equipement de l’immeuble à usage commun :
+        <ul>
+          <li>
+            Ascenseur.
+          </li>
+        </ul>
+      <% end %>
+      <br>
+    </p>
+
+    <h4 class="highlight"><strong>III. Date de prise d’effet et durée du contrat</strong></h2>
+      <p>
+        La durée du contrat et sa date de prise d’effet sont ainsi définies :
+        <br>
+        A. Date de prise d’effet du contrat : <%= @booking.flat.availability_date.strftime("%d/%m/%Y") %>
+        <br>
+        B. Durée du contrat : durée minimale de trois ou six ans
+        <br>
+        En l’absence de proposition de renouvellement du contrat, celui-ci est, à sont terme, reconduit
+        tacitement pour 3 ou 6 ans et dans les mêmes conditions. Le locataire peut mettre fin au bail à tout
+        moment, après avoir donné congé. Le bailleur, quant à lui, peut mettre fin au bail à son échéance
+        et après avoir donné congé, soit pour reprendre le logement en vue de l’occuper lui-même ou une
+        personne de sa famille, soit pour le vendre, soit pour un motif sérieux et légitime.
+      </p>
+      <br>
+
+    <h4 class="highlight"><strong>IV. Conditions financières</strong></h2>
+    <p>
+      Les parties conviennent des conditions financières suivantes :
+    </p>
+
+    <p>
+      A. Loyer
+      <br>
+      1. Fixation du loyer initial :
+      <br>
+      Montant du loyer mensuel : <%= @booking.flat.rent %> €
+    </p>
+
+    <p>
+      2. Modalités de révision :
+      <br>
+      a) Date de révision : <%= (@booking.flat.availability_date + 1.years).strftime("%d/%m/%Y") %>
+      <br>
+      b) Date ou trimestre de référence de l’IRL : 2ème trimestre 2017
+      <br>
+    </p>
+
+    <p>
+      B. Charges récupérables
+      <br>
+      1. Modalité de règlement des charges récupérables : provisions sur charges avec régularisation annuelle
+      <br>
+      2. Montant des provisions sur charges ou du forfait de charges: <%= @booking.flat.rental_costs %> €
+      <br>
+    </p>
+
+    <p>
+      C. Modalités de paiement
+      <ul>
+        <li>
+          Périodicité du paiement : mensuelle
+        </li>
+        <li>
+          Paiement à terme échu
+        </li>
+        <li>
+          Date : 1er de chaque mois
+        </li>
+        <li>
+          Montant total dû à la première échéance de paiement pour une période complète de location :
+          <ul>
+            <li>
+              somme des montants relatifs au loyer : <%= @booking.flat.rent %> €
+            </li>
+            <li>
+              charges récupérables : <%= @booking.flat.rental_costs %> €
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </p>
+
+    <h4 class="highlight"><strong>V. Garanties</strong></h2>
+      <p>
+        Le cas échéant, Montant du dépôt de garantie de l’exécution des obligations du locataire : [inférieur ou égal
+        à deux mois de loyers hors charges] : <%= @booking.flat.deposit %> €
+      </p>
+
+    <h4 class="highlight"><strong>VI. Clause résolutoire</strong></h2>
+      <p>
+        Modalités de résiliation de plein droit du contrat : défaut de paiement du loyer ou des charges aux termes
+        convenus, non versement du dépôt de garantie, non-souscription d’une assurance des
+        risques locatifs ou le non-respect de l’obligation d’user paisiblement des locaux loués, résultant
+        de troubles de voisinage constatés par une décision de justice passée en force de chose
+        jugée
+      </p>
+
+      <p>
+        Fait à Paris, le <%= @document.creation_date %>
+        <br>
+        <br>
+        Signature du bailleur
+        <br>
+        <br>
+        Signature du locataire
+        <br>
+      </p>
+  </div>
+<% end %>

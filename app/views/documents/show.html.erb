@@ -1,6 +1,8 @@
-<div class="hidden">
-  <%= render "documents/etat_des_lieux" %>
+<% if @document.document_type == "Bail"  %>
   <%= render "documents/bail" %>
+<% elsif @document.document_type == "Etat des lieux" %>
+  <%= render "documents/etat_des_lieux" %>
+<% elsif @document.document_type == "Quittance" %>
   <%= render "documents/quittance" %>
-</div>
+<% end %>
 

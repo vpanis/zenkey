@@ -1,17 +1,14 @@
 <!-- Flat navbar -->
 <div class="navbar-flat navbar-flat-wagon-fixed">
   <div class="navbar-flat-content">
-    <div class="<%= 'active' if current_page?(edit_flat_path(@flat)) %>">
-      <%= link_to "Annonce", edit_flat_path(@flat), class: "navbar-wagon-link" %>
-    </div>
-    <div class="<%= 'active' if current_page?(flat_dossiers_path(@flat)) %>">
-      <%= link_to "Candidats", flat_dossiers_path(@flat), class: "navbar-wagon-link" %>
-    </div>
     <div class="<%= 'active' if current_page?(flat_visits_path(@flat)) %>">
       <%= link_to "Visites", flat_visits_path(@flat), class: "navbar-wagon-link" %>
     </div>
-    <div class="<%= 'active' if current_page?(flat_reservations_path(@flat)) %>">
-      <%= link_to "Réservations", flat_reservations_path(@flat), class: "navbar-wagon-link" %>
+    <div class="<%= 'active' if current_page?(flat_candidates_path(@flat)) %>">
+      <%= link_to "Candidats", flat_candidates_path(@flat), class: "navbar-wagon-link" %>
+    </div>
+    <div class="<%= 'active' if current_page?(flat_booking_documents_path(@flat, @flat.bookings.where(status: "Confirmed"))) %>">
+      <%= link_to "Docs", flat_booking_documents_path(@flat, @flat.bookings.where(status: "Confirmed")), class: "navbar-wagon-link" %>
     </div>
   </div>
 </div>

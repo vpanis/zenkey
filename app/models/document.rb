@@ -3,5 +3,5 @@ class Document < ApplicationRecord
 
   validates :title, presence: true
   validates :document_type, presence: true, inclusion: { in: ["Etat des lieux", "Bail", "Quittance"] }
-  validates :status, presence: true, inclusion: { in: ["Signature manquante", "Signé", "Emis"] }
+  validates :status, presence: true, inclusion: { in: ["Signatures manquantes", "Signé", "Emis"] }
 end

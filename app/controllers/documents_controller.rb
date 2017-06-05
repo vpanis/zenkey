@@ -1,17 +1,37 @@
 class DocumentsController < ApplicationController
   def show
-    @booking = Booking.find(params[:booking_id])
     @document = Document.find(params[:id])
-    authorize (@booking)
+    @booking = Booking.find(@document.booking_id)
+    authorize @document
+
+    if @document.document_type == "Bail"
+      respond_to do |format|
+        format.pdf do
+          render pdf: "bail.pdf",
+                 template: "documents/bail.pdf.erb"
+        end
+      end
+    elsif @document.document_type == "Etat des lieux"
+      respond_to do |format|
+        format.pdf do
+          render pdf: "etat_des_lieux.pdf",
+                 template: "documents/etat_des_lieux.pdf.erb"
+        end
+      end
+    elsif @document.document_type == "Quittance"
+      respond_to do |format|
+        format.pdf do
+          render pdf: "quittance.pdf",
+                 template: "documents/quittance.pdf.erb"
+        end
+      end
+    end
   end
 
   def index
-    @booking = Booking.find(params[:booking_id])
-    @rooms = []
-    for i in 1..@booking.flat.rooms
-      @rooms << "Pièce #{i}"
-    end
-    @documents = policy_scope(Document.all)
+    @flat = Flat.find(params[:flat_id])
+    @booking = @flat.bookings.where(status: "Confirmed").last
+    @documents = policy_scope(Document).where(booking_id: @booking)
   end
 
   def create
@@ -19,4 +39,5 @@ class DocumentsController < ApplicationController
 
   def update
   end
+
 end

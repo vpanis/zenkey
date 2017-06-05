@@ -9,7 +9,7 @@ puts 'Creating Users...'
 
 admin               = User.create!(gender: "Homme", email: "admin@gmail.com", password: 'azerty', admin: true, status: "Etudiant", warrantor_type: "Aucun")
 
-charles             = User.create!(gender: "Homme", first_name: "Charles", last_name: "Bénard", email: "charles@gmail.com", password: '123456', status: "Salarié", income: 2000, has_warrantor: true, warrantor_income: 3000, warrantor_type: "Famille", phone_number: "06.00.00.00.01")
+charles             = User.create!(gender: "Homme", first_name: "Charles", last_name: "Bénard", is_landlord: true, email: "charles@gmail.com", password: '123456', status: "Salarié", income: 2000, has_warrantor: true, warrantor_income: 3000, warrantor_type: "Famille", phone_number: "06.00.00.00.01")
 url_charles         = 'https://avatars2.githubusercontent.com/u/5082751?v=3'
 charles.description = 'Qui n’a jamais pensé à écrire sa biographie, son autobiographie ?! A vrai dire, je penses pouvoir dire que chaque personne pense au moins une fois dans sa vie à écrire ses mémoires, réciter les évènements qui ont marqué leurs années d’existence. Pourquoi ? Tout simplement pour ne pas avoir vécu sans laisser de traces. Une biographie est en effet le moyen le plus efficace pour parler de soi et qui sait faire parler de soi aussi.'
 charles.photo_url   = url_charles

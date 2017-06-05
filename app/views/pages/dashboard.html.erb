@@ -15,7 +15,7 @@
         <% end %>
 
           <% @user_flats.where(status: "Busy").each do |user_flat|%>
-            <%= link_to edit_flat_path(user_flat) do %>
+            <%= link_to flat_visits_path(user_flat) do %>
               <div class="col-xs-12 col-sm-4 sm-marged-bottom">
                 <div class="card-dashboard">
                   <div class="card-dashboard-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=user_flat.photos.first.nil? ? "" : (cl_image_path user_flat.photos.first.public_id , crop: :scale) %>);">
@@ -40,7 +40,7 @@
           <% end %>
 
           <% @user_flats.where(status: "Available").each do |user_flat|%>
-            <%= link_to edit_flat_path(user_flat) do %>
+            <%= link_to flat_visits_path(user_flat) do %>
               <div class="col-xs-12 col-sm-4 sm-marged-bottom">
                 <div class="card-dashboard">
                   <div class="card-dashboard-image" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url(<%=user_flat.photos.first.nil? ? "" : (cl_image_path user_flat.photos.first.public_id , crop: :scale) %>);">
