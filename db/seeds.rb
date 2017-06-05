@@ -88,7 +88,7 @@ bruno.photo_url     = url_bruno
 
 puts 'Creating Flats...'
 
-oberkampf           = Flat.new(title: "T3 66m2 rue oberkampf", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 66, rent: 1400, rental_costs: 100, floor: 4, rooms: 3, bedrooms: 2, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 3, has_warrantor: true, warrantor_income_ratio: 3, deposit: 1400, landlord: charles)
+oberkampf           = Flat.new(title: "T3 66m2 rue oberkampf", rental_type: "Location", availability_date: DateTime.new(2017, 7, 1, 0, 0, 0, 0), min_duration: 6, address: "50 Rue Oberkampf, 75020 PARIS", is_address_public: true, subway: "Parmentier", furnished: true, size: 66, rent: 1400, rental_costs: 100, floor: 4, rooms: 3, bedrooms: 2, balcony: false, elevator: false, separate_bathroom: false, parking: false, status: "Available", income_ratio: 2, has_warrantor: false, warrantor_income_ratio: 0, deposit: 1400, landlord: charles)
 oberkampf.description = 'Cet appartement 2 pièces de 20 m² avec une vue mer dégagée, est situé au dernier étage dans une petite résidence de standing calme et recherchée au Mourillon.'
 oberkampf.save!
 urls_oberkampf      = [
