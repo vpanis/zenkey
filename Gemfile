@@ -23,8 +23,14 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.47'
 gem 'devise'
 gem 'pundit'
+
+# Google maps gems
 gem "geocoder"
 gem "gmaps4rails"
+
+# Gems to generate pdf files
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 
 source 'https://rails-assets.org' do
   gem "rails-assets-underscore"
