@@ -53,9 +53,10 @@
               </div>
             </div>
           <% end %>
+      <% end %>
 
 
-      <% elsif !Slot.where(flat: @flat).where("starts_at <= ?", Time.now).first.nil? %>
+      <% if !Slot.where(flat: @flat).where("starts_at <= ?", Time.now).first.nil? %>
 
         <h2 class="highlight">Visites effectuées (<%= @candidates_visits_done.count %>)</h2>
 

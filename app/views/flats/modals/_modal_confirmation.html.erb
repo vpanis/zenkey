@@ -6,9 +6,8 @@
         <h4 class="modal-title">Confirmez votre choix !</h4>
       </div>
 
-        <% if !candidate.bookings.where(flat: @flat).first.nil? %>
+        <% if !candidate.bookings.where(flat: @flat).first.nil? && candidate.bookings.where(flat: @flat).first.status == "Confirmed" %>
 
-          <% if candidate.bookings.where(flat: @flat).first.status == "Confirmed" %>
 
             <div class="modal-body">
               <p>Vous êtes sur le point d'annuler cette réservation.</p>
@@ -23,7 +22,7 @@
 
             </div>
 
-          <% elsif candidate.bookings.where(flat: @flat).first.status == "Pending" %>
+        <% elsif !candidate.bookings.where(flat: @flat).first.nil? && candidate.bookings.where(flat: @flat).first.status == "Pending" %>
 
             <div class="modal-body">
               <p>Vous êtes sur le point de choisir ce locataire.</p>
@@ -37,11 +36,7 @@
 
             </div>
 
-          <% end %>
-
-        <% elsif !candidate.slots.where(flat: @flat).first.nil? %>
-
-          <% if candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
+        <% elsif !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now > 0 %>
 
             <div class="modal-body">
               <p>Vous êtes sur le point d'annuler cette visite.</p>
@@ -55,7 +50,7 @@
 
             </div>
 
-          <% elsif candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
+        <% elsif !candidate.slots.where(flat: @flat).first.nil? && candidate.slots.where(flat: @flat).first.starts_at - Time.now <= 0 %>
 
             <div class="modal-body">
               <p>Vous êtes sur le point de faire une demande de dossier à ce locataire.</p>
@@ -69,8 +64,6 @@
 
             </div>
 
-          <% end %>
-
         <% else %>
 
           <div class="modal-body">
@@ -80,7 +73,7 @@
             <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
 
             <%= simple_form_for [@flat, candidate.bookings.where(flat: @flat).first], url: flat_booking_booking_confirm_path(@flat, candidate.bookings.where(flat: @flat).first), method: :patch do |f| %>
-              <%= f.submit "Choisir ce locataire !", class: "btn btn-red" %>
+              <%= f.submit "Je choisis ce locataire !", class: "btn btn-red" %>
             <% end %>
 
           </div>
